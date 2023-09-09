@@ -113,6 +113,43 @@ Calculate the sum
 
 }
 
+\sol{
+
+We can use the Euler-Maclaurin formula 
+\begin{eqnarray}
+    \sum_{n=a}^{N} f(n) = \int_{a}^{N} f(x) \dd{x} + \frac{1}{2}[f(N) + f(a)] + \sum_{n=1}^{q} \frac{B_{2n}}{(2n)!}[ f^{(2n-1)}(N) - f^{(2n-1)}(a) ] + R
+.\end{eqnarray}
+
+to compute this series.
+First, we split the sum into separate terms as
+\begin{eqnarray}
+    \label{eq:I1-parts}
+    I_{1} = \sum_{n=0}^{N} n^2 + \sum_{n=0}^{N} n + N
+,\end{eqnarray}
+where we have gone ahead and evaluated the sum of the last term since it is just $1$ added $N$ times.
+Also note that we have adjusted out indices to start from $n=0$ since this does not change the sum but should make the right hand side simpler to evaluate since $\dv[n]{x} x^{m}|_{x = 0} = 0$ for any $n,m \in \mathbb{N} \cup \{ 0 \}$.
+The first sum is
+\begin{eqnarray}
+    \begin{aligned}
+    \sum_{n=0}^{N} n^2 &= \int_{0}^{N} x^2 \dd{x} + \frac{N^2}{2} + \frac{B_{2}}{2!}\dv{x} (x^2)|_{x = N} = \frac{N^3}{3} + \frac{N^2}{2} + \frac{N}{6} \\
+        &= \frac{N}{6}(2N^2 + 3N + 1) = \frac{N(N+1)(2N+1)}{6}
+    \end{aligned}
+.\end{eqnarray}
+Moving on to the second sum we find\footnote{As Gauss did in his primary years using a much simpler and elegant rationale.}
+\begin{eqnarray}
+    \sum_{n=0}^{N} n = \int_{0}^{N} x \dd{x} + \frac{N}{2} = \frac{N^2}{2} + \frac{N}{2} = \frac{N(N+1)}{2}
+.\end{eqnarray}
+
+Plugging these intermediate results into \eref{I1-parts}, we find
+\begin{eqnarray}
+    \begin{aligned}
+        I_{1} &= \frac{N(N+1)(2N+1)}{6} + \frac{N(N+1)}{2} + N \\
+        &= \frac{N}{6} \Big[ (N+1) \Big( (2N+1) + 3 \Big) + 6 \Big] = \eqbox{ \frac{N(N^2 + 3N + 5)}{3} }
+    .\end{aligned} 
+\end{eqnarray}
+
+
+}
 
 \prob{5}{
 
@@ -120,6 +157,35 @@ Calculate the sum
 \begin{eqnarray}
    I_2 = \sum_{n=1}^{\infty} \frac{(-1)^{n}}{n^2 + a^2} 
 .\end{eqnarray}
+
+}
+
+\sol{
+
+For this problem we can use the Poisson summation formula
+\begin{eqnarray}
+    \sum_{n=0}^{\infty} \frac{(-1)^{n}}{n^2 + a^2} = \int_{0}^{\infty} f(x) \dd{x} + \frac{f(0)}{2} + 2 \sum_{n=1}^{\infty} \int_{0}^{\infty} f(x) \cos{(2 \pi n x)} \dd{x}
+.\end{eqnarray}
+Note here that we can rewrite $(-1)^{n} = \cos{n \pi}$.
+Using this, we find
+\begin{eqnarray}
+    \int_{0}^{\infty} \frac{\cos{k x}}{x^2 + a^2} \dd{x} = \frac{\pi}{2 |a|} e^{-k |a|}
+.\end{eqnarray}
+The sum is then given as
+\begin{eqnarray}
+    \begin{aligned}
+        \sum_{n=0}^{\infty} \frac{(-1)^{n}}{n^2 + a^2} &= \frac{\pi}{2 |a|} e^{- \pi |a|} + \frac{1}{a^2} + 2 \sum_{n=1}^{\infty} \int_{0}^{\infty} \frac{\cos{[(2n+1)\pi x]} + \cos{[(2n - 1)\pi x]}}{n^2 + a^2} \dd{x} \\
+        &= \frac{\pi}{2|a|}e^{- \pi |a|} +\frac{1}{2 a^2} + 2 \sum_{n=1}^{\infty} \frac{\pi}{2 |a|} \Big[ e^{-(2n+1) \pi |a|}  + e^{-(2n - 1) \pi |a|} \Big] \\
+        &= \frac{\pi}{2 |a|} + \frac{1}{2 a^2} + \frac{\pi}{|a|} \Big[ e^{-\pi|a|} \sum_{n=1}^{\infty} e^{-2n\pi|a|} + e^{\pi |a|} \sum_{n=1}^{\infty} e^{-2n\pi|a|} \Big] \\
+        &= \frac{\pi}{2 |a|} + \frac{1}{2 a^2} + \frac{\pi}{|a|} (2 \cosh{\pi |a|}) \frac{e^{-2 \pi |a|}}{1 - e^{-2 \pi |a|}} \\
+        &= \frac{1}{2a^2} + \frac{\pi}{2|a|} \Big[ 1 + 2 e^{-\pi |a|} \coth{\pi |a|} \Big]
+    .\end{aligned}
+\end{eqnarray}
+At this point, we can subtract the $n=0$ term from both sides of the previous equation and obtain
+\begin{eqnarray}
+    \eqbox{ I_{2} = \sum_{n=0}^{\infty} \frac{(-1)^{n}}{n^2 + a^2} - \frac{1}{a^2} = -\frac{1}{a^2} + \frac{\pi}{2 |a|} \Big[ 1 + 2e^{-\pi |a|} \coth{\pi |a|} \Big] }
+.\end{eqnarray}
+
 
 }
 
@@ -135,14 +201,6 @@ where $a > 0$.
 }
 
 \sol{
-
-Observe that we can write
-\begin{eqnarray}
-    \begin{aligned}
-    I_{3} &= \int_{x}^{\infty} e^{-au} (\ln{au} - \ln{a}) \dd{u} = \int_{x}^{\infty} e^{-au} \ln{au} - \ln{a} \int_{x}^{\infty} e^{-au} \dd{u} \\
-          &= -\frac{1}{a} \int_{x}^{\infty} e^{-v} \ln{v} \dd{v} - \frac{\ln{a}}{a} e^{-ax}
-    \end{aligned}
-.\end{eqnarray}
 
 We can solve this problem using integration by parts $\int f' g \dd{x} = fg - \int f g' \dd{x}$ with $f' = e^{-au}$ and $g = \ln{u}$, which gives $f = -\frac{1}{a}e^{-au}$ and $g' = 1/u$
 
