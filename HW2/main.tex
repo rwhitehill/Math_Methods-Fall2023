@@ -174,18 +174,17 @@ Using this, we find
 The sum is then given as
 \begin{eqnarray}
     \begin{aligned}
-        \sum_{n=0}^{\infty} \frac{(-1)^{n}}{n^2 + a^2} &= \frac{\pi}{2 |a|} e^{- \pi |a|} + \frac{1}{a^2} + 2 \sum_{n=1}^{\infty} \int_{0}^{\infty} \frac{\cos{[(2n+1)\pi x]} + \cos{[(2n - 1)\pi x]}}{n^2 + a^2} \dd{x} \\
-        &= \frac{\pi}{2|a|}e^{- \pi |a|} +\frac{1}{2 a^2} + 2 \sum_{n=1}^{\infty} \frac{\pi}{2 |a|} \Big[ e^{-(2n+1) \pi |a|}  + e^{-(2n - 1) \pi |a|} \Big] \\
-        &= \frac{\pi}{2 |a|} + \frac{1}{2 a^2} + \frac{\pi}{|a|} \Big[ e^{-\pi|a|} \sum_{n=1}^{\infty} e^{-2n\pi|a|} + e^{\pi |a|} \sum_{n=1}^{\infty} e^{-2n\pi|a|} \Big] \\
-        &= \frac{\pi}{2 |a|} + \frac{1}{2 a^2} + \frac{\pi}{|a|} (2 \cosh{\pi |a|}) \frac{e^{-2 \pi |a|}}{1 - e^{-2 \pi |a|}} \\
-        &= \frac{1}{2a^2} + \frac{\pi}{2|a|} \Big[ 1 + 2 e^{-\pi |a|} \coth{\pi |a|} \Big]
+        \sum_{n=0}^{\infty} \frac{(-1)^{n}}{n^2 + a^2} &= \frac{\pi}{2 |a|} e^{- \pi |a|} + \frac{1}{2a^2} + \sum_{n=1}^{\infty} \int_{0}^{\infty} \frac{\cos{[(2n+1)\pi x]} + \cos{[(2n - 1)\pi x]}}{n^2 + a^2} \dd{x} \\
+        &= \frac{\pi}{2|a|}e^{- \pi |a|} +\frac{1}{2 a^2} + \sum_{n=1}^{\infty} \frac{\pi}{2 |a|} \Big[ e^{-(2n+1) \pi |a|}  + e^{-(2n - 1) \pi |a|} \Big] \\
+        &= \frac{\pi}{2 |a|} e^{-\pi |a|} + \frac{1}{2 a^2} + \frac{\pi}{2|a|} \Big[ e^{-\pi|a|} \sum_{n=1}^{\infty} e^{-2n\pi|a|} + e^{\pi |a|} \sum_{n=1}^{\infty} e^{-2n\pi|a|} \Big] \\
+        &= \frac{\pi}{2 |a|} e^{-\pi |a|} + \frac{1}{2 a^2} + \frac{\pi}{|a|} \cosh{\pi |a|} \frac{e^{-2 \pi |a|}}{1 - e^{-2 \pi |a|}} \\
+        &= \frac{1}{2a^2} + \frac{\pi}{2|a|} e^{-\pi |a|} \Big[ 1 + \coth{\pi |a|} \Big]
     .\end{aligned}
 \end{eqnarray}
 At this point, we can subtract the $n=0$ term from both sides of the previous equation and obtain
 \begin{eqnarray}
-    \eqbox{ I_{2} = \sum_{n=0}^{\infty} \frac{(-1)^{n}}{n^2 + a^2} - \frac{1}{a^2} = -\frac{1}{a^2} + \frac{\pi}{2 |a|} \Big[ 1 + 2e^{-\pi |a|} \coth{\pi |a|} \Big] }
+    \eqbox{ I_{2} = \sum_{n=0}^{\infty} \frac{(-1)^{n}}{n^2 + a^2} - \frac{1}{a^2} = -\frac{1}{2 a^2} + \frac{\pi}{2 |a|} e^{-\pi |a|} \Big[ 1 + \coth{\pi |a|} \Big] }
 .\end{eqnarray}
-
 
 }
 
@@ -202,7 +201,16 @@ where $a > 0$.
 
 \sol{
 
-We can solve this problem using integration by parts $\int f' g \dd{x} = fg - \int f g' \dd{x}$ with $f' = e^{-au}$ and $g = \ln{u}$, which gives $f = -\frac{1}{a}e^{-au}$ and $g' = 1/u$
+We can solve this problem using integration by parts $\int f' g \dd{x} = fg - \int f g' \dd{x}$ with $f' = e^{-au}$ and $g = \ln{u}$, which gives $f = -\frac{1}{a}e^{-au} = -\frac{1}{a} f'$ and $g' = 1/u$.
+Plugging this in, we find
+\begin{eqnarray}
+    I_{3} = -\frac{1}{a} \frac{e^{-au}}{u} \Big|_{x}^{\infty} + \frac{1}{a} \int_{x}^{\infty} \frac{e^{-au}}{u} \dd{u} = \frac{e^{-ax}}{ax} + \int_{x}^{\infty} \frac{e^{-au}}{au} \dd{u} = \frac{e^{-ax}}{ax} + \frac{1}{a} E_{1}(ax)
+.\end{eqnarray}
+Thus, we have
+\begin{eqnarray}
+    \eqbox{ I_{3} = \frac{e^{-ax}}{ax} + \frac{1}{a} e^{-ax} \sum_{n=0}^{\infty} \frac{(-1)^{n}}{(ax)^{n+1}} n! = \frac{e^{-ax}}{ax} \Bigg[ 1 + x \sum_{n=0}^{\infty} \frac{(-1)^{n}}{(ax)^{n+1}} n! \Bigg] }
+.\end{eqnarray}
+
 
 }
 
