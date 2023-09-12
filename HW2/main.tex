@@ -44,7 +44,7 @@ Here, we can write
                                    &= \sum_{n=0}^{m-1} \frac{(-1)^{n+1}}{n+2} x^{n} + \frac{(-1)^{m+1}}{m+2} x^{m} + \sum_{n=m+1} \frac{(-1)^{n+1}}{n+2} x^{n}
     .\end{aligned}
 \end{eqnarray}
-The last step is mostly illustrative:
+The last step is mostly illustrative, explicitly showing
 \begin{eqnarray}
     \dv[m]{x} \frac{\ln(1 + x) - x}{x^2} = \frac{(-1)^{m+1} \, m!}{m+2} + {\cal O}(x)
 .\end{eqnarray}
@@ -182,7 +182,7 @@ The sum is then given as
 \end{eqnarray}
 At this point, we can subtract the $n=0$ term from both sides of the previous equation and obtain
 \begin{eqnarray}
-    \eqbox{ I_{2} = \sum_{n=0}^{\infty} \frac{(-1)^{n}}{n^2 + a^2} - \frac{1}{a^2} = -\frac{1}{2 a^2} + \frac{\pi}{2 |a|} e^{-\pi |a|} \Big[ 1 + \coth{\pi |a|} \Big] }
+    \eqbox{ I_{2} = \sum_{n=1}^{\infty} \frac{(-1)^{n}}{n^2 + a^2} - \frac{1}{a^2} = -\frac{1}{2 a^2} + \frac{\pi}{2 |a|} e^{-\pi |a|} \Big[ 1 + \coth{\pi |a|} \Big] }
 .\end{eqnarray}
 
 }
