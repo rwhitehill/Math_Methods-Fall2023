@@ -15,21 +15,20 @@ Calculate the following limit:
 
 \sol{
 
-Upon first glance, we have a limit of an indeterminate form $0/0$.
+Upon inspection, we have a limit of an indeterminate form $0/0$.
 We may use L'Hopital's rule, but the functions are quite messy to differentiate, so we expand both the numerator and denominator in Taylor series about $x = 0$.
-Note that $\ln(1 + x) = x - x^2/2 + {\rm cal O}(x^3)$ and $\sin^2{x} = (1 - \cos{2x})/2 = [(2x)^2/2! + (2x)^{4}/4! + {\cal O}(x^{6})]/2$.
-Thus, the limit
+Note that $\ln(1 + x) = x - x^2/2 + {\cal O}(x^3)$ and $\sin^2{x} = (1 - \cos{2x})/2 = [(2x)^2/2! + (2x)^{4}/4! + {\cal O}(x^{6})]/2$.
+Thus,
 \begin{eqnarray}
-    \eqbox{ I_{1} = \lim_{x \rightarrow 0} \frac{ x^{4} }{ x^2 - \frac{1}{2}[(2x)^2/2! - (2x)^{4}/4!] } = \frac{2(4!)}{2^{4}} = \frac{24}{8} = 3 }
+    \eqbox{ I_{1} = \lim_{x \rightarrow 0} \frac{ x^2(x^2 - {\cal O}(x^{4})) }{ x^2 - \frac{1}{2}[(2x)^2/2! - (2x)^{4}/4! + {\cal O}(x^{6})] } = \frac{2(4!)}{2^{4}} = \frac{24}{8} = 3 }
 .\end{eqnarray}
-
 
 }
 
 
 \prob{2}{
 
-Calculate the following limit of the $m-{\rm th}$ derivative at $x = 0$:
+Calculate the following limit of the $m^{\rm th}$ derivative at $x = 0$:
 \begin{eqnarray}
     I_{2} = \lim_{x \rightarrow 0} \dv[m]{x} \frac{\ln(1 + x) - x}{x^2}
 .\end{eqnarray}
@@ -45,7 +44,7 @@ Here, we can write
                                    &= \sum_{n=0}^{m-1} \frac{(-1)^{n+1}}{n+2} x^{n} + \frac{(-1)^{m+1}}{m+2} x^{m} + \sum_{n=m+1} \frac{(-1)^{n+1}}{n+2} x^{n}
     .\end{aligned}
 \end{eqnarray}
-The last step is mostly illustrative for this:
+The last step is mostly illustrative:
 \begin{eqnarray}
     \dv[m]{x} \frac{\ln(1 + x) - x}{x^2} = \frac{(-1)^{m+1} \, m!}{m+2} + {\cal O}(x)
 .\end{eqnarray}
@@ -77,7 +76,7 @@ which gives
 \begin{eqnarray}
     \laplacian e^{-ax^2 - by^2} \cos{ax} \cos{by} = e^{-by^2} \cos{by} \pdv[2]{x} e^{-ax^2} \cos{ax} + e^{-ax^2} \cos{ax} \pdv[2]{y} e^{-by^2} \cos{by}
 .\end{eqnarray}
-Note that we can evaluate the limit of the first term and use the replacements $a \leftrightarrow b,~ x \leftrightarrow y$.
+Note that we can evaluate the limit of the first term and use the replacement $a \leftrightarrow b$.
 
 Observe that
 \begin{eqnarray}
@@ -135,7 +134,7 @@ The first sum is
         &= \frac{N}{6}(2N^2 + 3N + 1) = \frac{N(N+1)(2N+1)}{6}
     \end{aligned}
 .\end{eqnarray}
-Moving on to the second sum we find\footnote{As Gauss did in his primary years using a much simpler and elegant rationale.}
+Moving on to the second sum we find\footnote{As Gauss did in his primary years using a much simpler and more elegant rationale.}
 \begin{eqnarray}
     \sum_{n=0}^{N} n = \int_{0}^{N} x \dd{x} + \frac{N}{2} = \frac{N^2}{2} + \frac{N}{2} = \frac{N(N+1)}{2}
 .\end{eqnarray}
