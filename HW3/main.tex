@@ -1,0 +1,100 @@
+\def\duedate{\today}
+\def\HWnum{\#}
+\input{../preamble.tex}
+
+\begin{document}
+
+\prob{1}{
+
+Express the following delta function in terms of delta functions of the variable $x$:
+\begin{eqnarray}
+    \delta\Big( \frac{\sin{x}}{x} \Big) 
+.\end{eqnarray}
+
+}
+
+\sol{
+
+Recall that we can write 
+\begin{eqnarray}
+    \delta(f(x)) = \sum_{i} \frac{\delta(x - x_{i})}{|f'(x_{i})|}
+,\end{eqnarray}
+where $f(x)$ has simple roots $x_{i}$\footnote{Otherwise we should expand to higher orders in the Taylor series of $f(x)$ around its root $x_{i}$}.
+Observe that $\sin{x}/x$ has zeros when $\sin{x} = 0$ or $x = n \pi$ for $n = \pm 1, \pm 2, \ldots$ and $\dv{x} \sin{x}/x |_{x = n \pi}= [\cos{x}/x - \sin{x}/x^2]_{x = n\pi} = (-1)^{n}/n \pi$.
+Note that there is not a zero when $n=0$ (i.e. $x = 0$) since the $1/x$ makes the function indeterminate and $\sin{x}/x \rightarrow 1$ as $x \rightarrow 0$.
+
+Thus,
+\begin{eqnarray}
+    \eqbox{ \delta \Big( \frac{\sin{x}}{x} \Big) = \sum_{n=1}^{\infty} (-1)^{n} n \pi \Big[ \delta(x - n \pi) - \delta(x + n\pi) \Big] }
+.\end{eqnarray}
+
+
+}
+
+
+\prob{2}{
+
+Calculate
+\begin{eqnarray}
+    I(z) = \Gamma(1 + z) \Gamma(1 - z)
+\end{eqnarray}
+at $z = 1/4$.
+
+}
+
+\sol{}
+
+
+\prob{3}{
+
+    Using the definition of the complete elliptical integrals $E(m)$ and $K(m)$, express the derivative ${\partial E(m)}/{\partial m}$ in terms of $K(m)$ and $E(m)$.
+
+}
+
+\sol{}
+
+\prob{4}{
+
+    Find the values of $e^{\pm i\pi/2}$, $e^{i \pi n}$, $\ln(-1)$ where $n = 0, \pm 1, \pm 2, \ldots$.
+
+}
+
+\sol{}
+
+
+\prob{5}{
+
+Calculate the following series:
+\begin{eqnarray}
+    I_1 = \sum_{n=0}^{\infty} p^{n} \sin{(qn)} \quad {\rm and} \quad I_{2} = \sum_{n=0}^{\infty} p^{n} \cos{(qn)}
+,\end{eqnarray}
+where $p$ and $q$ are real parameters. 
+
+HINT: Use the sum of geometric series with complex $r$.
+
+}
+
+\sol{
+
+Observe the following:
+\begin{eqnarray}
+   I = \sum_{n=0}^{\infty} p^{n} e^{iqn} = I_{2} + i I_{1}
+.\end{eqnarray}
+That is $I_{2} = \Re(I)$ and $I_{1} = \Im(I)$.
+We can use the geometric series formula with complex $r = p e^{iq}$, giving
+\begin{eqnarray}
+    I = \frac{1}{1 - p e^{iq}} = \frac{1}{(1 - p \cos{q}) - i p \sin{q}} = \frac{(1 - p\cos{q}) + i p \sin{q}}{(1 - p\cos{q})^2 + p^2 \sin^2{q}}
+.\end{eqnarray}
+Taking real and imaginary parts of $I$, we have
+\begin{gather}
+    \eqbox{ I_{1} = \frac{p \sin{q}}{ 1 + p^2 - 2 p \cos{q}} } \\
+    \eqbox{ I_{2} = \frac{1 - p\cos{q}}{1 + p^2 - 2p \cos{q}} }
+.\end{gather}
+
+
+
+}
+
+
+
+\end{document}
