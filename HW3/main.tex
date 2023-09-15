@@ -21,7 +21,7 @@ Recall that we can write
 ,\end{eqnarray}
 where $f(x)$ has simple roots $x_{i}$\footnote{Otherwise we should expand to higher orders in the Taylor series of $f(x)$ around its root $x_{i}$}.
 Observe that $\sin{x}/x$ has zeros when $\sin{x} = 0$ or $x = n \pi$ for $n = \pm 1, \pm 2, \ldots$ and $\dv{x} \sin{x}/x |_{x = n \pi}= [\cos{x}/x - \sin{x}/x^2]_{x = n\pi} = (-1)^{n}/n \pi$.
-Note that there is not a zero when $n=0$ (i.e. $x = 0$) since the $1/x$ makes the function indeterminate and $\sin{x}/x \rightarrow 1$ as $x \rightarrow 0$.
+Note that there is not a zero when $n=0$ (i.e. $x = 0$) since the $1/x$ factor makes the function indeterminate there and $\sin{x}/x \rightarrow 1$ as $x \rightarrow 0$.
 
 Thus,
 \begin{eqnarray}
@@ -42,7 +42,19 @@ at $z = 1/4$.
 
 }
 
-\sol{}
+\sol{
+
+We can write 
+\begin{eqnarray}
+    \eqbox{ 
+\begin{aligned}
+    &\Gamma(1 + z)\Gamma(1 - z) = z \Gamma(z) \Gamma(1 - z) = \frac{\pi z}{\sin{\pi z}} \\
+                               &\Rightarrow \Gamma(1 + z)\Gamma(1 - z)|_{z = 1/4} = \frac{\pi/4}{\sin{\pi/4}} = \frac{\pi}{2 \sqrt{2}} 
+\end{aligned}
+}
+.\end{eqnarray}
+
+}
 
 
 \prob{3}{
