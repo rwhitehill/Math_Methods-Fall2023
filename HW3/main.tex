@@ -22,14 +22,14 @@ Recall that we can write
 where $f(x)$ has simple roots $x_{i}$\footnote{Otherwise the $f'(x_{i})$ term vanishes and we have to be a bit more careful with the expansion of $f(x)$ inside the delta function.}.
 Note that $f(x) = \sin{x}/x$ indeed has simple roots since we can write
 \begin{eqnarray}
-    \sin{x} = x \prod_{n=1}^{\infty} \Big( 1 - \frac{x^2}{n \pi^2} \Big)
+    \frac{\sin{x}}{x} = \prod_{n=1}^{\infty} \Big( 1 - \frac{x^2}{n \pi^2} \Big)
 .\end{eqnarray}
-From this formala, it is also trivial to glean that $\sin{x}/x$ has zeros when $\sin{x} = 0$ or $x = n \pi$ for $n = \pm 1, \pm 2, \ldots$\footnote{Note that there is not a zero when $n=0$ (i.e. $x = 0$) since the $1/x$ factor makes the function indeterminate there and $\sin{x}/x \rightarrow 1$ as $x \rightarrow 0$. Alternatively, from the product expansion, the factor $x$ out front cancels with $1/x$, and we take the limit of this as $x \rightarrow 0$, which is just an infinite product of ones.}.
+From this formala, it is trivial to glean that $\sin{x}/x$ has zeros when $\sin{x} = 0$ or $x = n \pi$ for $n = \pm 1, \pm 2, \ldots$.
 Additionally, $\dv{x} \sin{x}/x |_{x = n \pi}= [\cos{x}/x - \sin{x}/x^2]_{x = n\pi} = (-1)^{n}/n \pi$.
 
 Thus,
 \begin{eqnarray}
-    \eqbox{ \delta \Big( \frac{\sin{x}}{x} \Big) = \sum_{n=1}^{\infty} (-1)^{n} n \pi \Big[ \delta(x - n \pi) - \delta(x + n\pi) \Big] }
+    \eqbox{ \delta \Big( \frac{\sin{x}}{x} \Big) = \sum_{n=1}^{\infty} n \pi \Big[ \delta(x - n \pi) - \delta(x + n\pi) \Big] }
 .\end{eqnarray}
 
 
@@ -48,7 +48,7 @@ at $z = 1/4$.
 
 \sol{
 
-We can write 
+We can write ({\color{red} Check this})
 \begin{eqnarray}
     \eqbox{ 
 \begin{aligned}

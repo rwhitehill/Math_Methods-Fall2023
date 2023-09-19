@@ -1,0 +1,229 @@
+\def\duedate{\today}
+\def\HWnum{2}
+\input{../preamble.tex}
+
+\begin{document}
+
+\prob{1}{
+
+Calculate the following limit:
+\begin{eqnarray}
+    I_{1} = \lim_{x \rightarrow 0} \frac{x^2 \ln(1 + x^2)}{x^2 - \sin^2{x}}
+.\end{eqnarray}
+
+}
+
+\sol{
+
+Upon inspection, we have a limit of an indeterminate form $0/0$.
+We may use L'Hopital's rule, but the functions are quite messy to differentiate, so we expand both the numerator and denominator in Taylor series about $x = 0$.
+Note that $\ln(1 + x) = x - x^2/2 + {\cal O}(x^3)$ and $\sin^2{x} = (1 - \cos{2x})/2 = [(2x)^2/2! + (2x)^{4}/4! + {\cal O}(x^{6})]/2$.
+Thus,
+\begin{eqnarray}
+    \eqbox{ I_{1} = \lim_{x \rightarrow 0} \frac{ x^2(x^2 - {\cal O}(x^{4})) }{ x^2 - \frac{1}{2}[(2x)^2/2! - (2x)^{4}/4! + {\cal O}(x^{6})] } = \frac{2(4!)}{2^{4}} = \frac{24}{8} = 3 }
+.\end{eqnarray}
+
+}
+
+
+\prob{2}{
+
+Calculate the following limit of the $m^{\rm th}$ derivative at $x = 0$:
+\begin{eqnarray}
+    I_{2} = \lim_{x \rightarrow 0} \dv[m]{x} \frac{\ln(1 + x) - x}{x^2}
+.\end{eqnarray}
+
+}
+
+\sol{
+
+Here, we can write
+\begin{eqnarray}
+    \begin{aligned}
+        \frac{\ln(1 + x) - x}{x^2} &= \frac{1}{x^2} \Big[ \sum_{n=1}^{\infty} \frac{(-1)^{n+1} x^{n}}{n} - x \Big] = \sum_{n=2}^{\infty} \frac{(-1)^{n+1}}{n} x^{n-2} = \sum_{n=0}^{\infty} \frac{(-1)^{n+1}}{n+2} x^{n} \\
+                                   &= \sum_{n=0}^{m-1} \frac{(-1)^{n+1}}{n+2} x^{n} + \frac{(-1)^{m+1}}{m+2} x^{m} + \sum_{n=m+1} \frac{(-1)^{n+1}}{n+2} x^{n}
+    .\end{aligned}
+\end{eqnarray}
+The last step is mostly illustrative, explicitly showing
+\begin{eqnarray}
+    \dv[m]{x} \frac{\ln(1 + x) - x}{x^2} = \frac{(-1)^{m+1} \, m!}{m+2} + {\cal O}(x)
+.\end{eqnarray}
+Therefore, taking $x \rightarrow 0$ gives
+\begin{eqnarray}
+    \eqbox{ I_{2} = (-1)^{m+1} \frac{m!}{m+2} }
+.\end{eqnarray}
+
+
+}
+
+
+\prob{3}{
+
+Calculate the following limit at $x = y = 0$:
+\begin{eqnarray}
+    I_{3} = \lim_{x \rightarrow 0, y \rightarrow 0} \laplacian \big[ e^{-ax^2 - by^2} \cos{ax} \cos{by} \big]
+.\end{eqnarray}
+
+}
+
+\sol{
+
+We can rewrite the operand of the laplacian as
+\begin{eqnarray}
+    e^{-ax^2-by^2} \cos{ax} \cos{by} = [e^{-ax^2}\cos{ax}] [e^{-by^2} \cos{bx}]
+,\end{eqnarray}
+which gives
+\begin{eqnarray}
+    \laplacian e^{-ax^2 - by^2} \cos{ax} \cos{by} = e^{-by^2} \cos{by} \pdv[2]{x} e^{-ax^2} \cos{ax} + e^{-ax^2} \cos{ax} \pdv[2]{y} e^{-by^2} \cos{by}
+.\end{eqnarray}
+Note that we can evaluate the limit of the first term and use the replacement $a \leftrightarrow b$.
+
+Observe that
+\begin{eqnarray}
+    \lim_{y \rightarrow 0} e^{-b y^2} \cos{b y} = 1
+.\end{eqnarray}
+Next, we evaluate the second factor to be
+\begin{eqnarray}
+    \begin{aligned}
+        \dv[2]{x} e^{-ax^2} \cos{ax} &= -2a (1 - 2ax) e^{-ax^2} \cos{ax} + (- 2 a x e^{-ax^2})(-a \sin{ax}) \\
+                                     &+ e^{-a x^2} (-a^2 \cos{ax})
+    .\end{aligned}
+\end{eqnarray}
+It should be clear then that
+\begin{eqnarray}
+    \lim_{x \rightarrow 0} \pdv[2]{x} e^{-ax^2} \cos{ax} = -2a - a^2 = -(a + 1)^2 + 1 
+.\end{eqnarray}
+Hence 
+\begin{eqnarray}
+    \eqbox{ \lim_{x,y \rightarrow 0} \laplacian e^{-ax^2 - by^2} \cos{ax} \cos{by} = -(a + 1)^2 - (b + 1)^2 + 2 }
+.\end{eqnarray}
+
+
+
+}
+
+
+\prob{4}{
+
+Calculate the sum
+\begin{eqnarray}
+   I_{1} = \sum_{n=1}^{N} (n^2 + n + 1) 
+.\end{eqnarray}
+
+}
+
+\sol{
+
+We can use the Euler-Maclaurin formula 
+\begin{eqnarray}
+    \sum_{n=a}^{N} f(n) = \int_{a}^{N} f(x) \dd{x} + \frac{1}{2}[f(N) + f(a)] + \sum_{n=1}^{q} \frac{B_{2n}}{(2n)!}[ f^{(2n-1)}(N) - f^{(2n-1)}(a) ] + R
+.\end{eqnarray}
+
+to compute this series.
+First, we split the sum into separate terms as
+\begin{eqnarray}
+    \label{eq:I1-parts}
+    I_{1} = \sum_{n=0}^{N} n^2 + \sum_{n=0}^{N} n + N
+,\end{eqnarray}
+where we have gone ahead and evaluated the sum of the last term since it is just $1$ added $N$ times.
+Also note that we have adjusted out indices to start from $n=0$ since this does not change the sum but should make the right hand side simpler to evaluate since $\dv[n]{x} x^{m}|_{x = 0} = 0$ for any $n,m \in \mathbb{N} \cup \{ 0 \}$.
+The first sum is
+\begin{eqnarray}
+    \begin{aligned}
+    \sum_{n=0}^{N} n^2 &= \int_{0}^{N} x^2 \dd{x} + \frac{N^2}{2} + \frac{B_{2}}{2!}\dv{x} (x^2)|_{x = N} = \frac{N^3}{3} + \frac{N^2}{2} + \frac{N}{6} \\
+        &= \frac{N}{6}(2N^2 + 3N + 1) = \frac{N(N+1)(2N+1)}{6}
+    \end{aligned}
+.\end{eqnarray}
+Moving on to the second sum we find\footnote{As Gauss did in his primary years using a much simpler and more elegant rationale.}
+\begin{eqnarray}
+    \sum_{n=0}^{N} n = \int_{0}^{N} x \dd{x} + \frac{N}{2} = \frac{N^2}{2} + \frac{N}{2} = \frac{N(N+1)}{2}
+.\end{eqnarray}
+
+Plugging these intermediate results into \eref{I1-parts}, we find
+\begin{eqnarray}
+    \begin{aligned}
+        I_{1} &= \frac{N(N+1)(2N+1)}{6} + \frac{N(N+1)}{2} + N \\
+        &= \frac{N}{6} \Big[ (N+1) \Big( (2N+1) + 3 \Big) + 6 \Big] = \eqbox{ \frac{N(N^2 + 3N + 5)}{3} }
+    .\end{aligned} 
+\end{eqnarray}
+
+
+}
+
+\prob{5}{
+
+Calculate the sum
+\begin{eqnarray}
+   I_2 = \sum_{n=1}^{\infty} \frac{(-1)^{n}}{n^2 + a^2} 
+.\end{eqnarray}
+
+}
+
+\sol{
+
+For this problem we can use the Poisson summation formula
+\begin{eqnarray}
+    \sum_{n=0}^{\infty} \frac{(-1)^{n}}{n^2 + a^2} = \int_{0}^{\infty} f(x) \dd{x} + \frac{f(0)}{2} + 2 \sum_{n=1}^{\infty} \int_{0}^{\infty} f(x) \cos{(2 \pi n x)} \dd{x}
+.\end{eqnarray}
+Note here that we can rewrite $(-1)^{n} = \cos{n \pi}$.
+Using this, we find
+\begin{eqnarray}
+    \int_{0}^{\infty} \frac{\cos{k x}}{x^2 + a^2} \dd{x} = \frac{\pi}{2 |a|} e^{-k |a|}
+.\end{eqnarray}
+The sum is then given as
+\begin{eqnarray}
+    \begin{aligned}
+        \sum_{n=0}^{\infty} \frac{(-1)^{n}}{n^2 + a^2} &= \frac{\pi}{2 |a|} e^{- \pi |a|} + \frac{1}{2a^2} + \sum_{n=1}^{\infty} \int_{0}^{\infty} \frac{\cos{[(2n+1)\pi x]} + \cos{[(2n - 1)\pi x]}}{n^2 + a^2} \dd{x} \\
+        &= \frac{\pi}{2|a|}e^{- \pi |a|} +\frac{1}{2 a^2} + \sum_{n=1}^{\infty} \frac{\pi}{2 |a|} \Big[ e^{-(2n+1) \pi |a|}  + e^{-(2n - 1) \pi |a|} \Big] \\
+        &= \frac{\pi}{2 |a|} e^{-\pi |a|} + \frac{1}{2 a^2} + \frac{\pi}{2|a|} \Big[ e^{-\pi|a|} \sum_{n=1}^{\infty} e^{-2n\pi|a|} + e^{\pi |a|} \sum_{n=1}^{\infty} e^{-2n\pi|a|} \Big] \\
+        &= \frac{\pi}{2 |a|} e^{-\pi |a|} + \frac{1}{2 a^2} + \frac{\pi}{|a|} \cosh{\pi |a|} \frac{e^{-2 \pi |a|}}{1 - e^{-2 \pi |a|}} \\
+        &= \frac{1}{2a^2} + \frac{\pi}{2|a|} e^{-\pi |a|} \Big[ 1 + \coth{\pi |a|} \Big]
+    .\end{aligned}
+\end{eqnarray}
+At this point, we can subtract the $n=0$ term from both sides of the previous equation and obtain
+\begin{eqnarray}
+    \eqbox{ I_{2} = \sum_{n=1}^{\infty} \frac{(-1)^{n}}{n^2 + a^2} - \frac{1}{a^2} = -\frac{1}{2 a^2} + \frac{\pi}{2 |a|} e^{-\pi |a|} \Big[ 1 + \coth{\pi |a|} \Big] }
+.\end{eqnarray}
+
+}
+
+
+\prob{6}{
+
+Calculate the asymptotic series for this integral at $x \gg 1$:
+\begin{eqnarray}
+    I_{3} = \int_{x}^{\infty} e^{-au} \ln{u} \dd{u}
+,\end{eqnarray}
+where $a > 0$.
+
+}
+
+\sol{
+
+We can solve this problem using integration by parts $\int f' g \dd{x} = fg - \int f g' \dd{x}$ with $f' = e^{-au}$ and $g = \ln{u}$, which gives $f = -\frac{1}{a}e^{-au} = -\frac{1}{a} f'$ and $g' = 1/u$.
+Plugging this in, we find
+\begin{eqnarray}
+    I_{3} = -\frac{1}{a} \frac{e^{-au}}{u} \Big|_{x}^{\infty} + \frac{1}{a} \int_{x}^{\infty} \frac{e^{-au}}{u} \dd{u} = \frac{e^{-ax}}{ax} + \int_{x}^{\infty} \frac{e^{-au}}{au} \dd{u} = \frac{e^{-ax}}{ax} + \frac{1}{a} E_{1}(ax)
+.\end{eqnarray}
+Thus, we have
+\begin{eqnarray}
+    \eqbox{ I_{3} = \frac{e^{-ax}}{ax} + \frac{1}{a} e^{-ax} \sum_{n=0}^{\infty} \frac{(-1)^{n}}{(ax)^{n+1}} n! = \frac{e^{-ax}}{ax} \Bigg[ 1 + x \sum_{n=0}^{\infty} \frac{(-1)^{n}}{(ax)^{n+1}} n! \Bigg] }
+.\end{eqnarray}
+
+{\color{red}
+
+The integration by parts is incorrect (The formula stated in terms of $f,g$ is correct but not the work carried out for the spectific example).
+The answer should therefore be
+\begin{eqnarray}
+    I_{3} = \frac{e^{-ax}}{a} \Bigg[ \ln{x} + \sum_{n=0}^{\infty} \frac{(-1)^{n}}{(ax)^{n+1}} n! \Bigg]
+.\end{eqnarray}
+
+
+
+}
+
+}
+
+
+
+\end{document}
