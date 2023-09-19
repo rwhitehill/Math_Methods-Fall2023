@@ -22,14 +22,14 @@ Recall that we can write
 where $f(x)$ has simple roots $x_{i}$\footnote{Otherwise the $f'(x_{i})$ term vanishes and we have to be a bit more careful with the expansion of $f(x)$ inside the delta function.}.
 Note that $f(x) = \sin{x}/x$ indeed has simple roots since we can write
 \begin{eqnarray}
-    \frac{\sin{x}}{x} = \prod_{n=1}^{\infty} \Big( 1 - \frac{x^2}{n \pi^2} \Big)
+    \frac{\sin{x}}{x} = \prod_{n=1}^{\infty} \Big( 1 - \frac{x^2}{n^2 \pi^2} \Big)
 .\end{eqnarray}
-From this formala, it is trivial to glean that $\sin{x}/x$ has zeros when $\sin{x} = 0$ or $x = n \pi$ for $n = \pm 1, \pm 2, \ldots$.
+From this formala, it is also trivial to glean that $\sin{x}/x$ has zeros when $\sin{x} = 0$ or $x = n \pi$ for $n = \pm 1, \pm 2, \ldots$.
 Additionally, $\dv{x} \sin{x}/x |_{x = n \pi}= [\cos{x}/x - \sin{x}/x^2]_{x = n\pi} = (-1)^{n}/n \pi$.
 
 Thus,
 \begin{eqnarray}
-    \eqbox{ \delta \Big( \frac{\sin{x}}{x} \Big) = \sum_{n=1}^{\infty} n \pi \Big[ \delta(x - n \pi) - \delta(x + n\pi) \Big] }
+    \eqbox{ \delta \Big( \frac{\sin{x}}{x} \Big) = \sum_{n=1}^{\infty} n \pi \Big[ \delta(x - n \pi) + \delta(x + n\pi) \Big] }
 .\end{eqnarray}
 
 
@@ -48,11 +48,11 @@ at $z = 1/4$.
 
 \sol{
 
-We can write ({\color{red} Check this})
+We can write 
 \begin{eqnarray}
     \eqbox{ 
 \begin{aligned}
-    &\Gamma(1 + z)\Gamma(1 - z) = z \Gamma(z) \Gamma(1 - z) = \frac{\pi z}{\sin{\pi z}} \\
+    &\Gamma(1 + z)\Gamma(1 - z) = z \Gamma(z) \Gamma(1 - z) = z \frac{\pi}{\sin{\pi z}} \\
                                &\Rightarrow \Gamma(1 + z)\Gamma(1 - z)|_{z = 1/4} = \frac{\pi/4}{\sin{\pi/4}} = \frac{\pi}{2 \sqrt{2}} 
 \end{aligned}
 }
@@ -106,12 +106,12 @@ Thus,
 \sol{
 
 We find that
-\begin{align}
-    e^{\pm i \pi/2} &= \cos{ (\pm \pi/2) } + i \sin{( \pm \pi/2 )} = \pm i \\
-    e^{i \pi n} &= \cos{(\pi n)} + i \sin{(\pi n)} = (-1)^{n} \\
-    \ln(-1) &= \ln(e^{i\pi}) = i \pi
-.\end{align}
-
+\begin{gather}
+    \eqbox{ e^{\pm i \pi/2} = \cos{ (\pm \pi/2) } + i \sin{( \pm \pi/2 )} = \pm i } \\
+    \eqbox{ e^{i \pi n} = \cos{(\pi n)} + i \sin{(\pi n)} = (-1)^{n} } \\
+    \eqbox{ \ln(-1) = \ln(e^{i\pi}) = i \pi }
+,\end{gather}
+restricting our definition of $\ln{z}$ to the principal branch (i.e. $\arg{z} \in [0,2 \pi)$).
 
 }
 
