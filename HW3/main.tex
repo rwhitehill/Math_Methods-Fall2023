@@ -1,5 +1,5 @@
 \def\duedate{\today}
-\def\HWnum{\#}
+\def\HWnum{3}
 \input{../preamble.tex}
 
 \begin{document}
@@ -19,13 +19,17 @@ Recall that we can write
 \begin{eqnarray}
     \delta(f(x)) = \sum_{i} \frac{\delta(x - x_{i})}{|f'(x_{i})|}
 ,\end{eqnarray}
-where $f(x)$ has simple roots $x_{i}$\footnote{Otherwise we should expand to higher orders in the Taylor series of $f(x)$ around its root $x_{i}$}.
-Observe that $\sin{x}/x$ has zeros when $\sin{x} = 0$ or $x = n \pi$ for $n = \pm 1, \pm 2, \ldots$ and $\dv{x} \sin{x}/x |_{x = n \pi}= [\cos{x}/x - \sin{x}/x^2]_{x = n\pi} = (-1)^{n}/n \pi$.
-Note that there is not a zero when $n=0$ (i.e. $x = 0$) since the $1/x$ makes the function indeterminate and $\sin{x}/x \rightarrow 1$ as $x \rightarrow 0$.
+where $f(x)$ has simple roots $x_{i}$\footnote{Otherwise the $f'(x_{i})$ term vanishes and we have to be a bit more careful with the expansion of $f(x)$ inside the delta function.}.
+Note that $f(x) = \sin{x}/x$ indeed has simple roots since we can write
+\begin{eqnarray}
+    \frac{\sin{x}}{x} = \prod_{n=1}^{\infty} \Big( 1 - \frac{x^2}{n^2 \pi^2} \Big)
+.\end{eqnarray}
+From this formala, it is also trivial to glean that $\sin{x}/x$ has zeros when $\sin{x} = 0$ or $x = n \pi$ for $n = \pm 1, \pm 2, \ldots$.
+Additionally, $\dv{x} \sin{x}/x |_{x = n \pi}= [\cos{x}/x - \sin{x}/x^2]_{x = n\pi} = (-1)^{n}/n \pi$.
 
 Thus,
 \begin{eqnarray}
-    \eqbox{ \delta \Big( \frac{\sin{x}}{x} \Big) = \sum_{n=1}^{\infty} (-1)^{n} n \pi \Big[ \delta(x - n \pi) - \delta(x + n\pi) \Big] }
+    \eqbox{ \delta \Big( \frac{\sin{x}}{x} \Big) = \sum_{n=1}^{\infty} n \pi \Big[ \delta(x - n \pi) + \delta(x + n\pi) \Big] }
 .\end{eqnarray}
 
 
@@ -42,7 +46,19 @@ at $z = 1/4$.
 
 }
 
-\sol{}
+\sol{
+
+We can write 
+\begin{eqnarray}
+    \eqbox{ 
+\begin{aligned}
+    &\Gamma(1 + z)\Gamma(1 - z) = z \Gamma(z) \Gamma(1 - z) = z \frac{\pi}{\sin{\pi z}} \\
+                               &\Rightarrow \Gamma(1 + z)\Gamma(1 - z)|_{z = 1/4} = \frac{\pi/4}{\sin{\pi/4}} = \frac{\pi}{2 \sqrt{2}} 
+\end{aligned}
+}
+.\end{eqnarray}
+
+}
 
 
 \prob{3}{
@@ -51,7 +67,35 @@ at $z = 1/4$.
 
 }
 
-\sol{}
+\sol{
+
+Recall that the complete elliptic integrals of the first and second kind are defined as
+\begin{align}
+    K(m) &= \int_{0}^{\pi/2} \frac{\dd{\theta}}{\sqrt{1 - m\sin^2{\theta}}} \\
+    E(m) &= \int_{0}^{\pi/2} \dd{\theta} \sqrt{1 - m \sin^2{\theta}}
+,\end{align}
+respectively.
+Differentiating $E(m)$ with respect to $m$ we have
+\begin{eqnarray}
+    \begin{aligned}
+        \pdv{E}{m} &= \pdv{m} \int_{0}^{\pi/2} \dd{\theta} \sqrt{1 - m\sin^2{\theta}} = \int_{0}^{\pi/2} \dd{\theta} \pdv{m} \sqrt{1 - m \sin^2{\theta}} \\
+                   &= -\frac{1}{2} \int_{0}^{\pi/2} \frac{\sin^2{\theta} \dd{\theta}}{\sqrt{1 - m \sin^2{\theta}}}
+    .\end{aligned}
+\end{eqnarray}
+Observe the following:
+\begin{eqnarray}
+    \begin{aligned}
+        K(m) - E(m) &= \int_{0}^{\pi/2} \dd{\theta} \Bigg[ \frac{1}{\sqrt{1 - m\sin^2{\theta}}} - \sqrt{1 - m\sin^2{\theta}} \Bigg] \\ 
+                    &= \int_{0}^{\pi/2} \dd{\theta} \frac{1 - (1 - m \sin^2{\theta})}{\sqrt{1 - m\sin^2{\theta}}} = m \int_{0}^{\pi/2} \dd{\theta} \frac{\sin^2{\theta}}{\sqrt{1 - m \sin^2{\theta}}}
+    .\end{aligned}
+\end{eqnarray}
+Thus,
+\begin{eqnarray}
+    \eqbox{ \pdv{E}{m} = \frac{K(m) - E(m)}{m} } 
+.\end{eqnarray}
+
+
+}
 
 \prob{4}{
 
@@ -59,7 +103,17 @@ at $z = 1/4$.
 
 }
 
-\sol{}
+\sol{
+
+We find that
+\begin{gather}
+    \eqbox{ e^{\pm i \pi/2} = \cos{ (\pm \pi/2) } + i \sin{( \pm \pi/2 )} = \pm i } \\
+    \eqbox{ e^{i \pi n} = \cos{(\pi n)} + i \sin{(\pi n)} = (-1)^{n} } \\
+    \eqbox{ \ln(-1) = \ln(e^{i\pi}) = i \pi }
+,\end{gather}
+restricting our definition of $\ln{z}$ to the principal branch (i.e. $\arg{z} \in [0,2 \pi)$).
+
+}
 
 
 \prob{5}{
