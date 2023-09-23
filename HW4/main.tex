@@ -1,5 +1,5 @@
 \def\duedate{\today}
-\def\HWnum{\#}
+\def\HWnum{4}
 \input{../preamble.tex}
 
 \begin{document}
@@ -10,16 +10,67 @@
 
 }
 
-\sol{}
+\sol{
+
+We can write
+\begin{eqnarray}
+    \ln{z} = \ln{r} + i \theta
+,\end{eqnarray}
+where we restrict $\theta \in [0,2\pi)$ such that $\ln{z}$ is single-valued.
+Thus,
+\begin{align}
+    u(x,y) &= \ln{r} \\
+    v(x,y) &= \theta
+,\end{align}
+where $r = \sqrt{x^2 + y^2}$ and $\tan{\theta} = y/x$.
+
+A plot of some of the lines of constant $u$ and $v$ are shown in \fref{prob1}
+
+\begin{figure}[h!]
+   \centering
+   %\includegraphics[width]{}
+   \caption{}
+   \label{fig:prob1}
+\end{figure}
+
+}
 
 
 \prob{2}{
 
 Calculate the integral
 \begin{eqnarray}
-    I(z) = \oint_{|z|=1} z^{\alpha} \dd{z}
+    I(\alpha) = \oint_{|z|=1} z^{\alpha} \dd{z}
 \end{eqnarray}
 along the circle of radius $|z|=1$, where $\alpha \in \reals$.
+
+}
+
+\sol{
+
+This integral is computed as follows:
+\begin{eqnarray}
+    \eqbox{
+    \begin{aligned}
+        I(\alpha) &= \int_{0}^{2 \pi} e^{i \alpha \theta} (i e^{i \theta}) \dd{\theta} = \int_{0}^{2 \pi} e^{i (\alpha + 1) \theta} \dd{\theta} \\
+          &= \frac{1}{i (\alpha + 1)} \Big[ e^{i (\alpha + 1) 2 \pi} - 1 \Big] = \frac{e^{2 \pi i \alpha} - 1}{i (\alpha + 1)}
+    .\end{aligned}
+}
+\end{eqnarray}
+Notice that, as found in class, if $\alpha = 0, 1, \pm 2, \pm 3, \ldots$, the result is identically zero.
+If $\alpha = -1$, then $I(\alpha) = 2 \pi i$.
+
+Now, let us restrict our attention to non-integer $\alpha$.
+Upon first sight, it seems that the $I(\alpha) \equiv 0$ for such $\alpha$, but upon closer inspection, one notices that the function $z^{\alpha}$ is multi-valued.
+Thus, $z^{\alpha}$ is not analytic for $\alpha \not\in \integers$, and we must enforce some branch cut when defining $z^{\alpha}$ such that it is single-valued.
+Indeed, though, $I(\alpha)$ takes on different values for different choices of branch cut.
+For example, in the computation above, we implicitly chose the branch cut along the real, positive axis.
+If we chose, however, the branch cut along the real, negative axis such that $\theta \in [-\pi,\pi)$, then
+\begin{eqnarray}
+    I(\alpha) = \frac{e^{i \pi \alpha} - e^{-i \pi \alpha}}{i (\alpha + 1)} = \frac{2}{\alpha + 1} \sin{ \pi \alpha }
+.\end{eqnarray}
+
+
 
 }
 
@@ -35,6 +86,45 @@ Calculate the integral
 
 }
 
+\sol{
+
+Observe that we can write
+\begin{eqnarray}
+   f(z) = \frac{z + 1}{z^2 + 4} = \frac{z + 1}{(z - 2i)(z + 2i)}
+,\end{eqnarray}
+which has poles at $\pm 2i$, and according to Cauchy's integral theorem
+
+(a) if $C$ encloses the pole at $2 i$ but not that at $- 2 i$, then
+\begin{eqnarray}
+   \eqbox{
+       I = \frac{1}{2 \pi i} \Big[ \frac{z + 1}{z + 2i} \Big]_{z = 2i} = \frac{1 + 2i}{8 \pi}
+   } 
+.\end{eqnarray}
+
+(b) On the other hand, if $C$ encloses the pole at $-2 i$ but not that at $2i$, then
+\begin{eqnarray}
+   \eqbox{
+       I = \frac{1}{2 \pi i} \Big[ \frac{z + 1}{z - 2i} \Big]_{z = -2i} = -\frac{1 - 2i}{8 \pi}
+   } 
+.\end{eqnarray}
+
+(c) Now, if $C$ encloses both poles, the result is just the sum of the previous two:
+\begin{eqnarray}
+    \eqbox{
+        I = \frac{1 + 2i}{8 \pi} - \frac{1 - 2i}{8 \pi} = \frac{1}{4} i
+    }
+.\end{eqnarray}
+This fact can be seen easily.
+In our derivation of Cauchy's integral theorem, we only worried about a function with one simple pole, which we handled by ``removing'' it from the integration region.
+For a function with $n$ poles enclosed by $C$, we just repeat the argument at each pole, ``removing'' each of them individually, which gives us
+\begin{eqnarray}
+    \sum_{k=1}^{n} \phi_{k}(z_{k}) = \frac{1}{2 \pi i} \int_{C} f(z) \dd{z}
+,\end{eqnarray}
+where $\phi_{k}(z) = (z - z_{k})f(z)$.
+Alternatively, and more concretely, we could handle this particular case by writing $C = C_+ + C_-$, where $C_{\pm}$ encloses only the pole at $z = \pm 2i$.
+
+}
+
 \prob{4}{
 
 The function defined by the series
@@ -46,12 +136,33 @@ Find the convergent series which analytically continues this function into the r
 
 }
 
+\sol{
+
+Notice
+\begin{eqnarray}
+    \eqbox{
+    \begin{aligned}
+        I_4(z) &= \frac{1}{z^2} \frac{1}{1 - (-z^{-2})} = \frac{1}{z^2} \Big[ 1 - \frac{1}{z^2} + \frac{1}{z^{4}} - \frac{1}{z^{6}} + \ldots \Big] \\
+               &= \frac{1}{z^2} - \frac{1}{z^{4}} + \frac{1}{z^{6}} - \frac{1}{z^{8}} + \ldots
+    ,\end{aligned}
+}
+\end{eqnarray}
+which is valid for $|1/z^2| > 1$ or $|z| > 1$.
+
+}
+
 \prob{5}{
 
 Expand the following function in the Laurent series in the neighborhood of $z = \infty$:
 \begin{eqnarray}
     I_{5}(z) = \ln{\frac{z^2 - a^2}{z^2 - b^2}}
 .\end{eqnarray}
+
+}
+
+\sol{
+
+
 
 }
 
