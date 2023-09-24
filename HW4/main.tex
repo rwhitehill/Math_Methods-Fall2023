@@ -25,7 +25,6 @@ Thus,
 where $r = \sqrt{x^2 + y^2}$ and $\tan{\theta} = y/x$.
 
 A plot of some of the lines of constant $u$ and $v$ are shown in \fref{prob1}
-
 \begin{figure}[h!]
    \centering
    %\includegraphics[width]{}
@@ -162,7 +161,21 @@ Expand the following function in the Laurent series in the neighborhood of $z = 
 
 \sol{
 
-
+Let us make the spatial inversion $t = 1/z$\footnote{This allows us to expand $I_{5}(1/t)$ about $t=0$, which is by construction an expansion of $z$ in the neighborhood of $\infty$.}, which allows us to write
+\begin{eqnarray}
+    I_{5}(z) = \ln( \frac{1 - t^2a^2}{1 - t^2b^2} ) = \ln(1 - t^2a^2) - \ln(1 - t^2b^2)
+,\end{eqnarray}
+and since $\ln(1 + x) = x - x^2/2 + x^3/3 - x^{4}/4 \ldots$, we have
+\begin{eqnarray}
+    \eqbox{
+    \begin{aligned}
+        I_{5}(z) &= \sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n} (-t^2 a^2)^{n} - \sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n} (-t^2 b^2)^{n} \\
+                 &= \sum_{n=1}^{\infty} \frac{1}{n} \frac{b^{2n} - a^{2n}}{z^{2n}} \\
+                 &= \frac{b^2 - a^2}{z^2} + \frac{b^{4} - a^{4}}{z^{4}} + \frac{b^{6} - a^{6}}{z^{6}} + \ldots
+    ,\end{aligned}
+}
+\end{eqnarray}
+where in the second-to-last line, we have replaced $t$ with $z$ to make the expansion in $z$ explicit.
 
 }
 
@@ -172,6 +185,21 @@ Expand the following function in the Laurent series at $z = 0$:
 \begin{eqnarray}
     I_{6}(z) = z^3 \exp(-\frac{1}{z^2})
 .\end{eqnarray}
+
+}
+
+\sol{
+
+This can be done as follows:
+\begin{eqnarray}
+    \eqbox{
+    \begin{aligned}
+        I_6(z) &= z^3 \sum_{n=0}^{\infty} \frac{1}{n!} \Big( -\frac{1}{z^2} \Big)^{n} = \sum_{n=0}^{\infty} \frac{(-1)^{n}}{n! \, z^{2n - 3}} \\
+               &= z^3 - z + \frac{1}{2 z} - \frac{1}{6 z^3} + \ldots
+    \end{aligned}
+}
+.\end{eqnarray}
+
 
 }
 
