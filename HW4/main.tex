@@ -23,12 +23,12 @@ Thus,
     v(x,y) &= \theta
 ,\end{align}
 where $r = \sqrt{x^2 + y^2}$ and $\tan{\theta} = y/x$.
+Hence, lines of constant $u$ are circles of radius $r$ in the complex plane while lines of constant $v$ are lines that make angle $\theta$ relative to the real axis (as shown in \fref{prob1}).
 
-A plot of some of the lines of constant $u$ and $v$ are shown in \fref{prob1}
 \begin{figure}[h!]
    \centering
-   %\includegraphics[width]{}
-   \caption{}
+   \includegraphics[width=0.3\textwidth]{prob1.jpeg}
+   \caption{Sketch of lines of constant $u$ (magenta) and $v$ (blue).}
    \label{fig:prob1}
 \end{figure}
 
@@ -60,15 +60,16 @@ Notice that, as found in class, if $\alpha = 0, 1, \pm 2, \pm 3, \ldots$, the re
 If $\alpha = -1$, then $I(\alpha) = 2 \pi i$.
 
 Now, let us restrict our attention to non-integer $\alpha$.
-Upon first sight, it seems that the $I(\alpha) \equiv 0$ for such $\alpha$, but upon closer inspection, one notices that the function $z^{\alpha}$ is multi-valued.
-Thus, $z^{\alpha}$ is not analytic for $\alpha \not\in \integers$, and we must enforce some branch cut when defining $z^{\alpha}$ such that it is single-valued.
-Indeed, though, $I(\alpha)$ takes on different values for different choices of branch cut.
+Upon first sight, it may seem that $I(\alpha) \equiv 0$ for such $\alpha$, but upon closer inspection, one notices that the function $z^{\alpha}$ is multi-valued (finitely multi-valued for rational $\alpha$ and infinitely multi-valued for irrational $\alpha$).
+Thus, $z^{\alpha}$ is not analytic everywhere inside $C$ for $\alpha \not\in \integers$, and we must enforce some branch cut when defining $z^{\alpha}$ such that it is single-valued.
+
+Actually, $I(\alpha)$ takes on different values for different choices of branch cut.
 For example, in the computation above, we implicitly chose the branch cut along the real, positive axis.
 If we chose, however, the branch cut along the real, negative axis such that $\theta \in [-\pi,\pi)$, then
 \begin{eqnarray}
-    I(\alpha) = \frac{e^{i \pi \alpha} - e^{-i \pi \alpha}}{i (\alpha + 1)} = \frac{2}{\alpha + 1} \sin{ \pi \alpha }
+    I(\alpha) = -\frac{e^{i \pi \alpha} - e^{-i \pi \alpha}}{i (\alpha + 1)} = -\frac{2}{\alpha + 1} \sin{ \pi \alpha }
 .\end{eqnarray}
-
+The integrations choosing different branch cuts are different by a phase.
 
 
 }
@@ -96,21 +97,21 @@ which has poles at $\pm 2i$, and according to Cauchy's integral theorem
 (a) if $C$ encloses the pole at $2 i$ but not that at $- 2 i$, then
 \begin{eqnarray}
    \eqbox{
-       I = \frac{1}{2 \pi i} \Big[ \frac{z + 1}{z + 2i} \Big]_{z = 2i} = \frac{1 + 2i}{8 \pi}
+       I = 2 \pi i \Big[ \frac{z + 1}{z + 2i} \Big]_{z = 2i} = \frac{\pi}{2}(1 + 2i)
    } 
 .\end{eqnarray}
 
 (b) On the other hand, if $C$ encloses the pole at $-2 i$ but not that at $2i$, then
 \begin{eqnarray}
    \eqbox{
-       I = \frac{1}{2 \pi i} \Big[ \frac{z + 1}{z - 2i} \Big]_{z = -2i} = -\frac{1 - 2i}{8 \pi}
+       I = 2 \pi i \Big[ \frac{z + 1}{z - 2i} \Big]_{z = -2i} = -\frac{\pi}{2}(1 - 2i)
    } 
 .\end{eqnarray}
 
 (c) Now, if $C$ encloses both poles, the result is just the sum of the previous two:
 \begin{eqnarray}
     \eqbox{
-        I = \frac{1 + 2i}{8 \pi} - \frac{1 - 2i}{8 \pi} = \frac{1}{4} i
+        I = \frac{\pi}{2} \Big[ (1 + 2i) - (1 - 2i) \Big] = 2 \pi i
     }
 .\end{eqnarray}
 This fact can be seen easily.
@@ -121,6 +122,13 @@ For a function with $n$ poles enclosed by $C$, we just repeat the argument at ea
 ,\end{eqnarray}
 where $\phi_{k}(z) = (z - z_{k})f(z)$.
 Alternatively, and more concretely, we could handle this particular case by writing $C = C_+ + C_-$, where $C_{\pm}$ encloses only the pole at $z = \pm 2i$.
+
+\begin{figure}[h!]
+   \centering
+   \includegraphics[width=\textwidth]{prob3.jpeg}
+   \caption{Sketch of contours which enclose \textbf{(a)} $z = 2i$, \textbf{(b)} $z = -2i$, and \textbf{(c)} $z = \pm 2i$. Also note that the green line along the real axis in (c) gives an idea for how to ``break'' $C$ into separate paths $C_{\pm}$, which individually enclose $z = \pm 2i$ and whose contributions cancel when the contour integrals of $C_{\pm}$ are summed.}
+   \label{prob3}
+\end{figure}
 
 }
 
@@ -149,6 +157,8 @@ Notice
 which is valid for $|1/z^2| > 1$ or $|z| > 1$.
 
 }
+
+%\newpage
 
 \prob{5}{
 
@@ -196,9 +206,9 @@ This can be done as follows:
     \begin{aligned}
         I_6(z) &= z^3 \sum_{n=0}^{\infty} \frac{1}{n!} \Big( -\frac{1}{z^2} \Big)^{n} = \sum_{n=0}^{\infty} \frac{(-1)^{n}}{n! \, z^{2n - 3}} \\
                &= z^3 - z + \frac{1}{2 z} - \frac{1}{6 z^3} + \ldots
-    \end{aligned}
+    .\end{aligned}
 }
-.\end{eqnarray}
+\end{eqnarray}
 
 
 }
