@@ -14,7 +14,24 @@ What branch cuts can make this function single-valued?
 
 }
 
-\sol{}
+\sol{
+
+We can write
+\begin{eqnarray}
+    f(z) = \sqrt{\Big[z - \Big(-1 + \sqrt{2} \Big)\Big] \Big[z - \Big(-1 - \sqrt{2} \Big) \Big]}
+.\end{eqnarray}
+Thus, there are branch points at $z = -1 \pm \sqrt{2}$.
+We can make a couple different branch cuts to make this function single valued such as those shown in \fref{prob1}.
+The first is just connecting the two points via a line on the real axis, and the second is the lines $(\infty,-1 - \sqrt{2}]$ and $[-1 + \sqrt{2},\infty)$.
+
+\begin{figure}[h!]
+    \centering
+    %\includegraphics[width=\textwidth]{}
+    \caption{}
+    \label{fig:prob1}
+\end{figure}
+
+}
 
 
 \prob{2}{
@@ -26,7 +43,31 @@ Find the residues and all isolated singularities of the function
 
 }
 
-\sol{}
+\sol{
+
+Observe that
+\begin{eqnarray}
+    \tan{z} = \frac{\sin{z}}{\cos{z}} = \dfrac{\sin{z}}{\prod_{n=0}^{\infty} \Big[ 1 - \frac{4 z^2}{\pi^2(2n+1)^2} \Big]}
+.\end{eqnarray}
+Clearly, the function becomes singular at $z = \pm(n + 1/2)\pi$ for $n = 0,1,2,\ldots$, and furthermore, observe that these are all isolated singularities and simple poles.
+Notice that in the neighborhood of these poles (let $z_{n} = (n + 1/2)\pi$ where $n = 0,\pm 1,\pm 2,\ldots$) we can write
+\begin{eqnarray}
+    \begin{aligned}
+        \cos{z} &= \cos{(w + z_{n})} = \cos{w}\cos{z_{n}} - \sin{w} \sin{z_{n}} = (-1)^{n+1} \sin{w} \\
+                &= (-1)^{n+1} \sum_{k=0}^{\infty} \frac{(-1)^{k}}{(2k+1)!} (z - z_{n})^{2k+1} \\
+                &= (z - z_{n}) \Bigg[ (-1)^{n+1} \sum_{k=0}^{\infty} \frac{(-1)^{k}}{(2k+1)!} (z - z_{n})^{2k} \Bigg]
+    ,\end{aligned}
+\end{eqnarray}
+where $w = z - z_{n}$ and we have expanded around $w = 0$.
+Thus, we find
+\begin{eqnarray}
+    \Res{\tan{z}}|_{z = z_{n}} = \frac{\sin{z_{n}}}{(-1)^{n+1}} = -1
+.\end{eqnarray}
+
+Alternatively, the ``formula'' for this kind of situation is that $\Res{\tan{z}}|_{z = z_{n}} = \\ \sin{z_{n}}/[-\sin{z_{n}}] = -1$.
+Interestingly, this result is independent of where the singularity is located.
+
+}
 
 
 \prob{3}{
@@ -38,7 +79,19 @@ Calculate the following real integral using the Cauchy theorem:
 
 }
 
-\sol{}
+\sol{
+
+Let us write $\cos^2{x} = (1 + \cos{2 x})/2$ such that
+\begin{eqnarray}
+    \eqbox{ I_{3} = 2 \int_{0}^{2\pi} \frac{\dd{x}}{5 + \cos{2x}} = \frac{1}{5} \int_{0}^{2 \pi} \frac{\dd{y}}{1 + \frac{1}{5}\cos{y}} = \frac{1}{5} \frac{2 \pi}{\sqrt{1 - (1/5)^2}} = \frac{\pi}{\sqrt{6}} }
+,\end{eqnarray}
+where we have used the substitution $y = 2x$ and the result
+\begin{eqnarray}
+    \int_{0}^{2 \pi} \frac{\dd{x}}{1 + \epsilon \cos{x}} = \frac{2 \pi}{\sqrt{1 - \epsilon^2}}
+\end{eqnarray}
+for $|\epsilon| < 1$
+
+}
 
 
 \prob{4}{
@@ -50,12 +103,34 @@ Calculate the following real integral using the Cauchy theorem:
 
 }
 
-\sol{}
+\sol{
+
+Notice that $f(z) = 1/(1 + z^4) \approx \frac{1}{|z|^{4}} \rightarrow 0$ as $|z| \rightarrow \infty$, and therefore we can write
+\begin{eqnarray}
+    I_{4} = \oint_{C} \frac{\dd{z}}{1 + z^{4}}
+,\end{eqnarray}
+where $C = (-\infty,\infty) + \Gamma$, where $\Gamma$ is the path along semi-circle in either the upper or lower half plane.
+\begin{eqnarray}
+    1 + z^{4} = (z^2 + i)(z^2 - i) = (z - i\sqrt{i})(z + i\sqrt{i})(z - \sqrt{i})(z + \sqrt{i})
+.\end{eqnarray}
+Note that $\sqrt{i} = e^{i \pi/4} = \cos{(\pi /4)} + i \sin{(\pi / 4)} = (1 + i)/\sqrt{2}$.
+There are then two roots in the upper half plane ($z = \sqrt{i},i\sqrt{i}$) and another two in the lower half plane ($z = -\sqrt{i},-i\sqrt{i}$), so we choose $\Gamma$ in the upper half plane since it is oriented in a way compatible inherently with Cauchy's theorem (although the contour in the lower half plane just comes in with a minus sign which is not prohibitively more complicated).
+Thus, the integral
+\begin{eqnarray}
+    \begin{aligned}
+        I_{4} &= 2 \pi i \Bigg[ \frac{1}{(z^2 + i)(z + \sqrt{i})}\Big|_{z = \sqrt{i}} + \frac{1}{(z + i\sqrt{i})(z^2 - i)}\Big|_{z = i\sqrt{i}} \Bigg] \\
+              &= 2 \pi i \Bigg[ \frac{1}{(2i)(2\sqrt{i})} + \frac{1}{(2i\sqrt{i})(-2i)} \Bigg] \\
+              &= \pi \Bigg[ \frac{1}{2\sqrt{i}} - \frac{1}{2i\sqrt{i}} \Bigg] \\
+              &= \pi \Big( \frac{-1 + i}{2i\sqrt{i}} \Big) = \eqbox{ \frac{\pi}{\sqrt{2}} }
+    .\end{aligned}
+\end{eqnarray}
+
+}
 
 
 \prob{5}{
 
-Calculate the following real integral using teh Cauchy theorem:
+Calculate the following real integral using the Cauchy theorem:
 \begin{eqnarray}
     I_{5}(a) = \int_{0}^{\infty} \frac{x \sin{ax}}{b^2 + x^2} \dd{x}
 ,\end{eqnarray}
@@ -63,7 +138,38 @@ where $a > 0$.
 
 }
 
-\sol{}
+\sol{
+
+Let us write
+\begin{eqnarray}
+    I_{5} = \frac{1}{2} \Im{ \int_{-\infty}^{\infty} \frac{x e^{iax}}{b^2 + x^2} \dd{x} }
+.\end{eqnarray}
+Since $f(z) = z/(b^2 + z^2) \rightarrow 0$ as $|z| \rightarrow \infty$ and $a > 0$, we can write
+\begin{eqnarray}
+    \int_{-\infty}^{\infty} \frac{x e^{iax}}{b^2 + x^2} \dd{x} = \oint_{C} \frac{z e^{iaz}}{b^2 + z^2} \dd{z}
+,\end{eqnarray}
+where $C = (-\infty,\infty) + \Gamma$, where $\Gamma$ is the half-circle in the upper half-plane, which encloses the simple pole of the integrand $z = ib$.
+Hence,
+\begin{eqnarray}
+    I_{5} = \frac{1}{2} \Im{ 2 \pi i \frac{ib e^{ia(ib)}}{2ib} } = \frac{\pi}{2} \Im{ i e^{-ab} } = \frac{\pi}{2} e^{-ab}
+.\end{eqnarray}
+Note that the result does not depend on the sign of $b$, so we append the absolute value sign to $b$ in our expression and arrive at
+\begin{eqnarray}
+    \eqbox{ I_{5} = \frac{\pi}{2} e^{-a|b|} }
+.\end{eqnarray}
+
+We can check our answer as follows.
+Note that 
+\begin{eqnarray}
+    \begin{aligned}
+        I_{5} &= \frac{1}{2} \Im{ -i \pdv{a} \int_{-\infty}^{\infty} \frac{e^{iax}}{b^2 + x^2} \dd{x} } = \frac{1}{2} \Im{ -i \pdv{a} \frac{\pi}{|b|} e^{-a|b|} } \\
+              &= \frac{1}{2} \Im{ i \pi e^{-a|b|} } = \frac{\pi}{2} e^{-a|b|}
+    ,\end{aligned}
+\end{eqnarray}
+which is exactly the result quoted above.
+
+
+}
 
 
 
