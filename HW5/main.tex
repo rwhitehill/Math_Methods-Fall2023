@@ -26,8 +26,8 @@ The first is just connecting the two points via a line on the real axis, and the
 
 \begin{figure}[h!]
     \centering
-    %\includegraphics[width=\textwidth]{}
-    \caption{}
+    \includegraphics[width=0.4\textwidth]{prob1.jpeg}
+    \caption{Sketch of branch points of the function $f(z) = \sqrt{z^2 + 2z - 1}$ and some possible branch cuts to make the function single valued. The blue line connects the two points, and the magenta lines extend from the points either to $\pm \infty$, depending on the sign of the branch point.}
     \label{fig:prob1}
 \end{figure}
 
@@ -83,13 +83,17 @@ Calculate the following real integral using the Cauchy theorem:
 
 Let us write $\cos^2{x} = (1 + \cos{2 x})/2$ such that
 \begin{eqnarray}
-    \eqbox{ I_{3} = 2 \int_{0}^{2\pi} \frac{\dd{x}}{5 + \cos{2x}} = \frac{1}{5} \int_{0}^{2 \pi} \frac{\dd{y}}{1 + \frac{1}{5}\cos{y}} = \frac{1}{5} \frac{2 \pi}{\sqrt{1 - (1/5)^2}} = \frac{\pi}{\sqrt{6}} }
+    \eqbox{ I_{3} = 2 \int_{0}^{2\pi} \frac{\dd{x}}{5 + \cos{2x}} = \frac{1}{5} \int_{0}^{4 \pi} \frac{\dd{y}}{1 + \frac{1}{5}\cos{y}} = \frac{2}{5} \frac{2 \pi}{\sqrt{1 - (1/5)^2}} = \sqrt{\frac{2}{3}} \pi }
 ,\end{eqnarray}
 where we have used the substitution $y = 2x$ and the result
 \begin{eqnarray}
     \int_{0}^{2 \pi} \frac{\dd{x}}{1 + \epsilon \cos{x}} = \frac{2 \pi}{\sqrt{1 - \epsilon^2}}
 \end{eqnarray}
-for $|\epsilon| < 1$
+for $|\epsilon| < 1$.
+This integral was computed in lecture via the contour integral along the unit circle and the replacement $\cos(x) = (z + z^{-1})/2$, where $z = e^{ix}$.
+Note that the integration from $0 \rightarrow 4\pi$ is double that from $0 \rightarrow 2\pi$.
+This can be seen by splitting the integration into a part from $0 \rightarrow 2\pi$ and $2\pi \rightarrow 4\pi$.
+In the second integration, we make a substitution of the form $y' = y - 2 \pi$ and observe that $\dd{y'} = \dd{y}$ and $\cos(y' - 2\pi) = \cos{y'}\cos{2\pi} - \sin{y'}\sin{2\pi} = \cos{y'}$.
 
 }
 
@@ -148,7 +152,7 @@ Since $f(z) = z/(b^2 + z^2) \rightarrow 0$ as $|z| \rightarrow \infty$ and $a > 
 \begin{eqnarray}
     \int_{-\infty}^{\infty} \frac{x e^{iax}}{b^2 + x^2} \dd{x} = \oint_{C} \frac{z e^{iaz}}{b^2 + z^2} \dd{z}
 ,\end{eqnarray}
-where $C = (-\infty,\infty) + \Gamma$, where $\Gamma$ is the half-circle in the upper half-plane, which encloses the simple pole of the integrand $z = ib$.
+where $C = (-\infty,\infty) + \Gamma$, where $\Gamma$ is the semi-circle in the upper half-plane, which encloses the simple pole of the integrand $z = ib$.
 Hence,
 \begin{eqnarray}
     I_{5} = \frac{1}{2} \Im{ 2 \pi i \frac{ib e^{ia(ib)}}{2ib} } = \frac{\pi}{2} \Im{ i e^{-ab} } = \frac{\pi}{2} e^{-ab}
