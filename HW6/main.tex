@@ -1,0 +1,107 @@
+\def\duedate{\today}
+\def\HWnum{6}
+\input{../preamble.tex}
+
+\begin{document}
+
+\prob{1}{
+
+Calculate the following integral:
+\begin{eqnarray}
+    I_1 = \int_{0}^{\infty} \frac{x^{1/4} \dd{x}}{a^2 + x^2}
+.\end{eqnarray}
+
+}
+
+\sol{
+
+Let us make use of the substitution $x = ay$, which allows us to write
+\begin{eqnarray}
+    I_1 = \frac{a^{1/4} a}{a^2} \int_{0}^{\infty} \frac{y^{1/4}}{1 + y^2} \dd{y} = a^{-3/4} \int_{0}^{\infty} \frac{y^{1/4}}{1 + y^2} \dd{y}
+.\end{eqnarray}
+Next, let us write $y = e^{t/2}$, which gives
+\begin{eqnarray}
+    \eqbox{ I_1 = \frac{1}{2} a^{-3/4} \int_{-\infty}^{\infty} \frac{e^{t/8} e^{t/2}}{1 + e^{t}} \dd{t} = \frac{1}{2} a^{-3/4} \int_{-\infty}^{\infty} \frac{e^{5t/8}}{1 + e^{t}} \dd{t} = \frac{\pi}{2a^{3/4}\sin(5\pi/8)} }
+.\end{eqnarray}
+
+}
+
+
+\prob{2}{
+
+Calculate the following integral at $s\gg 1$:
+\begin{eqnarray}
+    I_2 = \int_{1}^{\infty} e^{s(x - x^2)} \dd{x}
+.\end{eqnarray}
+
+}
+
+\sol{
+
+Notice that we can write $x^2 - x = (x - 1) + (x-1)^2$.
+If $s$ is sufficiently large, then $\exp[s(x-x^2)] \approx \exp[-s(x-1)]$, meaning
+\begin{eqnarray}
+    \eqbox{ I_2 \approx e^{s} \int_{1}^{\infty} e^{-sx} \dd{x} = \frac{1}{s} }
+.\end{eqnarray}
+
+}
+
+
+\prob{3}{
+
+Calculate the following integral at $s \gg 1$:
+\begin{eqnarray}
+    I_3 = \int_{0}^{\infty} \exp(- \frac{s^2}{x} - x) \dd{x}
+.\end{eqnarray}
+
+}
+
+\sol{
+
+Let $f(x;s) = s/x + x/s$.
+Notice then that $f'(x;s) = -s/x^2 + 1/s$, implying that $f$ has a minimum at $x = s$ in the integration region, allowing us to write
+\begin{eqnarray}
+    f(x;s) = f(s) + \frac{f''(s)}{2} (x - s)^2 + \ldots = 2 + \frac{1}{s^2} (x-s)^2 + \ldots
+\end{eqnarray}
+which makes
+\begin{eqnarray}
+    I_3 \approx e^{-2s} \int_{0}^{\infty} e^{-(x-s)^2/s} \dd{x}
+.\end{eqnarray}
+
+{\color{red} This is wrong -- the expansion for $f(x;s)$ actually only converges for $|x - s| < s$ -- need to think a little bit more about this}
+
+}
+
+
+\prob{4}{
+
+Calculate the following integral at $s \gg 1$:
+\begin{eqnarray}
+    I_4 = \int_{0}^{\infty} x^{\alpha} e^{-sx^2} \dd{x}
+,\end{eqnarray}
+where $\alpha > 0$ is an arbitrary (not necessarily integer) number.
+
+}
+
+\sol{
+
+Notice that we can write $x^{\alpha} = e^{\alpha \ln{x}}$ such that our integral becomes
+\begin{eqnarray}
+    I_4 = \int_{0}^{\infty} e^{-s(x^2 - \alpha \ln{x})} \dd{x}
+,\end{eqnarray}
+and if we denote $f(x) = x^2 - \alpha \ln{x}$, observe that $f$ attains a minimum at $x = \sqrt{\alpha/2}$, which is positive since $\alpha > 0$.
+Hence, we can write
+\begin{eqnarray}
+    \eqbox{
+    \begin{aligned}
+        I_4 &\approx e^{-\frac{s \alpha}{2}[1 - \ln(\alpha/2)]}\int_{-\infty}^{\infty} e^{-2s \big[x - \sqrt{\alpha/2} \big]^2} \dd{x} \\
+        &= e^{-\frac{s\alpha}{2} [1 - \ln(\alpha/2)]} \sqrt{\frac{\pi}{2s}} = \Big( \frac{\alpha}{2e} \Big)^{s \alpha/2} \sqrt{\frac{\pi}{2s}}
+    .\end{aligned}
+    }
+\end{eqnarray}
+
+}
+
+
+
+\end{document}
