@@ -23,6 +23,10 @@ Next, let us write $y = e^{t/2}$, which gives
 \begin{eqnarray}
     \eqbox{ I_1 = \frac{1}{2} a^{-3/4} \int_{-\infty}^{\infty} \frac{e^{t/8} e^{t/2}}{1 + e^{t}} \dd{t} = \frac{1}{2} a^{-3/4} \int_{-\infty}^{\infty} \frac{e^{5t/8}}{1 + e^{t}} \dd{t} = \frac{\pi}{2a^{3/4}\sin(5\pi/8)} }
 .\end{eqnarray}
+Note that we can determine the value of $\sin(5 \pi / 8)$ using the following half-angle formula:
+\begin{eqnarray}
+    \sin(\frac{5\pi/4}{2}) = \sqrt{ \frac{1 - \cos(5 \pi /4)}{2} } = \sqrt{ \frac{1}{2} + \frac{1}{2\sqrt{2}}}
+.\end{eqnarray}
 
 }
 
@@ -65,10 +69,8 @@ Notice then that $f'(x;s) = -s/x^2 + 1/s$, implying that $f$ has a minimum at $x
 \end{eqnarray}
 which makes
 \begin{eqnarray}
-    I_3 \approx e^{-2s} \int_{0}^{\infty} e^{-(x-s)^2/s} \dd{x}
+    \eqbox{ I_3 \approx e^{-2s} \int_{-\infty}^{\infty} e^{-(x-s)^2/s} \dd{x} = e^{-2s} \sqrt{\pi s} }
 .\end{eqnarray}
-
-{\color{red} This is wrong -- the expansion for $f(x;s)$ actually only converges for $|x - s| < s$ -- need to think a little bit more about this}
 
 }
 
