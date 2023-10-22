@@ -1,0 +1,200 @@
+\def\duedate{\today}
+\def\HWnum{7}
+\input{../preamble.tex}
+
+\begin{document}
+
+\prob{1}{
+
+Expand the following function into the Fourier series:
+\begin{eqnarray}
+    I_{1}(x) = \sum_{n=-\infty}^{\infty} \delta(x - 2 \pi n)
+.\end{eqnarray}
+
+}
+
+\sol{
+
+We can use the complex form of the Fourier series
+\begin{eqnarray}
+    I_1(x) = \sum_{n=-\infty}^{\infty} c_{n} e^{inx}
+\end{eqnarray}
+on the interval $[-\pi,\pi]$, where
+\begin{eqnarray}
+    c_{n} = \frac{1}{2\pi} \int_{-\pi}^{\pi} I_1(x) e^{-inx} \dd{x} = \frac{1}{2\pi}
+.\end{eqnarray}
+Hence, on $[-\pi,\pi]$, 
+\begin{eqnarray}
+    I_{1}(x) = \sum_{n=-\infty}^{\infty} \frac{1}{2\pi} e^{inx}
+.\end{eqnarray}
+
+We can actually extend this result to any interval $[(2m-1)\pi,(2m+1)\pi]$ by noticing that 
+\begin{eqnarray}
+    \int_{a-\pi}^{a+\pi} e^{i(n-n')x} = 2\pi \delta_{nn'}
+.\end{eqnarray}
+Thus, on an interval centered at $2m\pi$ of width $2\pi$
+\begin{eqnarray}
+    c_{n} = \frac{1}{2\pi} \int_{(2m-1)\pi}^{(2m+1)\pi} I_1(x) e^{-inx} = \frac{1}{2\pi} e^{-in(2m\pi)} = \frac{1}{2\pi}
+\end{eqnarray}
+since $2nm\pi$ is an integer multiple of $2 \pi$.
+Therefore,
+\begin{eqnarray}
+    \eqbox{ I_1(x) = \sum_{n=-\infty}^{\infty} \frac{1}{2\pi} e^{inx} }
+\end{eqnarray}
+on each interval of width $2\pi$ centered at $2m\pi$.
+Since this result is independent of $m$, we can generally apply this result for any $x \in \reals$.
+
+
+}
+
+
+\prob{2}{
+
+Expand the following real function into the Fourier series:
+\begin{eqnarray}
+    I_2(x) = \sum_{n=-\infty}^{\infty} \frac{1}{a^2 + (x - 2 \pi n)^2}
+.\end{eqnarray}
+
+}
+
+\sol{
+
+Observe that this function is $2\pi$-periodic:
+\begin{eqnarray}
+    \begin{aligned}
+        f(x + 2\pi) &= \sum_{n=-\infty}^{\infty} \frac{1}{a^2 + [(x+2\pi) - 2\pi n]^2} \sum_{n=-\infty}^{\infty} \frac{1}{a^2 + [x - 2 \pi (n-1)]^2} \\
+                    &= \sum_{n=-\infty}^{\infty} \frac{1}{a^2 + (x - 2 \pi n)^2}
+    ,\end{aligned}
+\end{eqnarray}
+where in the last step, we took $n - 1 \rightarrow n$, which leaves the sum unchanged since the index set spans all integers.
+Furthermore, notice that this is an even function since
+\begin{eqnarray}
+    f(-x) = \sum_{n=-\infty}^{\infty} \frac{1}{a^2 + (x + 2 \pi n)^2} = \sum_{n=-\infty}^{\infty} \frac{1}{a^2 + (x - 2 \pi n)^2}
+,\end{eqnarray}
+where in the last step we took $n \rightarrow -n$, which again leaves the sum unchanged for the same reason as above.
+
+The Fourier transform can then be written 
+
+}
+
+
+\prob{3}{
+
+Calculate the following function defined by the Fourier series:
+\begin{eqnarray}
+    I_6(x) = \sum_{n=1}^{\infty} a_{n} \sin{nx}
+.\end{eqnarray}
+whith $a_{n} = e^{-kn}$ and $k > 0$.
+
+}
+
+\sol{
+
+We can write
+\begin{eqnarray}
+\begin{aligned}
+    \sum_{n=1}^{\infty} \Big( e^{-k + ix} \Big)^{n} &= \frac{1}{1 - e^{-k+ix}} = \frac{1 - e^{-k-ix}}{(1-e^{-k+ix})(1-e^{-k-ix})} \\
+                                                    &= \frac{(1 - e^{-k} \cos{x}) + i e^{-k} \sin{x}}{1 - 2e^{-k}\cos{x} + e^{-2k}}
+\end{aligned}
+.\end{eqnarray}
+Observe then that
+\begin{eqnarray}
+    \begin{aligned}
+        I_6(x) &= \sum_{n=1}^{\infty} e^{-kn} \sin{nx} = \sum_{n=0}^{\infty} e^{-kn}\sin{nx} \\
+               &= \Im \Big\{ \sum_{n=0}^{\infty} e^{(-k+ix)n} \Big\} = \frac{e^{-k} \sin{x}}{e^{-2k} \sin^2{x} + (1 - e^{-k} \cos{x})^2}
+    .\end{aligned}
+\end{eqnarray}
+
+}
+
+
+\prob{4}{
+
+Expand the following function in the Fourier integral
+\begin{eqnarray}
+    I_1(x) = \frac{A}{x^2 + a^2} + \frac{Bx}{(x^2 + b^2)^2}
+.\end{eqnarray}
+
+}
+
+\sol{
+
+We can write
+\begin{eqnarray}
+    I_1(x) = \frac{1}{2\pi} \int_{-\infty}^{\infty} C(\omega) e^{-i \omega x} \dd{\omega}
+,\end{eqnarray}
+where
+\begin{align}
+    C(\omega) &= \int_{-\infty}^{\infty} I_1(x) e^{i \omega x} \dd{x} \\
+              &= A \int_{-\infty}^{\infty} \frac{e^{i \omega x}}{x^2 + a^2} \dd{x} + B \int_{-\infty}^{\infty} \frac{x e^{i \omega x}}{(x^2 + b^2)^2} \dd{x}
+.\end{align}
+Both of these integrals can be solved by analytically continuing the integrands to the complex plane and using contour integration.
+Note that we must be careful in choosing the right contour.
+Observe that $e^{i \omega z} = e^{i \omega R \cos{\phi}}e^{-R \omega \sin{\phi}}$, where $z = R \cos{\phi} + i R\sin{\phi}$ along the semi-circle enclosing either the upper or lower half-plane.
+Hence, if $\omega > 0$, then enclosing in the upper half-plane gives no contribution along the semi-circle at infinity since $R \rightarrow \infty$ and $\sin{\phi} \geq 0$, but if $\omega < 0$, then we must enclose the poles in the lower half-plane so that the real exponential factor goes to zero at $R \rightarrow \infty$.
+We can, however, relate the two contributions by observing that $C(\omega) = C^{*}(-\omega)$, meaning that we only have to consider the case $\omega > 0$ explictly and can obtain the case $\omega < 0$ essentially for free.
+
+If $\omega > 0$, then we enclose the poles in the upper half plane and obtain
+\begin{align}
+    C(\omega) &= A (2 \pi i) \frac{e^{i \omega z}}{z + ia} \Big|_{z = ia} + B (2 \pi i) \Big[ \dv{z} \frac{z e^{i \omega z}}{(z + ib)^2} \Big]_{z = ib} \nonumber \\
+              &= A (2 \pi i) \frac{e^{-\omega a}}{2ia} + B (2 \pi i) \frac{[1 + i\omega z](z + ib)^2 - 2 z (z + ib)}{(z+ib)^{4}} e^{i \omega z} \Big|_{z = ib} \nonumber \\
+              &= \frac{A}{a} \pi e^{-\omega a} + B(2 \pi i) \frac{[1 + i\omega(ib)](2ib)^2 - 2(ib)(2ib)}{(2ib)^{4}} e^{-\omega b} \nonumber \\
+              &= \frac{A}{a} \pi e^{-\omega a} - B (2 \pi i) \frac{\omega b}{(2ib)^2} e^{-\omega b} \nonumber \\
+              &= \pi \Big( \frac{A}{|a|} e^{-\omega |a|} + i \frac{B \omega}{2|b|} e^{-\omega |b|} \Big)
+.\end{align}
+Notice that we have put in the absolute value by hand since the result should be independent of the signs of $a$ and $b$.
+Really, it is because $z^2 + a^2 = (z + i|a|)(z - i|a|)$, and the pole in the upper half-plane is $z = i|a|$.
+
+We can also then write
+\begin{eqnarray}
+\begin{aligned}
+    I_1(x) &= \frac{1}{2 \pi} \int_{-\infty}^{\infty} C(\omega) e^{-i \omega x} \dd{\omega} = \frac{1}{2} \int_{0}^{\infty} \big[ C(\omega) e^{-i \omega x} + C(-\omega) e^{i \omega x} \big] \\
+           &= \frac{1}{2 \pi} \int_{0}^{\infty} \big[ C(\omega) e^{-i\omega x} + C^{*}(\omega) e^{i\omega x} \big] \dd{\omega} \\
+           &= \frac{1}{\pi} \int_{0}^{\infty} \Big[ \Re\{ C(\omega) \} \cos{\omega x} - \Im\{ C(\omega) \} \sin{\omega x} \Big] \dd{\omega} \\
+           &= \int_{0}^{\infty} \Bigg[ \frac{A}{|a|} e^{-\omega|a|} \cos{\omega x} - \frac{B}{2|b|} \omega e^{-\omega|b|} \sin{\omega x} \Bigg] \dd{\omega}
+.\end{aligned}
+\end{eqnarray}
+
+
+
+}
+
+
+\prob{5}{
+
+A particle of mass $m$ and charge $q$ moves in a parabolic potential $k(x^2 + y^2)/2$ in the $xy$ plane.
+Find how the frequency $\omega_0 = (k/m)^{1/2}$ of this 2D harmonic oscillator changes if a uniform magnetic field $H$ is applied along the $z$-axis.
+The $x$ and $y$ components of the equation of motion 
+\begin{eqnarray}
+    m \ddot{\va*{r}} - q[\dot{\va*{r}} \cross \va*{H}]/c + k \va*{r} = 0
+\end{eqnarray}
+yield two coupled differential equations:
+\begin{eqnarray}
+\begin{aligned}
+    \ddot{x} - \omega_{L} \dot{y} + \omega_0^2 x &= 0 \\
+    \ddot{y} + \omega_{L} \dot{x} + \omega_0^2 y &= 0
+,\end{aligned} 
+\end{eqnarray}
+where $\omega_{L} = qH/mc$ is the Larmor frequency.
+
+}
+
+\sol{}
+
+\prob{6}{
+
+Solve the following nonuniform differential equation using the Fourier transform
+\begin{eqnarray}
+    y'' - q^2 y = Ae^{-a|x|}
+,\end{eqnarray}
+where $q, a > 0$ and $A$ are real parameters.
+Find a continuous solution satisfying the boundary conditions $y(\pm \infty) = 0$.
+
+}
+
+
+
+
+
+
+\end{document}
