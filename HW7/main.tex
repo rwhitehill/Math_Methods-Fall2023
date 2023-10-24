@@ -28,11 +28,11 @@ Hence, on $[-\pi,\pi]$,
     I_{1}(x) = \sum_{n=-\infty}^{\infty} \frac{1}{2\pi} e^{inx}
 .\end{eqnarray}
 
-We can actually extend this result to any interval $[(2m-1)\pi,(2m+1)\pi]$ by noticing that 
+We can actually extend this result to any interval centered at $2\pi m$ of width $2 \pi$ by noticing that 
 \begin{eqnarray}
     \int_{a-\pi}^{a+\pi} e^{i(n-n')x} = 2\pi \delta_{nn'}
 .\end{eqnarray}
-Thus, on an interval centered at $2m\pi$ of width $2\pi$
+Thus, on an interval $[(2m-1)\pi,(2m+1)\pi]$
 \begin{eqnarray}
     c_{n} = \frac{1}{2\pi} \int_{(2m-1)\pi}^{(2m+1)\pi} I_1(x) e^{-inx} = \frac{1}{2\pi} e^{-in(2m\pi)} = \frac{1}{2\pi}
 \end{eqnarray}
@@ -42,7 +42,7 @@ Therefore,
     \eqbox{ I_1(x) = \sum_{n=-\infty}^{\infty} \frac{1}{2\pi} e^{inx} }
 \end{eqnarray}
 on each interval of width $2\pi$ centered at $2m\pi$.
-Since this result is independent of $m$, we can generally apply this result for any $x \in \reals$.
+Since this result is independent of $m$, we can generally apply this result for any $x \in \reals$, meaning that the Dirac comb is a sum of complex exponentials.
 
 
 }
@@ -86,9 +86,11 @@ where
 \end{eqnarray}
 From this, we see that
 \begin{eqnarray}
+\eqbox{
     f(x) = \frac{1}{|a|} \Bigg[ \frac{1}{2} + \sum_{m=1}^{\infty} e^{-|a|m} \cos{mx} \Bigg]
+}
 .\end{eqnarray}
-This could actually be summed up exactly, which is nice since this was not clear from the original form of the series, but we leave this for a later exercise since the spirit of the exercise is focused on the Fourier decomposition of the function.
+This could actually be summed up exactly, which is nice since this was not clear from the original form of the series, but this will be left for a later exercise since the focus of this problem was on the Fourier decomposition of the function.
 
 }
 
@@ -116,7 +118,7 @@ Observe then that
 \begin{eqnarray}
     \begin{aligned}
         I_6(x) &= \sum_{n=1}^{\infty} e^{-kn} \sin{nx} = \sum_{n=0}^{\infty} e^{-kn}\sin{nx} \\
-               &= \Im \Big\{ \sum_{n=0}^{\infty} e^{(-k+ix)n} \Big\} = \frac{e^{-k} \sin{x}}{e^{-2k} \sin^2{x} + (1 - e^{-k} \cos{x})^2}
+               &= \Im \Big\{ \sum_{n=0}^{\infty} e^{(-k+ix)n} \Big\} = \eqbox{ \frac{e^{-k} \sin{x}}{e^{-2k} \sin^2{x} + (1 - e^{-k} \cos{x})^2} }
     .\end{aligned}
 \end{eqnarray}
 
@@ -157,8 +159,7 @@ If $\omega > 0$, then we enclose the poles in the upper half plane and obtain
               &= \frac{A}{a} \pi e^{-\omega a} - B (2 \pi i) \frac{\omega b}{(2ib)^2} e^{-\omega b} \nonumber \\
               &= \pi \Big( \frac{A}{|a|} e^{-|\omega a|} + i \frac{B \omega}{2|b|} e^{-|\omega b|} \Big)
 .\end{align}
-Notice that we have put in the absolute value by hand since the result should be independent of the signs of $a$ and $b$, and we must satisfy $C(\omega) = C^{*}(-\omega)$.
-Really, it is because $z^2 + a^2 = (z + i|a|)(z - i|a|)$, and the pole in the upper half-plane is $z = i|a|$.
+Notice that we have put in the absolute value by hand since the result should be independent of the signs of $a$ and $b$, and we must satisfy $C(\omega) = C^{*}(-\omega)$\footnote{The point about the absolute value of $a$ and $b$ is because $z^2 + a^2 = (z + i|a|)(z - i|a|)$, and the pole in the upper half-plane is $z = i|a|$.}
 
 We can also then write
 \begin{eqnarray}
@@ -166,7 +167,7 @@ We can also then write
     I_1(x) &= \frac{1}{2 \pi} \int_{-\infty}^{\infty} C(\omega) e^{-i \omega x} \dd{\omega} = \frac{1}{2} \int_{0}^{\infty} \big[ C(\omega) e^{-i \omega x} + C(-\omega) e^{i \omega x} \big] \\
            &= \frac{1}{2 \pi} \int_{0}^{\infty} \big[ C(\omega) e^{-i\omega x} + C^{*}(\omega) e^{i\omega x} \big] \dd{\omega} \\
            &= \frac{1}{\pi} \int_{0}^{\infty} \Big[ \Re\{ C(\omega) \} \cos{\omega x} - \Im\{ C(\omega) \} \sin{\omega x} \Big] \dd{\omega} \\
-           &= \int_{0}^{\infty} \Bigg[ \frac{A}{|a|} e^{-\omega|a|} \cos{\omega x} - \frac{B}{2|b|} \omega e^{-\omega|b|} \sin{\omega x} \Bigg] \dd{\omega}
+           &= \eqbox{ \int_{0}^{\infty} \Bigg[ \frac{A}{|a|} e^{-\omega|a|} \cos{\omega x} - \frac{B}{2|b|} \omega e^{-\omega|b|} \sin{\omega x} \Bigg] \dd{\omega} }
 .\end{aligned}
 \end{eqnarray}
 
@@ -210,9 +211,14 @@ or
     \omega^{4} - (2 \omega_0^2 + \omega_{L}^{2}) \omega^2 + \omega_0^{4} = 0 
 .\end{eqnarray}
 This has solution
-\begin{align}
-    \omega^2 = \frac{(2\omega_0^2 + \omega_{L}^2) \pm \sqrt{(2 \omega_0^2 + \omega_{L}^2)^2 - 4\omega_0^{4}}}{2} = \omega_0^2 + \omega_{L} \Big( \frac{\omega_{L}}{2} \pm \sqrt{\omega_0^2 + \omega_{L}^2} \Big)
-.\end{align}
+\begin{eqnarray}
+\eqbox{ 
+\begin{aligned}
+    \omega^2 &= \frac{(2\omega_0^2 + \omega_{L}^2) \pm \sqrt{(2 \omega_0^2 + \omega_{L}^2)^2 - 4\omega_0^{4}}}{2} \\
+             &= \omega_0^2 \Bigg[ 1 + \frac{1}{2} ( \omega_{L} /\omega_0 )^2 \pm \sqrt{1 + (\omega_{L}/\omega_0)^2} \Bigg]
+\end{aligned}
+}
+.\end{eqnarray}
 
 }
 
@@ -264,11 +270,11 @@ Again, clearly this satisfies the boundary condition $y(-\infty) \rightarrow 0$,
 \begin{eqnarray}
     y(0^{+}) = y(0^{-}) = -\frac{A}{q(q-a)}
 .\end{eqnarray}
-Note the notation $y(x^{\pm}) = \lim_{\epsilon \rightarrow 0} y(x \pm \epsilon)$.
+Note the notation: $y(x^{\pm}) = \lim_{\epsilon \rightarrow 0} y(x \pm \epsilon)$.
 
 Observe also that we can combine the portions $x > 0$ and $x < 0$ such that
 \begin{eqnarray}
-    y(x) = \frac{Aa}{a^2 - q^2} \Bigg[ \frac{1}{a}e^{-a|x|} + \frac{1}{q} e^{-q|x|} \Bigg]
+    \eqbox{ y(x) = \frac{Aa}{a^2 - q^2} \Bigg[ \frac{1}{a}e^{-a|x|} - \frac{1}{q} e^{-q|x|} \Bigg] }
 .\end{eqnarray}
 
 \end{document}
