@@ -155,9 +155,9 @@ If $\omega > 0$, then we enclose the poles in the upper half plane and obtain
               &= A (2 \pi i) \frac{e^{-\omega a}}{2ia} + B (2 \pi i) \frac{[1 + i\omega z](z + ib)^2 - 2 z (z + ib)}{(z+ib)^{4}} e^{i \omega z} \Big|_{z = ib} \nonumber \\
               &= \frac{A}{a} \pi e^{-\omega a} + B(2 \pi i) \frac{[1 + i\omega(ib)](2ib)^2 - 2(ib)(2ib)}{(2ib)^{4}} e^{-\omega b} \nonumber \\
               &= \frac{A}{a} \pi e^{-\omega a} - B (2 \pi i) \frac{\omega b}{(2ib)^2} e^{-\omega b} \nonumber \\
-              &= \pi \Big( \frac{A}{|a|} e^{-\omega |a|} + i \frac{B \omega}{2|b|} e^{-\omega |b|} \Big)
+              &= \pi \Big( \frac{A}{|a|} e^{-|\omega a|} + i \frac{B \omega}{2|b|} e^{-|\omega b|} \Big)
 .\end{align}
-Notice that we have put in the absolute value by hand since the result should be independent of the signs of $a$ and $b$.
+Notice that we have put in the absolute value by hand since the result should be independent of the signs of $a$ and $b$, and we must satisfy $C(\omega) = C^{*}(-\omega)$.
 Really, it is because $z^2 + a^2 = (z + i|a|)(z - i|a|)$, and the pole in the upper half-plane is $z = i|a|$.
 
 We can also then write
@@ -194,7 +194,27 @@ where $\omega_{L} = qH/mc$ is the Larmor frequency.
 
 }
 
-\sol{}
+\sol{
+
+Let's plug in test solutions $x = A_{x} e^{i \omega t}$ and $y = A_{y} e^{i \omega t}$:
+\begin{align}
+    (\omega_0^2 -\omega^2) A_{x} - i \omega \omega_{L} A_{y} &= 0 \\
+    i \omega \omega_{L} A_{x} + (\omega_0^2 - \omega^2) A_{y} &= 0
+.\end{align}
+In order to have a non-trivial solution for $A_{x,y}$, we must have
+\begin{eqnarray}
+    (\omega_0^2 - \omega^2)^2 - \omega^2 \omega_{L}^2 = 0
+\end{eqnarray}
+or
+\begin{eqnarray}
+    \omega^{4} - (2 \omega_0^2 + \omega_{L}^{2}) \omega^2 + \omega_0^{4} = 0 
+.\end{eqnarray}
+This has solution
+\begin{align}
+    \omega^2 = \frac{(2\omega_0^2 + \omega_{L}^2) \pm \sqrt{(2 \omega_0^2 + \omega_{L}^2)^2 - 4\omega_0^{4}}}{2} = \omega_0^2 + \omega_{L} \Big( \frac{\omega_{L}}{2} \pm \sqrt{\omega_0^2 + \omega_{L}^2} \Big)
+.\end{align}
+
+}
 
 \prob{6}{
 
