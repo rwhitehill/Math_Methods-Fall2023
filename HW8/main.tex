@@ -13,7 +13,28 @@ Find the Laplace transform of the following function:
 
 }
 
-\sol{}
+\sol{
+
+The Laplace transform of a function $f(t)$ is generally given as
+\begin{eqnarray}
+    \mathcal{L}\{ f(t) \} = \int_{0}^{\infty} f(t) e^{-st} \dd{t}
+,\end{eqnarray}
+where the values of $s$ are such that the integral is convergent.
+Thus,
+\begin{eqnarray}
+\begin{aligned}
+    \mathcal{L}\{ I(t) \} &= \int_{0}^{\infty} t^{n} e^{-(a+s)t} \dd{t} = (-1)^{n} \dv[n]{(a+s)} \int_{0}^{\infty} e^{-(a+s)t} \dd{t} \\
+                          &= (-1)^{n} \dv[n]{(a+s)} \frac{1}{a+s} = \frac{n!}{(a+s)^{n+1}}
+.\end{aligned}
+\end{eqnarray}
+This matches the result we have in our library.
+That is, $\mathcal{L}\{ t^{n} \} = n!/s^{n+1}$ and for a general function $f(t)$, $\mathcal{L}\{ f(t)e^{-at} \} = F(s + a)$.
+Collecting these results, we end up with the same solution, which is that
+\begin{eqnarray}
+    \mathcal{L}\{ t^{n} e^{-at} \} = \frac{n!}{(s + a)^{n+1}}
+.\end{eqnarray}
+
+}
 
 
 \prob{2}{
@@ -26,7 +47,28 @@ where $y(0) = 0$ and $\dot{y}(0) = v$.
 
 }
 
-\sol{}
+\sol{
+
+If we take the Laplace transform of the equation\footnote{Strictly speaking, this means that if we have a differential equation $D f = g$, where $D$ is a linear differential operator, then its ``Laplace transform'' is $\mathcal{L}\{ D f \} = G(s)$.}, we find
+\begin{eqnarray}
+    \mathcal{L}\{ \ddot{y} + 2 \lambda \dot{y} + \omega_0^2 y \} = [ s^2 Y(s) - sv ] + 2 \lambda [ sY(s) ] + \omega_0^2 Y(s) = 0
+.\end{eqnarray}
+Solving for $Y(s)$ gives
+\begin{eqnarray}
+    Y(s) = \frac{sv}{s^2 + 2\lambda s + \omega_0^2} = \frac{s v}{(s + \lambda)^2 + (\omega_0^2 - \lambda^2)}
+.\end{eqnarray}
+From our ``library'' we have
+\begin{align}
+    \mathcal{L}\{ e^{-at}\cos{bt} \} &= \frac{s+a}{(s+a)^2 + b^2} \\
+    \mathcal{L}\{ e^{-at}\sin{bt} \} &= \frac{b}{(s+a)^2 + b^2}
+.\end{align}
+Thus, if we write $a = \lambda$ and $b = \sqrt{\omega_0^2 - \lambda^2}$, then
+\begin{eqnarray}
+    Y(s) = v\Bigg[ \frac{s+a}{(s+a)^2 + b^2} - \frac{a}{(s+a)^2 + b^2} \Bigg]
+.\end{eqnarray}
+
+
+}
 
 
 \prob{3}{
