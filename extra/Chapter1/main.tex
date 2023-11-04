@@ -1,0 +1,92 @@
+\chapter{Sturm-Liouville Differential Equation}
+
+\section{Motivation}
+
+Many of the problems we have studied follow from general properties of the Sturm-Lioville (SL) problem.
+In these problems, a system is governed by the differential equation of the form 
+\begin{eqnarray}
+    \label{eq:SL-DE}
+    -\dv{x}\Bigg[ p(x) \dv{x} \Bigg] \phi(x) + q(x) \phi(x) =  \lambda r(x) \phi(x)
+\end{eqnarray}
+for $x \in [a,b]$, where $a,b \in \R$ and some real functions $p,q,r$, where $p(x),r(x) > 0$ for $x \in (a,b)$\footnote{Note that the endpoints are excluded here!}.
+This is in essence an eigenvalue problem, where we would like to determine the eigenvalues $\lambda$ and corresponding eigenfunctions $\phi(x)$ which satisfy \eref{SL-DE} for a given set of $p,q,r$.
+
+For example, the Schr\"{o}dinger equation, Bessel's equation, and Legendre's equation all fall under this category.
+Clearly, the particular properties that determines a system's unique behavior depend on $p,q,r$, but the general methods by which we uncover these all follow the same generic trend which follow from general behaviors of systems with a Sturm-Lioville description.
+
+
+\section{Boundary Conditions}
+
+Since the \eref{SL-DE} is a second-order differential equation, we have two linearly independent solutions $y_{1,2}$ for a given set of functions $p,q,r$, and a general solution $y = \alpha_1 y_1 + \alpha_2 y_2$, where $\alpha_{1,2}$ are constants.
+These constants are determined by boundary conditions at $x=a,b$ by specifying (1) $y(a)$ and $y(b)$ [Dirichlet BCs], (2) $y'(a)$ and $y'(b)$ [Neumann BCs], or (3) $c_a y(a) + d_{a} y'(a)$ and $c_{b} y(b) + d_{b}y'(b)$ [Robin BCs].
+For the most part, we focus on Dirichlet BCs (e.g. specifying the value of the wave function) and Neumann (e.g. specifying the surface charge density).
+It is rare in the textbook problems that a linear combination of the function and its derivative are specified since these linear combinations are not usually related to a physical quantity.
+For the development of general properties, though, we will reference these kind of BCs, but Dirichlet and Neumann BCs are recovered by setting $d_{a,b} = 0$ and $c_{a,b} = 0$, respectively.
+
+Finally, in some cases, a fourth distinct set of BCs can be specified, which are called periodic BCs.
+As the name suggests we either have $y(a) = y(b)$ or $y'(a) = y'(b)$.
+
+\section{Definitions}
+
+Let us define a couple of terms that will be used to identify the type of equation we consider.
+
+\begin{enumerate}
+    \item A \textit{regular} SL system is one such that homogeneous mixed BCs are given: $c_{a}y(a) + d_{a}y'(a) = 0$ and $c_{b}y(b) + d_{b}y'(b) = 0$
+    \item A \textit{periodic} SL system is one such that periodic BCs are specified and $p(a) = p(b)$
+    \item A \textit{singular} SL system is one where any of the following occur:
+    \begin{itemize}
+        \item $p(a) = 0$, no BC at $a$ is given, and the BC at $b$ is homogeneous mixed (Note: solutions must be bounded at $x=a$)\footnote{A function $f$ is bounded at $x$ if $|f(x)| < M$ for some $M$.}
+        \item $p(b) = 0$, no BC at $b$ is given, and the BC at $a$ is homogeneous mixed (Note: solutions must be bounded at $x = a$)
+        \item $p(a) = p(b) = 0$ and no BCs are given (solutions must be bounded at both $x = a,b$.)
+        \item $a \rightarrow -\infty$ and $b \rightarrow \infty$ such that the equation is defined on $\R$ (Note: solutions must be square-integrable on $\R$)\footnote{A function $f$ is square-integrable if $\int_{-\infty}^{\infty} |f(x)|^2 < \infty$ (i.e. the integral is convergent and bounded).}
+    \end{itemize}
+\end{enumerate}
+
+
+\section{Properties of the Sturm-Liouville System}
+
+\subsection{Sturm-Lioville Operator}
+
+Let $\mathcal{L}^2([a,b],r(x),\dd{x})$ be the Hilbert space of square integrable functions on the interval $[a,b]$ with inner product
+\begin{eqnarray}
+    (f,g) = \int_{a}^{b} r(x) f^{*}(x) g(x) \dd{x}
+.\end{eqnarray}
+It is for this reason that $r(x)$ is sometimes denoted a \textit{weight} function.
+
+Denote the linear differential operator
+\begin{eqnarray}
+    \label{eq:SL-lin-op}
+    \hat{L} = \frac{1}{r(x)} \Bigg[ - \dv{x} p(x) \dv{x} + q(x) \Bigg]
+,\end{eqnarray}
+and let $\mathcal{H} \subset \mathcal{L}^2$ be the subspace of functions which are square integrable and satisfy a given set of BCs.
+The SL problem can then be stated as 
+\begin{eqnarray}
+    \hat{L} \phi = \lambda \phi
+,\end{eqnarray}
+and because of this relation we call $L$ the SL operator.
+Effectively, we have explicitly rewritten \eref{SL-DE} as an eigenvalue equation.
+We now study generally some properties of the SL operator and its spectrum and space of eigenfunctions.
+
+\textbf{Theorem}: \textit{The SL operator is self-adjoint}. Recall that the adjoint $A^{\dagger}$ of an operator $A$ is defined by the equality $(A^{\dagger}f, g) = (f,Ag)$, and a self-adjoint operator is one such that $A^{\dagger} = A$.
+The proof is as follows for the SL operator.
+Consider the inner product
+\begin{align}
+    (f,Lg) &= \int_{a}^{b} r(x) f^{*}(x) \hat{L} g(x) \dd{x} = \int_{a}^{b} f^{*}(x) \Bigg[ - \dv{x} p(x) \dv{x} + q(x) \Bigg] g(x) \dd{x} \nonumber \\
+    &= -\int_{a}^{b} f^{*}(x) \dv{x} p(x) \dv{x} g(x) \dd{x} + \int_{a}^{b} [ q(x) f(x) ]^{*} g(x) \dd{x} \nonumber \\
+    &= -\Big[ f^{*}(x) p(x) g'(x) \Big]_{a}^{b} + \int_{a}^{b} p(x) \dv{f^{*}(x)}{x} \dv{g(x)}{x} \dd{x} + \int_{a}^{b} [ q(x)f(x) ]^{*} g(x) \dd{x} \nonumber \\
+    &= \Bigg\{ p(x) \Bigg[ \dv{f^{*}(x)}{x} g(x) - f^{*}(x) \dv{g(x)}{x} \Bigg] \Bigg\}_{a}^{b} + \int_{a}^{b} \Bigg\{ \Bigg[ -\dv{x} p(x) \dv{x} + q(x) \Bigg] f \Bigg\}^{*} g(x) \dd{x} \nonumber \\
+    &= \int_{a}^{b} ( \hat{L} f )^{*} g(x) \dd{x} = ( \hat{L} f,g )
+.\end{align}
+Note that the first term in the second to last line is in fact zero for every set of BCs we mentioned:
+\begin{align}
+    \Bigg\{ p(x) &\Bigg[ \dv{f^{*}(x)}{x} g(x) - f^{*}(x) \dv{g(x)}{x} \Bigg] \Bigg\}_{a}^{b} \nonumber \\
+    &= p(b) \Big[ \dv{f^{*}(b)}{x}g(b) - f^{*}(b) \dv{g(b)}{x} \Big] - p(a) \Big[ \dv{f^{*}(a)}{x}g(a) - f^{*}(a) \dv{g(a)}{x} \Big] \\
+    &= 
+.\end{align}
+For Dirichlet BCs and Neumann BCs, it is straightforward to see this.
+
+https://www.iitg.ac.in/physics/fac/charu/courses/ph402/SturmLiouville.pdf
+
+
+
+
