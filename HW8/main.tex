@@ -31,7 +31,7 @@ This matches the result we have in our library.
 That is, $\mathcal{L}\{ t^{n} \} = n!/s^{n+1}$ and for a general function $f(t)$, $\mathcal{L}\{ f(t)e^{-at} \} = F(s + a)$.
 Collecting these results, we end up with the same solution, which is that
 \begin{eqnarray}
-    \mathcal{L}\{ t^{n} e^{-at} \} = \frac{n!}{(s + a)^{n+1}}
+    \eqbox{ \mathcal{L}\{ t^{n} e^{-at} \} = \frac{n!}{(s + a)^{n+1}} }
 .\end{eqnarray}
 
 }
@@ -51,21 +51,37 @@ where $y(0) = 0$ and $\dot{y}(0) = v$.
 
 If we take the Laplace transform of the equation\footnote{Strictly speaking, this means that if we have a differential equation $D f = g$, where $D$ is a linear differential operator, then its ``Laplace transform'' is $\mathcal{L}\{ D f \} = G(s)$.}, we find
 \begin{eqnarray}
-    \mathcal{L}\{ \ddot{y} + 2 \lambda \dot{y} + \omega_0^2 y \} = [ s^2 Y(s) - sv ] + 2 \lambda [ sY(s) ] + \omega_0^2 Y(s) = 0
+    \mathcal{L}\{ \ddot{y} + 2 \lambda \dot{y} + \omega_0^2 y \} = [ s^2 Y(s) - v ] + 2 \lambda [ sY(s) ] + \omega_0^2 Y(s) = 0
 .\end{eqnarray}
 Solving for $Y(s)$ gives
 \begin{eqnarray}
-    Y(s) = \frac{sv}{s^2 + 2\lambda s + \omega_0^2} = \frac{s v}{(s + \lambda)^2 + (\omega_0^2 - \lambda^2)}
+    Y(s) = \frac{v}{s^2 + 2\lambda s + \omega_0^2} = \frac{v}{(s + \lambda)^2 + (\omega_0^2 - \lambda^2)}
 .\end{eqnarray}
 From our ``library'' we have
 \begin{align}
     \mathcal{L}\{ e^{-at}\cos{bt} \} &= \frac{s+a}{(s+a)^2 + b^2} \\
     \mathcal{L}\{ e^{-at}\sin{bt} \} &= \frac{b}{(s+a)^2 + b^2}
 .\end{align}
-Thus, if we write $a = \lambda$ and $b = \sqrt{\omega_0^2 - \lambda^2}$, then
+Thus, if we let $a = \lambda$ and $b = \sqrt{\omega_0^2 - \lambda^2}$, then
 \begin{eqnarray}
-    Y(s) = v\Bigg[ \frac{s+a}{(s+a)^2 + b^2} - \frac{a}{(s+a)^2 + b^2} \Bigg]
+    \eqbox{ y(t) = \frac{v}{\sqrt{\omega_0^2 - \lambda^2}} e^{-\lambda t} \sin(\sqrt{\omega_0^2 - \lambda^2} \, t) }
 .\end{eqnarray}
+This is the solution in general for any $\omega_0$ and $\lambda$ (subject to the initial conditions above), but we can specify the relative values of $\omega_0$ and $\lambda$ in order to rewrite the solution in terms of explicitly real factors .
+First, if $\omega_0^2 > \lambda^2$.
+In this case, the solution does not change since all the constants are already real.
+
+Second, if $\omega_0^2 = \lambda^2$, we have an indeterminate form, which is defined as the limit $\sqrt{\omega_0^2 - \lambda^2} \rightarrow 0$.
+Clearly, this is of the form $\lim_{x \rightarrow 0} \sin{ax}/x = a$, leaving us with
+\begin{eqnarray}
+    \eqbox{ y(t) = v t e^{-\lambda t} }
+.\end{eqnarray}
+
+Finally, if $\omega_0^2 < \lambda^2$, we have $\sqrt{\omega_0^2 - \lambda^2} = i \sqrt{\lambda^2 - \omega_0^2}$, and using $\sin{ix} = i\sinh{x}$, we have
+\begin{eqnarray}
+    \eqbox{ y(t) = \frac{v}{\sqrt{\lambda^2 - \omega_0^2}} e^{-\lambda t}\sinh( \sqrt{\lambda^2 - \omega_0^2} \, t ) }
+.\end{eqnarray}
+
+Now that we have enumerated all the possible combinations, we are done, and we see that we have recovered all the forms of the solution to a generic homogeneous linear, second-order ordinary differential equation with constant coefficients with initial conditions $y(0) = 0$ and $\dot{y}(0) = v$.
 
 
 }
@@ -78,7 +94,27 @@ Find $\cos{\varphi}$, where $\varphi$ is the angle between $\vu*{n}$ and $\vu*{n
 
 }
 
-\sol{}
+\sol{
+
+    Note that if a vector $\va*{A}$ ``makes an angle'' $\phi$ with some axis defined by a unit vector $\vu*{e}$, this means that $\va*{A} \cdot \va*{e} = |\va*{A}| \cos{\phi}$, and therefore the component of $\va*{A}$ along $\vu*{e}$ is just $A_{e} = |\va*{A}| \cos{\phi}$.
+
+Using this fact, we can write
+\begin{align}
+    \vu*{n} &= \cos{\alpha} \vu*{x} + \sqrt{1 - \cos^2{\alpha} - \cos^2{\theta}} \, \vu*{y} - \cos{\theta} \vu*{z} \\
+    \vu*{n}' &= \cos{\alpha'} \vu*{x} + \sqrt{1 - \cos^2{\alpha'} - \cos^2{\theta'}} \, \vu*{y} + \cos{\theta'} \vu*{z}
+.\end{align}
+Through the dot product, we have
+\begin{eqnarray}
+    \vu*{n} \cdot \vu*{n}' = \cos{\varphi} = \cos{\alpha}\cos{\alpha'} + \sqrt{(1 - \cos^2{\alpha} - \cos^2{\theta})(1 - \cos^2{\alpha'} - \cos^2{\theta'})} + \cos{\theta}\cos{\theta'}
+.\end{eqnarray}
+Let us simplify the term under the radical:
+\begin{eqnarray}
+\begin{aligned}
+    (1 &- \cos^2{\alpha} - \cos^2{\theta})(1 - \cos^2{\alpha'} - \cos^2{\theta'}) =
+\end{aligned}
+.\end{eqnarray}
+
+}
 
 
 \prob{4}{
@@ -90,16 +126,117 @@ Find a scalar function $\varphi(r)$ of $r = |\va*{r}|$ which satisfies the equat
 
 }
 
-\sol{}
+\sol{
+
+We can write the equation above as
+\begin{eqnarray}
+    \label{eq:simplified-4}
+    \div{ [ \varphi(r) \va*{r} ] } = \varphi(r) \div{\va*{r}} + \grad{\varphi(r)} \cdot \va*{r} = 3 \varphi(r) + x \pdv{\varphi(r)}{x} + y \pdv{\varphi(r)}{y} + z \pdv{\varphi(r)}{z} = 0
+.\end{eqnarray}
+
+Recall the transformation between the Cartesian $(x,y,z)$ and spherical $(r,\phi,\theta)$ bases in $\reals^{3}$ is just
+\begin{eqnarray}
+    \begin{cases}
+        x = r \sin{\theta} \cos{\phi} \\
+        y = r \sin{\theta} \sin{\phi} \\
+        z = r \cos{\theta}
+    \end{cases}
+    \Leftrightarrow
+    \begin{cases}
+        r = \sqrt{x^2 + y^2 + z^2} \\
+        \phi = \arctan(y/x) \\
+        \theta = \arctan(z/\sqrt{x^2 + y^2})
+    .\end{cases}
+\end{eqnarray}
+We can use this to transform the last three terms of \eref{simplified-4} to an explicit representation in terms of spherical components.
+It suffices to do this for the $x$-component and generalize to the other two:
+\begin{eqnarray}
+    \pdv{\varphi(r)}{x} = \pdv{r}{x} \pdv{\varphi}{r} = \frac{x}{r} \dv{\varphi}{r}
+,\end{eqnarray}
+Plugging this into \eref{simplified-4} then gives us
+\begin{eqnarray}
+    \div{ [ \varphi(r) \va*{r} ] } = 3 \varphi(r) + \frac{x^2 + y^2 + z^2}{r} \dv{\varphi(r)}{r} = 3 \varphi(r) + r \dv{\varphi(r)}{r} = 0
+.\end{eqnarray}
+This is just a separable differential equation, which gives
+\begin{eqnarray}
+    \eqbox{ \varphi(r) = \frac{A}{r^3} }
+,\end{eqnarray}
+where $A$ is a constant determined by some boundary condition.
+
+}
 
 
 \prob{5}{
 
-    Calculate the following: (1) $\div{[(\va*{a} \cdot \va*{r}) \va*{b}]}$, (2) $\curl{[(\va*{a} \cdot \va*{r})\va*{b}]}$, (3) $\div{\va*{a} \cross \va*{r}}$, (4) $\curl{(\va*{a} \cross \va*{r})}$, (5) $\div{[\va*{r} \cross (\va*{a} \cross \va*{r})]}$, where $\va*{a}$ and $\va*{b}$ are constant vectors.
+    Calculate the following: (1) $\div{[(\va*{a} \cdot \va*{r}) \va*{b}]}$, (2) $\curl{[(\va*{a} \cdot \va*{r})\va*{b}]}$, (3) $\div{[\va*{a} \cross \va*{r}]}$, (4) $\curl{(\va*{a} \cross \va*{r})}$, (5) $\div{[\va*{r} \cross (\va*{a} \cross \va*{r})]}$, where $\va*{a}$ and $\va*{b}$ are constant vectors.
 
 }
 
-\sol{}
+\sol{
+
+There are a few ways of approaching these kinds of problems.
+One way is to do the calculus and algebra via brute-force in its full glory.
+Another utilizes a nicer and more compact notation through tensors and the Einstein summation notation.
+The summation notation is that we can write sums like $\va*{A} = \sum_{i=1}^{3} A_{i} \vu*{e}_{i} = A_{i} \vu*{e}_{i}$, dropping the explicit sum and implicitly understanding that repeated indices are summed over.
+Note that $i=1,2,3$ corresponds to the $x,y,z$ components of $\va*{A}$.
+Additionally, we can define the Kronecker-delta symbol (effectively the three-dimensional analogue to the metric tensor) as
+\begin{eqnarray}
+    \delta_{ij} = \begin{cases}
+        1 & {\rm if} ~ i = j \\
+        0 & {\rm if} ~ i \ne j
+    .\end{cases}
+\end{eqnarray}
+This is useful for defining the dot product between vectors as
+\begin{eqnarray}
+    \va*{A} \cdot \va*{B} = A_{i}B_{i} = A_{i}B_{j} \delta_{ij}
+.\end{eqnarray}
+We also introduce the Levi-civita symbol as
+\begin{eqnarray}
+    \epsilon_{ijk} = \begin{cases}
+        1 & {\rm if} ~ ijk \in \{ (123), (231), (312) \} \\
+        1 & {\rm if} ~ ijk \in \{ (213), (132), (321) \} \\
+        0 & {\rm otherwise}
+    .\end{cases}
+\end{eqnarray}
+The Levi-civita symbol is totally anti-symmetric in the sense that permuting indices as $\epsilon_{ijk} = -\epsilon_{jik}$.
+This is useful in writing the cross product as
+\begin{eqnarray}
+    \va*{A} \cross \va*{B} = \vu*{e}_{i} \epsilon_{ijk} A_{j} B_{k}
+.\end{eqnarray}
+Note the following useful identity:
+\begin{eqnarray}
+    \epsilon_{ijk} \epsilon_{lmk} = \delta_{il}\delta_{jm} - \delta_{im}\delta_{jl}
+.\end{eqnarray}
+This can be proven in a number of ways.
+The most direct (although at the same time the least satisfying and enlightening) is to just check that the two sides are the same for each pair $(ij)$ and $(lm)$ for $k = 1,2,3$.
+
+(1) Using the framework established above, we have
+\begin{eqnarray}
+    \eqbox{ \div{[ (\va*{a} \cdot \va*{r}) \va*{b} ]} = \nabla_{i} (\va*{a} \cdot \va*{r}) b_{i} = \nabla_{i} a_{j} r_{j} b_{i} = a_{j} ( \nabla_{i} r_{j} ) b_{i} = a_{j} \delta_{ij} b_{i} = \va*{a} \cdot \va*{b} }
+\end{eqnarray}
+since $a_{j}$ and $b_{i}$ are constants by assumption.
+
+(2)
+\begin{eqnarray}
+    \eqbox{ \curl{ [ \va*{a} \cdot \va*{r} ] \va*{b} } = \vu*{e}_{i} \epsilon_{ijk} \nabla_{j} a_{l} r_{l} b_{k} = \vu*{e}_{i} \epsilon_{ijk} a_{l} \delta_{jl} b_{k} = \vu*{e}_{i} \epsilon_{ilk} a_{l}b_{k} = \va*{a} \cross \va*{b} }
+.\end{eqnarray}
+
+(3)
+\begin{eqnarray}
+    \eqbox{ \div{[ \va*{a} \cross \va*{r} ]} = \nabla_{i} \epsilon_{ijk} a_{j} r_{k} = \epsilon_{ijk} a_{j} \delta_{ik} = \epsilon_{kjk} a_{j} = 0 }
+.\end{eqnarray}
+
+(4)
+\begin{eqnarray}
+\eqbox{
+\begin{aligned} 
+    \curl{ [ \va*{a} \cross \va*{r} ] } &= \vu*{e}_{i} \epsilon_{ijk} \nabla_{j} \epsilon_{klm} a_{l} r_{m} = \vu*{e}_{i} \epsilon_{imk}\epsilon_{lmk} a_{l} \\
+    &= \vu*{e}_{i} [ \delta_{il} \delta_{mm} - \delta_{im} \delta_{lm} ] a_{l} = 3 \va*{a} - \va*{a} = 2 \va*{a}
+\end{aligned}
+}
+.\end{eqnarray}
+
+}
 
 
 \end{document}
