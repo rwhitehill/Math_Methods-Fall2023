@@ -6,7 +6,7 @@ Many of the problems we have studied follow from general properties of the Sturm
 In these problems, a system is governed by the differential equation of the form 
 \begin{eqnarray}
     \label{eq:SL-DE}
-    -\dv{x}\Bigg[ p(x) \dv{x} \Bigg] \phi(x) + q(x) \phi(x) =  \lambda r(x) \phi(x)
+    \dv{x}\Bigg[ p(x) \dv{x} \Bigg] \phi(x) + q(x) \phi(x) =  -\lambda r(x) \phi(x)
 \end{eqnarray}
 for $x \in [a,b]$, where $a,b \in \R$ and some real functions $p,q,r$, where $p(x),r(x) > 0$ for $x \in (a,b)$\footnote{Note that the endpoints are excluded here!}.
 This is in essence an eigenvalue problem, where we would like to determine the eigenvalues $\lambda$ and corresponding eigenfunctions $\phi(x)$ which satisfy \eref{SL-DE} for a given set of $p,q,r$.
@@ -56,36 +56,100 @@ It is for this reason that $r(x)$ is sometimes denoted a \textit{weight} functio
 Denote the linear differential operator
 \begin{eqnarray}
     \label{eq:SL-lin-op}
-    \hat{L} = \frac{1}{r(x)} \Bigg[ - \dv{x} p(x) \dv{x} + q(x) \Bigg]
+    \hat{L} = -\frac{1}{r(x)} \Bigg[ \dv{x} p(x) \dv{x} + q(x) \Bigg]
 ,\end{eqnarray}
 and let $\mathcal{H} \subset \mathcal{L}^2$ be the subspace of functions which are square integrable and satisfy a given set of BCs.
 The SL problem can then be stated as 
 \begin{eqnarray}
-    \hat{L} \phi = \lambda \phi
+    \hat{L} \phi(x) = \lambda \phi(x)
 ,\end{eqnarray}
 and because of this relation we call $L$ the SL operator.
 Effectively, we have explicitly rewritten \eref{SL-DE} as an eigenvalue equation.
 We now study generally some properties of the SL operator and its spectrum and space of eigenfunctions.
 
-\textbf{Theorem}: \textit{The SL operator is self-adjoint}. Recall that the adjoint $A^{\dagger}$ of an operator $A$ is defined by the equality $(A^{\dagger}f, g) = (f,Ag)$, and a self-adjoint operator is one such that $A^{\dagger} = A$.
+\subsection{Facts about solutions and eigenvalues of the Sturm-Lioville problem}
+\textbf{Theorem 1}: \textit{The SL operator is self-adjoint}. Recall that the adjoint $A^{\dagger}$ of an operator $A$ is defined by the equality $(A^{\dagger}f, g) = (f,Ag)$, and a self-adjoint operator is one such that $A^{\dagger} = A$.
 The proof is as follows for the SL operator.
 Consider the inner product
 \begin{align}
-    (f,Lg) &= \int_{a}^{b} r(x) f^{*}(x) \hat{L} g(x) \dd{x} = \int_{a}^{b} f^{*}(x) \Bigg[ - \dv{x} p(x) \dv{x} + q(x) \Bigg] g(x) \dd{x} \nonumber \\
-    &= -\int_{a}^{b} f^{*}(x) \dv{x} p(x) \dv{x} g(x) \dd{x} + \int_{a}^{b} [ q(x) f(x) ]^{*} g(x) \dd{x} \nonumber \\
-    &= -\Big[ f^{*}(x) p(x) g'(x) \Big]_{a}^{b} + \int_{a}^{b} p(x) \dv{f^{*}(x)}{x} \dv{g(x)}{x} \dd{x} + \int_{a}^{b} [ q(x)f(x) ]^{*} g(x) \dd{x} \nonumber \\
-    &= \Bigg\{ p(x) \Bigg[ \dv{f^{*}(x)}{x} g(x) - f^{*}(x) \dv{g(x)}{x} \Bigg] \Bigg\}_{a}^{b} + \int_{a}^{b} \Bigg\{ \Bigg[ -\dv{x} p(x) \dv{x} + q(x) \Bigg] f \Bigg\}^{*} g(x) \dd{x} \nonumber \\
-    &= \int_{a}^{b} ( \hat{L} f )^{*} g(x) \dd{x} = ( \hat{L} f,g )
+    (f,Lg) &= \int_{a}^{b} r f^{*} \hat{L} g \dd{x} = \int_{a}^{b} f^{*} \Bigg[ - \dv{x} \Big( p \dv{x} \Big) + q \Bigg] g \dd{x} \nonumber \\
+    &= -\int_{a}^{b} f^{*} \dv{x} \Big( p \dv{x} \Big) g \dd{x} + \int_{a}^{b} [ q f ]^{*} g \dd{x} \nonumber \\
+    &= -\Big[ f^{*} p g' \Big]_{a}^{b} + \int_{a}^{b} p \dv{f^{*}}{x} \dv{g}{x} \dd{x} + \int_{a}^{b} [ q f ]^{*} g \dd{x} \nonumber \\
+    &= \Bigg[ p \Bigg( \dv{f^{*}}{x} g - f^{*} \dv{g}{x} \Bigg) \Bigg]_{a}^{b} + \int_{a}^{b} \Bigg\{ \Bigg[ -\dv{x} p \dv{x} + q \Bigg] f \Bigg\}^{*} g \dd{x} \nonumber \\
+    &= \int_{a}^{b} ( \hat{L} f )^{*} g \dd{x} = ( \hat{L} f,g )
 .\end{align}
-Note that the first term in the second to last line is in fact zero for every set of BCs we mentioned:
-\begin{align}
-    \Bigg\{ p(x) &\Bigg[ \dv{f^{*}(x)}{x} g(x) - f^{*}(x) \dv{g(x)}{x} \Bigg] \Bigg\}_{a}^{b} \nonumber \\
-    &= p(b) \Big[ \dv{f^{*}(b)}{x}g(b) - f^{*}(b) \dv{g(b)}{x} \Big] - p(a) \Big[ \dv{f^{*}(a)}{x}g(a) - f^{*}(a) \dv{g(a)}{x} \Big] \\
-    &= 
-.\end{align}
-For Dirichlet BCs and Neumann BCs, it is straightforward to see this.
+Note that the boundary term from the integrations by parts is zero for certain homogeneous BCs we discussed above.
+This is straightforward to see for homogeneous Dirichlet BCs ($f(a) = f(b) = g(a) = g(b) = 0$) and Neumann BCs ($f'(a) = f'(b) = g'(a) = g'(b) = 0$).
 
-https://www.iitg.ac.in/physics/fac/charu/courses/ph402/SturmLiouville.pdf
+\textbf{Theorem 2}: \textit{The eigenvalues of $\hat{L}$ are real}.
+Suppose $\phi_{\lambda} \not\equiv 0$ is the function with corresponding eigenvalue $\lambda$.
+That is $\hat{L} \phi_{\lambda} = \lambda \phi_{\lambda}$.
+Since $\hat{L}$ is self-adjoint, we can write
+\begin{align}
+    (\hat{L}\phi_{\lambda},\phi_{\lambda}) &= (\phi_{\lambda},\hat{L}\phi_{\lambda}) \nonumber \\
+    (\lambda \phi_{\lambda},\phi_{\lambda}) &= (\phi_{\lambda},\lambda \phi_{\lambda}) \nonumber \\
+    \lambda^{*} (\phi_{\lambda},\phi_{\lambda}) &= \lambda (\phi_{\lambda},\phi_{\lambda}) \nonumber \\
+    \lambda^{*} &= \lambda
+\end{align}
+
+\textbf{Theorem 3}: \textit{If $\phi_{\lambda}$ and $\phi_{\mu}$ correspond to distinct eigenvalues $\lambda$ and $\mu$, then $\phi_{\lambda}$ and $\phi_{\mu}$ are orthogonal (i.e. $(\phi_{\lambda},\phi_{\mu}) = 0$)}.
+The proof of this fact is straightforward.
+The eigenfunctions satisfy $\hat{L} \phi_{\lambda} = \lambda \phi_{\lambda}$ and $\hat{L} \phi_{\mu} = \mu \phi_{\mu}$.
+It follows then that
+\begin{align}
+    (\hat{L}\phi_{\lambda},\phi_{\mu}) &= (\phi_{\lambda},\hat{L}\phi_{\mu}) \nonumber \\
+    \lambda(\phi_{\lambda},\phi_{\mu}) &= \mu(\phi_{\lambda},\phi_{\mu})
+.\end{align}
+Rewriting we have
+\begin{eqnarray}
+    [\lambda - \mu](\phi_{\lambda},\phi_{\mu}) = 0 \Rightarrow (\phi_{\lambda},\phi_{\mu}) = 0
+\end{eqnarray}
+since by assumption $\lambda \ne \mu$.
+
+\textbf{Theorem 4}: \textit{The spectrum of $\hat{L}$ is non-degenerate}.
+That is to say that if $\phi_1$ and $\phi_2$ correspond to the same eigenvalue, then $\phi_2 = c \phi_2$, or $\phi_1$ and $\phi_2$ are linearly dependent.
+We prove this by contradiction.
+Suppose that there exists $\phi_1 \ne \phi_2$ such that $\hat{L} \phi_{1,2} = \lambda \phi_{1,2}$.
+We then have
+\begin{align}
+    \phi_2 \hat{L} \phi_1 - \phi_1 \hat{L} \phi_2 &=  -\frac{1}{r(x)} \Big[ \phi_2 \dv{x} \Big( p \phi_1 \Big) - \phi_1' \dv{x} \Big( p \phi_2' \Big) \Big] = 0 \nonumber \\
+                                                  &= -\frac{1}{r(x)} \dv{x} \underbrace{ p(x) \Big[ \phi_1' \phi_2 - \phi_1 \phi_2' \Big] }_{W[\phi_1,\phi_2]} = 0
+.\end{align}
+We then have 
+\begin{eqnarray}
+    p(x) W[\phi_1(x),\phi_2(x)] = c
+.\end{eqnarray}
+Notice that for homogeneous BCs,
+\begin{eqnarray}
+    W[\phi_1(x),\phi_2(x)] = \dv{\phi_1}{x} \phi_2 - \phi_1 \dv{\phi_2}{x} = 0
+.\end{eqnarray}
+This is simple to see for pure Dirichlet and Neumann BCs since either the function or the derivative is zero at the boundaries.
+Thus, we have a separable $1^{\rm st}$ order equation with solution
+\begin{eqnarray}
+    \phi_1(x) = c\phi_2(x)
+.\end{eqnarray}
+
+\textbf{Theorem 5}: \textit{The set of eigenfunctions is a basis for $\mathcal{H}$}.
+Equivalently, the set of eigenfunctions $\{ \phi_{\lambda} \} $.
+Let us assume for now that $\hat{L}$ has a countable spectrum, allowing us to label the eigenfunctions by natural numbers such that eigenvalue $\lambda_{n}$ corresponds to eigenfunction $\phi_{n}$.
+A rigorous statement of completeness is this: if $\psi(x)$ is any function in $\mathcal{H}$,
+\begin{eqnarray}
+    \lim_{n \rightarrow N} || \psi(x) - \sum_{k=1}^{n} c_{k} \phi_{k} ||
+,\end{eqnarray}
+where $N$ is the number of discrete eigenvalues in the spectrum of $\hat{L}$ (possibly infinite).
+Note that the coefficients $c_{k} = (\phi_{k},\psi)$ and the norm $|| \cdot ||$ is defined as $|| \psi || = \sqrt{(\psi,\psi)}$.
+Another way of stating completeness is that
+\begin{eqnarray}
+    \sum_{n} \phi_{n}^{*}(x) \phi_{n}(x) = \delta(x)
+.\end{eqnarray}
+This is equivalent since any function $\psi \in \mathcal{H}$ can be expressed as
+\begin{eqnarray}
+    \psi(x) = \int_{a}^{b} \dd{x'} \psi(x') \delta(x - x') = \sum_{n} \int_{a}^{b} \dd{x'} \phi_{n}^{*}(x - x') \phi_{n}(x - x') \psi(x')
+.\end{eqnarray}
+{\color{red} Wrong}
+
+
+
 
 
 
