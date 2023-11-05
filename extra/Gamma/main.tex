@@ -1,0 +1,186 @@
+\chapter{Gamma Function}
+
+The Gamma function appears in many places, including our treatment of specific cases of the Sturm-Lioville problem and its solution.
+Before moving on then, we will take a look at the Gamma function and work out some of its useful properties in a more elaborate way than in our courses, which primarily highlighted its definition and properties without indicating how they arise.
+
+\section{Definition}
+
+The Gamma function is really an analytic continuation of the factorial function to the complex plane.
+Let us define
+\begin{eqnarray}
+    \label{eq:Gamma-def}
+    \Gamma(z) = \int_{0}^{\infty} x^{z-1} e^{-x} \dd{x}
+.\end{eqnarray}
+It is simple to derive its defining recursion property via integration by parts
+\begin{eqnarray}
+    \Gamma(z+1) = \int_{0}^{\infty} x^{z} e^{-x} \dd{x} = -x^{z} e^{-x} \Big|_{0}^{\infty} + z \int_{0}^{\infty} x^{z-1}e^{-x} = z \Gamma(z)
+.\end{eqnarray}
+If $z \in \N$\footnote{If you are not familiar with this notation $\N = \{ 1,2,3,\ldots \} $ is just the set of natural numbers.}, then
+\begin{eqnarray}
+    \label{eq:Gamma-recursive}
+    \Gamma(n+1) = n \Gamma(n) = \ldots = n (n-1) \hdots (3)(2)(1) \Gamma(1) = n!
+.\end{eqnarray}
+Note that
+\begin{eqnarray}
+    \Gamma(1) = \int_{0}^{\infty} e^{-x} \dd{x} = -e^{-x} \Big|_{0}^{\infty} = 1
+.\end{eqnarray}
+
+One important observation is that the integral definition above only applies to $z \in \C$\footnote{The set $\C$ is just the set of complex numbers.} such that $\Re{z} \geq 0$.
+If $\Re(z) < 0$, then the integrand is divergent as $x \rightarrow 0$.
+We can however, use analytic continuation again to define the Gamma function for $z$ with negative real parts using \eref{Gamma-recursive}:
+\begin{eqnarray}
+    \Gamma(z) = \frac{1}{z} \Gamma(z+1)
+.\end{eqnarray}
+Essentially, one applies this recursion relation $N$ times until $z + N \geq 0$.
+
+
+\section{Important Identities}
+
+A common value that is needed is $\Gamma(1/2)$.
+Putting this into \eref{Gamma-def}, we have
+\begin{eqnarray}
+    \Gamma(1/2) = \int_{0}^{\infty} x^{-1/2} e^{-x} \dd{x}
+.\end{eqnarray}
+It may not be immedately clear how to integrate this.
+For $z = n + 1/2$, it is useful to relate the Gamma function to moments of the Gaussian integral.
+If we use the substitution $x = y^2$,
+\begin{align}
+    \Gamma\Big(n + \frac{1}{2} \Big) &= \int_{0}^{\infty} x^{(2n-1)/2} e^{-x} \dd{x} = \int_{0}^{\infty} y^{2n - 1} e^{-y^2} ( 2 y \dd{y} ) \nonumber \\
+    \label{eq:gamma-odd-half-int}
+                                     &= 2 \int_{0}^{\infty} y^{2n} e^{-y^2} \dd{y} = \int_{-\infty}^{\infty} y^{2n} e^{-y^2} \dd{y}
+.\end{align}
+A common an useful trick is to introduce a parameter $\alpha$ in the Gaussian, differentiate with respect to this parameter $n$ times, and take $\alpha \rightarrow 1$:
+\begin{align}
+    \int_{-\infty}^{\infty} y^{2n} e^{-\alpha y^2} \dd{y} &= (-1)^{n} \dv[n]{\alpha} \int_{0}^{\infty} e^{-\alpha y^2} = (-1)^{n} \dv[n]{\alpha} \sqrt{\frac{\pi}{\alpha}} \nonumber \\
+                                                          &= (-1)^{n} \sqrt{\pi} \dv[n]{\alpha} \alpha^{-1/2} \nonumber \\
+                                                          &= (-1)^{n}(-1/2)(-1/2 - 1)\hdots(-1/2 - (n-1)) \sqrt{\pi} \alpha^{-1/2 + n} \nonumber \\
+                                                          &= \frac{1}{2} \cdot \frac{3}{2} \ldots  \frac{2n-1}{2} \sqrt{\pi} \alpha^{-(2n+1)/2} = \frac{(2n-1)!!}{2^{n}} \sqrt{\pi} \alpha^{-(2n+1)/2}
+,\end{align}
+where we have defined the ``double-factorial'' as
+\begin{align}
+    (2n)!! &= (2n)(2n-2)\ldots(2) \\
+    (2n+1)!! &= (2n+1)(2n-1)\ldots(1)
+.\end{align}
+Essentially, instead of multiplying consecutive integers one by one, we just multiply integers that are separated by 2 units until we reach either 2 or 1.
+You can also see that we step $n$ down one unit at a time, which steps $2n$ and $2n+1$ down 2 units.
+
+Taking $\alpha \rightarrow 1$, we finally have
+\begin{eqnarray}
+    \Gamma\Big( n + \frac{1}{2} \Big) = \frac{(2n -1)!! \sqrt{\pi}}{2^{n}} = \frac{(2n)! \sqrt{\pi}}{2^{2n} n!}
+.\end{eqnarray}
+The last equality comes from noticing that we can write
+\begin{align}
+    \frac{(2n)!}{n!} &= \frac{(2n)(2n-1)(2n-2)(2n-3)\ldots(3)(2)(1)}{n!} \nonumber \\
+                     &= \frac{(2n)(2n-2)\ldots(2)}{n!} (2n-1)!! \nonumber \\
+                     &= \frac{2^{n}(n)(n-1)\ldots(2)(1)}{n!} (2n-1)!! = 2^{n} (2n-1)!!
+.\end{align}
+It immediately follows then that
+\begin{eqnarray}
+    \Gamma(1/2) = \sqrt{\pi}
+.\end{eqnarray}
+This could be gleaned directly from \eref{gamma-odd-half-int} also since $\Gamma(1/2)$ is just the Gaussian integral.
+
+An alternate derivation of this fact is just to exploit the recursion property:
+\begin{align}
+    \Gamma(n+1/2) &= (n-1/2)\Gamma(n-1/2) \nonumber \\
+                  &= \Big( n - \frac{1}{2} \Big) \Big( n - \frac{3}{2} \Big) \ldots \Big( \frac{3}{2} \Big) \Big( \frac{1}{2} \Big)\Gamma(1/2)
+.\end{align}
+This is certainly the more straightforward approach, but the method used above highlights some other useful tools.
+
+Another fact that was thrown at us is the following:
+\begin{eqnarray}
+    \label{eq:gamma-prod-sin}
+    \Gamma(z) \Gamma(1-z) = \frac{\pi}{\sin{\pi z}}
+.\end{eqnarray}
+If you would like, you can take it as a fact.
+The proof of this will require a relatively lengthy development, but we will eventually get to the end result.
+Let us define the beta function
+\begin{eqnarray}
+    \label{eq:beta-def}
+    B(p,q) = \int_{0}^{1} x^{p-1} (1-x)^{q-1} \dd{x}
+.\end{eqnarray}
+We claim that $B(p,q) = \Gamma(p)\Gamma(q)/\Gamma(p+q)$.
+Let us now prove this claim.
+Recall that we can write
+\begin{eqnarray}
+    \Gamma(z) = 2 \int_{0}^{\infty} x^{2z-1} e^{-x^2} \dd{x}
+.\end{eqnarray}
+This was shown writing $z = n + 1/2$, but in fact, the transformation did not depend on this assumption -- it only lead to our ability to evaluate it in closed form after the substitution.
+Thus,
+\begin{eqnarray}
+    \Gamma(p)\Gamma(q) = 4 \int_{0}^{\infty} \int_{0}^{\infty} x^{2p-1} y^{2q-1} e^{-(x^2+y^2)} \dd{x} \dd{y}
+.\end{eqnarray}
+Let us change to polar coordinates via $x = r\cos{\phi}$ and $y = r\sin{\phi}$
+\begin{align}
+    \Gamma(p)\Gamma(q) &= 4 \int_{0}^{\pi/2} \cos^{2p-1}(\phi) \sin^{2q-1}(\phi) \dd{\phi} \int_{0}^{\infty} r^{2p+2q-1} e^{-r^2} \dd{r}
+.\end{align}
+Note that $\phi$ only goes from $0$ to $\pi/2$ since we only integrate over the first quadrant.
+Let us look at the angular integral and make the substitution $x = \sin^2{\phi}$.
+Thus, $\cos{\phi} = \sqrt{1 - x}$ and $\dd{x} = 2 \sin{\phi} \cos{\phi} \dd{\phi}$
+\begin{align}
+    \int_{0}^{\pi/2} \cos^{2p-1}(\phi) \sin^{2q-1}(\phi) \dd{\phi} &= \int_{0}^{1} (1-x)^{p-1/2} x^{q-1/2} \frac{\dd{x}}{2 x^{1/2} (1-x)^{1/2}} \nonumber \\
+                                                                   &= \frac{1}{2} \int_{0}^{1} x^{q-1}(1-x)^{p-1} \dd{x} \nonumber \\
+                                                                   &= \frac{1}{2} \int_{0}^{1} y^{p-1} (1 - y)^{q-1} \dd{y} = \frac{1}{2}B(p,q)
+,\end{align}
+where in the second-to-last step, we made the substitution $y = 1-x$.
+Essentially, this substitution showed the reciprocity of the beta function arguments: $B(p,q) = B(q,p)$.
+Next, it should be clear that the radial integral 
+\begin{eqnarray}
+    \int_{0}^{\infty} r^{2p+2q-1} e^{-r^2} \dd{r} = \frac{1}{2} \Gamma(p+q)
+.\end{eqnarray}
+Putting it all together, we have
+\begin{eqnarray}
+    \Gamma(p)\Gamma(q) = B(p,q) \Gamma(p+q)
+.\end{eqnarray}
+
+Before we finally prove \eref{gamma-prod-sin}, we have another representation of the beta function.
+Making the substitution $x = y/(1+y)$, we have $y = x/(1-x)$ and
+\begin{align}
+    B(p,q) &= \int_{0}^{\infty} \frac{y^{p-1}}{(1+y)^{p-1}} \frac{1}{(1+y)^{q-1}} \frac{\dd{y}}{(1+y)^2} \nonumber \\
+           &= \int_{0}^{\infty} \frac{y^{p-1}}{(1+y)^{p+q}} \dd{y}
+.\end{align}
+Now, we are ready to prove \eref{gamma-prod-sin}.
+Let $p = z$ and $q = 1-z$.
+Then, using the most recent representation of the beta function 
+\begin{eqnarray}
+    \Gamma(z)\Gamma(1-z) = B(z,1-z) \Gamma(1) = B(z,1-z) = \int_{0}^{\infty} \frac{x^{z-1}}{1+x} \dd{x}
+.\end{eqnarray}
+We have already evaluated this integral via contour integration.
+I will evaluate it here again for completeness.
+We integrate over the contour shown in {\color{red} Fig. 1} with the analytic continuation $x \rightarrow w$:
+\begin{align}
+    2 \pi i (-1)^{z-1} &= \int_{C_{R \rightarrow \infty}} \frac{w^{z-1}}{1+w} \dd{w} + \int_{\infty}^{0} \frac{x^{1-z} e^{i 2\pi(z-1)}}{1+x} \dd{x} \nonumber \\
+             &+ \int_{C_{\epsilon\rightarrow 0}} \frac{w^{z-1}}{1+w} \dd{w} + \int_{0}^{\infty} \frac{x^{z-1}}{1+x} \dd{x}
+.\end{align}
+The left hand-side is just the residue of the integrand at the pole $w = -1$.
+Rearranging, we have
+\begin{align}
+    B(z,1-z) [ 1 - e^{i 2 \pi z} ] = -2 \pi i e^{i \pi z} - \int_{C_{R \rightarrow 0}} \frac{w^{z-1}}{1 + w} \dd{w} - \int_{C_{\epsilon \rightarrow 0}} \frac{w^{z-1}}{1 + w} \dd{w}
+.\end{align}
+Along the path $C_{R}$, we can write $w = R e^{i \phi}$, giving
+\begin{eqnarray}
+    \int_{C_{R \rightarrow 0}} \frac{w^{z-1}}{1 + w} \dd{w} = i \int_{0}^{2\pi} \frac{R^{z} e^{iz\phi}}{1 + R e^{i\phi}} \dd{\phi}
+.\end{eqnarray}
+Taking $R \Rightarrow \infty$, this is zero, restricting $0 < z < 1$.
+Recycling most of the work and replacing $R$ with $\epsilon$, it is trivial to see that the integral along the path $C_{\epsilon \rightarrow 0}$ is zero.
+Thus,
+\begin{eqnarray}
+    \Gamma(z) \Gamma(1-z) = B(z,1-z) = \frac{-2 \pi i e^{i \pi z}}{1 - e^{i 2 \pi z}} = \pi \frac{2i}{e^{i \pi z} - e^{-i \pi z}} = \frac{\pi}{\sin{\pi z}}
+.\end{eqnarray}
+At the moment, it seems that this result only holds for $0 < z < 1$.
+If we are outside this interval, we can always use the reciprocity relation and find an integer $N$ such that $w = z + n$ is inside the interval $(0,1)$.
+Suppose $z > 1$, then there exists $N > 0$ such that $w = z - N$ and
+\begin{align}
+    \Gamma(z)\Gamma(1-z) &= \Gamma(w + N) \Gamma(1 - [w + N]) \nonumber \\
+                         &= (w + [N-1])(w + [N-2])\ldots w \Gamma(w) \nonumber \\
+                         &\times \frac{1}{1 - [w + N]} \frac{1}{2 - [w + N]} \ldots \frac{1}{N - [w + N]} \Gamma(1 - w) \nonumber \\
+                         &= (-1)^{N} \Gamma(w) \Gamma(1 - w) = (-1)^{N} \frac{\pi}{\sin{\pi w}} \nonumber \\
+                         &= (-1)^{N} \frac{\pi}{\sin[\pi(z - N)]} = (-1)^{N} \frac{\pi}{\sin{\pi z} \cos{\pi N}} = \frac{\pi}{\sin{\pi z}}
+\end{align}
+since $\cos{\pi N} = (-1)^{N}$.
+A similar logic can be applied for $z < 0$, so indeed, \eref{gamma-prod-sin} applies for any complex $z$.
+
+
+
+
+
