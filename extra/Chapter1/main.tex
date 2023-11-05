@@ -140,13 +140,18 @@ where $N$ is the number of discrete eigenvalues in the spectrum of $\hat{L}$ (po
 Note that the coefficients $c_{k} = (\phi_{k},\psi)$ and the norm $|| \cdot ||$ is defined as $|| \psi || = \sqrt{(\psi,\psi)}$.
 Another way of stating completeness is that
 \begin{eqnarray}
-    \sum_{n} \phi_{n}^{*}(x) \phi_{n}(x) = \delta(x)
+    \sum_{n} \phi_{n}^{*}(x') \phi_{n}(x) = \delta(x - x')
 .\end{eqnarray}
 This is equivalent since any function $\psi \in \mathcal{H}$ can be expressed as
 \begin{eqnarray}
-    \psi(x) = \int_{a}^{b} \dd{x'} \psi(x') \delta(x - x') = \sum_{n} \int_{a}^{b} \dd{x'} \phi_{n}^{*}(x - x') \phi_{n}(x - x') \psi(x')
+\psi(x) = \int_{a}^{b} \dd{x'} \psi(x') \delta(x - x') = \sum_{n} \phi_{n}(x) \underbrace{ \int_{a}^{b} \dd{x'} \phi_{n}^{*}(x') \psi(x') }_{c_{n}}
 .\end{eqnarray}
-{\color{red} Wrong}
+
+Note that there was no ``proof'' here.
+We really just posited that the eigenfunctions of $\hat{L}$ forms a complete basis.
+The proof is quite involved and perhaps beyond the scope of this discussion.
+We will assume that the mathematicians who proved this result are quite competent and take it as fact.
+It is essential that this theorem is true though since many of our problems take advantage of this fact, so in the end it may be unsatisfying for some.
 
 
 
