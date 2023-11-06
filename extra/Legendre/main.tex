@@ -1,0 +1,114 @@
+\chapter{Legendre's Differential Equation and Legendre Polynomials}
+
+
+\section{Legendre's Sturm-Liouville problem}
+
+\section{Derivation of the differential equation}
+
+Legendre polynomials appear when we solve for example Laplace's equation in the spherical coordinate representation.
+In particular, Legendre polynomials arise when there is azimuthal symmetry, and the associated Legendre polynomials arise when we consider the full angular decomposition of solutions.
+Let us see this organically.
+Laplace's equation is generically given as
+\begin{eqnarray}
+    \laplacian \phi(\va*{r}) = 0
+.\end{eqnarray}
+In spherical coordinates, the Laplacian operator is
+\begin{eqnarray}
+    \Bigg[ \frac{1}{r^2} \pdv{r} \Big( r^2 \pdv{r} \Big) + \frac{1}{r^2 \sin{\theta}} \pdv{\theta} \Big( \sin{\theta} \pdv{\theta} \Big) + \frac{1}{r^2 \sin^2{\theta}} \pdv[2]{\phi} \Bigg] \psi(r,\theta,\phi) = 0
+.\end{eqnarray}
+If we pose a separable ansatz for the solution $\psi(r,\theta,\phi) = R(r) P(\theta) T(\phi)$, then the equation reduces to
+\begin{align}
+    \underbrace{ \frac{\sin^2{\theta}}{ R(r)} \dv{r} \Big( r^2 \dv{R(r)}{r} \Big) + \frac{\sin{\theta}}{P(\theta)} \dv{\theta} \Big( \sin{\theta} \dv{P(\theta)}{\theta} \Big) }_{F(r,\theta)} + \underbrace{ \frac{1}{T(\phi)} \dv[2]{T(\phi)}{\phi} }_{G(\phi)} = 0
+.\end{align}
+It is clear from this that both functions $F$ and $G$ are constants with respect to $\phi$.
+Let us have 
+\begin{align}
+    G(\phi) = -m^2 \Rightarrow \dv[2]{T}{\phi} + m^2 T = 0 \Rightarrow T(\phi) = e^{\pm im\phi}
+,\end{align}
+We know that the form of the solution in $\phi$ must be periodic such that $T(\phi + 2\pi) = T(\phi)$\footnote{This is what led us to choose a negative constant for $G$ in the first place too.}.
+This constraint forces $m \in \Z$\footnote{The set $\Z = \{ \ldots,-2,-1,0,1,2 \}$ is the collection of integers.}.
+
+From this constraint, we can also write
+\begin{align}
+    F(r,\theta) = m^2
+,\end{align}
+which leads to
+\begin{align}
+    \underbrace{ \frac{1}{R(r)}\dv{r} \Big( r^2 \dv{R(r)}{r} \Big) }_{ H(r) } + \underbrace{ \frac{1}{\sin{\theta} P(\theta)} \dv{\theta} \Big( \sin{\theta} \dv{P(\theta)}{\theta} \Big) - \frac{m^2}{\sin^2{\theta}} }_{ I(\theta) } = 0
+.\end{align}
+Again, $H$ and $I$ must be independent of $r$ and $\theta$, and we will set $I(\theta) = -\lambda$, which also means that $H(r) = \lambda$.
+Typically, we write the eigenvalue in a convenient form, but here we will remain oblivious to its form and recover the conventional $l(l+1)$ behavior later.
+For now, we ignore the radial dependence.
+The solution is not terribly difficult, but the associated Legendre polynomials we care about are the solutions to azimuthal angle dependent differential equation:
+\begin{align}
+    \frac{1}{\sin{\theta}} \dv{\theta}\Big( \sin{\theta} \dv{P(\theta)}{\theta} \Big) + \Big[ \lambda - \frac{m^2}{\sin^2{\theta}} \Big] P(\theta) = 0
+.\end{align}
+This is equivalent to Legendre's equation, but we can write it in its canonical form via the substitution $x = \cos{\theta}$.
+The differential operator then transforms as
+\begin{eqnarray}
+    \dv{\theta} = \dv{x}{\theta} \dv{x} = \sin{\theta} \dv{x} = \sqrt{1 - x^2} \dv{x}
+,\end{eqnarray}
+and therefore,
+\begin{eqnarray}
+    \label{eq:associated-legendre-eq}
+    \Bigg[ \dv{x} (1 - x^2) \dv{x} - \frac{m^2}{1-x^2} \Bigg] P(x) = -\lambda P(x)
+.\end{eqnarray}
+This equation is exactly of the SL form with $p(x) = 1 - x^2,~ q(x) = \\ -m^2/(1-x^2),~{\rm and}~r(x) = 1$.
+
+\section{Series solution with $m=0$}
+
+The differential equation \eref{associated-legendre-eq} is generally true, but we can simplify our life a bit to begin by considering azimuthally symmetric solutions.
+That is, $m = 0$, giving
+\begin{eqnarray}
+    \label{eq:legendre-m0}
+    \dv{x} (1 - x^2) \dv{P(x)}{x} + \lambda P_{l}(x) = 0
+.\end{eqnarray}
+It will actually be seen later that we can obtain the solution for nonzero $m$ from this special case.
+
+It is not clear the above equation how to express $P_{l}$ in terms of elementary functions, so we will solve the equation using Frobenius' method, which means that we write $P_{l}$ as a power series
+\begin{align}
+    P(x) = \sum_{n=0}^{\infty} a_{n} x^{n + \gamma}
+\end{align}
+and solve for the coefficients $a_{n}$ and $\gamma$ such that $P$ satisfies Legendre's equation.
+The introduction of $\gamma$ allows the leading power of the expansion to potentially vary as well as make the powers non-integer.
+Putting this into \eref{legendre-m0}, we have
+\begin{gather}
+    \dv{x}(1 - x^2) \sum_{n=0}^{\infty} (n+\gamma) a_{n} x^{n+\gamma-1} + \sum_{n=0}^{\infty} \lambda a_{n} x^{n+\gamma} = 0 \nonumber \\
+    \dv{x} \sum_{n=0}^{\infty} (n+\gamma) a_{n} x^{n+\gamma-1} - \dv{x} \sum_{n=0}^{\infty} (n+\gamma) a_{n} x^{n+\gamma+1} + \sum_{n=0}^{\infty} \lambda a_{n} x^{n+\gamma} \nonumber \\
+    \sum_{n=0}^{\infty} (n+\gamma) (n+\gamma-1) a_{n} x^{n+\gamma-2} - \sum_{n=0}^{\infty} (n+\gamma)(n+\gamma+1) a_{n} x^{n+\gamma} + \sum_{n=0}^{\infty} \lambda a_{n} x^{n + \gamma} \nonumber \\
+    \sum_{n=-2}^{\infty} (n+\gamma+2)(n+\gamma+1) a_{n+2} x^{n+\gamma} + \sum_{n=0}^{\infty} [ \lambda - (n+\gamma)(n+\gamma+1) ] a_{n} x^{n+\gamma}
+.\end{gather}
+Shifting the indices of the first sum so that $n \rightarrow n+2$, we arrive at 
+\begin{align}
+    \gamma &(\gamma - 1) a_{0} x^{\gamma - 2} + (\gamma + 1)(\gamma + 2) a_{1} x^{\gamma - 1} \nonumber \\
+                                             &+ \sum_{n=0}^{\infty} \Big\{ (n+\gamma+1)(n+\gamma+2)a_{n+2} + [ \lambda - (n+\gamma)(n+\gamma+1) ] a_{n} \Big\} x^{n+\gamma} = 0
+.\end{align}
+In order to have this expression be zero for every $x$, we must have the coefficients of each power of $x$ be identically zero.
+For the first term, this means that
+\begin{eqnarray}
+    \gamma(\gamma - 1) = 0 \Rightarrow \gamma = 0~{\rm or}~1
+.\end{eqnarray}
+These two solutions for $\gamma$ are what give us our two solutions of the differential equation.
+For either value of $\gamma$, we must have
+\begin{eqnarray}
+    a_1 = 0
+.\end{eqnarray}
+since $(\gamma + 1)(\gamma+2) > 0$.
+Focusing now on the coefficient inside the sum, we obtain the recurrence relation
+\begin{align}
+    \label{eq:legendre-rec-rel}
+    a_{n+2} = \frac{(n+\gamma)(n+\gamma+1) - \lambda}{(n+\gamma+1)(n+\gamma+2)} a_{n}
+.\end{align}
+We can see immediately from this that the odd terms $a_{2n+1} = 0$ since these are recursively related to $a_1$.
+
+This is where we determine the value of $\lambda$.
+The basis of this is that a power series solution must converge.
+
+
+
+
+
+
+
+
+
