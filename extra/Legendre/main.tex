@@ -54,6 +54,12 @@ and therefore,
     \Bigg[ \dv{x} (1 - x^2) \dv{x} - \frac{m^2}{1-x^2} \Bigg] P(x) = -\lambda P(x)
 .\end{eqnarray}
 This equation is exactly of the SL form with $p(x) = 1 - x^2,~ q(x) = \\ -m^2/(1-x^2),~{\rm and}~r(x) = 1$.
+It is clear since $p(\pm 1) = 0$ the boundary conditions are satisfied, and therefore, its solutions will be orthogonal in the sense that
+\begin{eqnarray}
+    (P_{\lambda}(x),P_{\mu}(x)) = \int_{-1}^{1} P_{\lambda}^{*}(x) P_{\mu}(x) \dd{x} = 0
+\end{eqnarray}
+if $\lambda \ne \mu$.
+
 
 \section{Series solution with $m=0$}
 
@@ -80,7 +86,7 @@ Putting this into \eref{legendre-m0}, we have
 .\end{gather}
 Shifting the indices of the first sum so that $n \rightarrow n+2$, we arrive at 
 \begin{align}
-    \gamma &(\gamma - 1) a_{0} x^{\gamma - 2} + (\gamma + 1)(\gamma + 2) a_{1} x^{\gamma - 1} \nonumber \\
+    \gamma &(\gamma - 1) a_{0} x^{\gamma - 2} + \gamma(\gamma + 1) a_{1} x^{\gamma - 1} \nonumber \\
                                              &+ \sum_{n=0}^{\infty} \Big\{ (n+\gamma+1)(n+\gamma+2)a_{n+2} + [ \lambda - (n+\gamma)(n+\gamma+1) ] a_{n} \Big\} x^{n+\gamma} = 0
 .\end{align}
 In order to have this expression be zero for every $x$, we must have the coefficients of each power of $x$ be identically zero.
@@ -102,8 +108,76 @@ Focusing now on the coefficient inside the sum, we obtain the recurrence relatio
 We can see immediately from this that the odd terms $a_{2n+1} = 0$ since these are recursively related to $a_1$.
 
 This is where we determine the value of $\lambda$.
-The basis of this is that a power series solution must converge.
+The basis of the argument is that the power series solution must converge\footnote{Otherwise our power series is not really a function.}.
+As a first pass, let us perform the ratio test:
+\begin{eqnarray}
+    \lim_{n \rightarrow \infty} \Big| \frac{a_{n+2}}{a_{n}} \Big| = \lim_{n \rightarrow \infty} \frac{(n+\gamma)(n+\gamma+1) - \lambda}{(n+\gamma+1)(n+\gamma+2)} = 1
+.\end{eqnarray}
+The test is indeterminate, so we cannot conclude anything about the series about its convergence (or lack thereof).
+Another, more obscure test for us physicists, is the Gauss test.
+The theorem is this: \textit{Consider a series $\sum_{k} a_{k}$ such that $a_{k} > 0$. Given a bounded function $B(k)$ as $k \rightarrow \infty$, if $|a_{k}/a_{k+1}| = 1 + A/n + B(n)/n^{r}$ with $r > 1$, then the series is divergent for $A \leq 1$ and convergent for $A > 1$.}
+We can expand the ratio of successive coefficients in the limit $n \rightarrow \infty$\footnote{Tell wolfram the following: \textbf{expand (2k+gamma+1)(2k+gamma+2)/((2k+gamma)(2k+gamma+1) - lambda) as k -> infty}}
+\begin{eqnarray}
+    \frac{a_{2k}}{a_{2k+2}} = \frac{(2k+\gamma+1)(2k+\gamma+2)}{(2k+\gamma)(2k+\gamma+1) - \lambda} = 1 + \frac{1}{k} + \frac{\lambda - 2\gamma}{4n^2} + \ldots
+.\end{eqnarray}
+We see from here that $A = 1$, implying that our series formally diverges for every $\lambda$ if for every $n \geq 0$ there exists $N > n$ such that $a_{N} \ne 0$\footnote{This is just a formal way of saying that the series includes an infinite number of nonzero coefficients.}.
+We, therefore, have to truncate our series such that there exists some $n=l$ with $a_{l} \ne 0$ but for each $n > l$ the coefficient $a_{n} = 0$.
+In terms of our recurrence relation, this says
+\begin{eqnarray}
+    a_{l+2} = \frac{(l+\gamma)(l+\gamma+1) - \lambda}{(l+\gamma+1)(l+\gamma+2)} a_{l} = 0 \Rightarrow \lambda = (l+\gamma)(l+\gamma+1)
+.\end{eqnarray}
+For $\gamma=0$, we clearly have $\lambda = l(l+1)$ for even $l > 0$ as expected, which makes
+\begin{eqnarray}
+    P(x;\gamma=0) = \sum_{n=0}^{l} a_{n} x^{n} = P_{l}(x)
+,\end{eqnarray}
+which is a polynomial of degree $l$.
+For $\gamma = 1$, we have $\lambda = (l+1)(l+2)$ for even $l > 0$, but we can always redefine $l$ such that $l \rightarrow l - 1$, making $l$ odd and $\lambda = l(l+1)$.
+Thus, our solutions for $\gamma = 1$
+\begin{eqnarray}
+    P(x;\gamma=1) = \sum_{n=0}^{l-1} a_{n} x^{n+1} = P_{l}(x)
+.\end{eqnarray}
+We therefore have a full set of solutions for integers $l \geq 0$.
+As a final note, we fix the undetermined constant $a_0$ by enforcing $P_{l}(1) = 1$.
 
+
+\section{Rodrigues' Formula}
+
+In the last section, we found the series solutions for the Legendre polynomials $P_{l}(x)$.
+It turns out that if a set of polynomials $P_{n}(x)$ satisfy the simplified SL equation
+\begin{eqnarray}
+    \dv{x} \Big[ p(x) \dv{P_{n}}{x} \Big] + \lambda_{n} r(x) P_{n}(x) = 0
+.\end{eqnarray}
+we can construct a generic Rodrigues' formula for the polynomials.
+Since the polynomials are solutions to an SL problem, they are orthogonal with
+\begin{eqnarray}
+    \int_{a}^{b} r(x) P_{n}(x) P_{m}(x) \dd{x} = A_{n} \delta_{nm}
+,\end{eqnarray}
+for some $A_{n}$.
+If we impose that $p(a) = p(b) = 0$ and $p(x) = r(x) g(x)$, then we claim that the polynomials
+\begin{eqnarray}
+    P_{n}(x) = \frac{1}{A_{n} r(x)} \dv[n]{x} [r(x) g^{n}(x)]
+\end{eqnarray}
+if the following conditions are satisfied
+\begin{eqnarray}
+    \lim_{x \rightarrow a,b} \dv[r-1]{x} w(x) g^{n}(x) = 0
+\end{eqnarray}
+for $r \leq n$.
+
+We have also seen that the Legendre polynomials are given by Rodrigues' formula
+\begin{eqnarray}
+    P_{l}(x) = \frac{1}{l! 2^{l}} \dv[l]{x} (x^2 - 1)^{l}
+.\end{eqnarray}
+
+
+\section{Generating Function}
+
+We have also found in Electricity \& Magnetism that the function
+\begin{eqnarray}
+    g(x,t) = \frac{1}{\sqrt{1 - 2xt + t^2}} = \sum_{n=0}^{\infty} P_{n}(x) t^{n}
+.\end{eqnarray}
+That is, the coefficients of the power series expansion of $g$ in powers of $t$ are the Legendre polynomials we found in the previous section.
+We show that this is the case by proving that the coefficients of $g(x,t)$ satisfies Legendre's equation.
+First, we take 
 
 
 
