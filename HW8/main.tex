@@ -19,7 +19,7 @@ The Laplace transform of a function $f(t)$ is generally given as
 \begin{eqnarray}
     \mathcal{L}\{ f(t) \} = \int_{0}^{\infty} f(t) e^{-st} \dd{t}
 ,\end{eqnarray}
-where the values of $s$ are such that the integral is convergent.
+where the values of $s$ are such that the integral is convergent and $n > -1$.
 Thus,
 \begin{eqnarray}
 \begin{aligned}
@@ -27,7 +27,7 @@ Thus,
                           &= (-1)^{n} \dv[n]{(a+s)} \frac{1}{a+s} = \frac{n!}{(a+s)^{n+1}}
 .\end{aligned}
 \end{eqnarray}
-This matches the result we have in our library.
+This matches the results we have in our library.
 That is, $\mathcal{L}\{ t^{n} \} = n!/s^{n+1}$ and for a general function $f(t)$, $\mathcal{L}\{ f(t)e^{-at} \} = F(s + a)$.
 Collecting these results, we end up with the same solution, which is that
 \begin{eqnarray}
@@ -105,13 +105,7 @@ Using this fact, we can write
 .\end{align}
 Through the dot product, we have
 \begin{eqnarray}
-    \vu*{n} \cdot \vu*{n}' = \cos{\varphi} = \cos{\alpha}\cos{\alpha'} + \sqrt{(1 - \cos^2{\alpha} - \cos^2{\theta})(1 - \cos^2{\alpha'} - \cos^2{\theta'})} + \cos{\theta}\cos{\theta'}
-.\end{eqnarray}
-Let us simplify the term under the radical:
-\begin{eqnarray}
-\begin{aligned}
-    (1 &- \cos^2{\alpha} - \cos^2{\theta})(1 - \cos^2{\alpha'} - \cos^2{\theta'}) =
-\end{aligned}
+    \eqbox{ \vu*{n} \cdot \vu*{n}' = \cos{\varphi} = \cos{\alpha}\cos{\alpha'} + \sqrt{(1 - \cos^2{\alpha} - \cos^2{\theta})(1 - \cos^2{\alpha'} - \cos^2{\theta'})} + \cos{\theta}\cos{\theta'} }
 .\end{eqnarray}
 
 }
