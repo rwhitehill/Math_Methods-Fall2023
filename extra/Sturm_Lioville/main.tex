@@ -78,8 +78,9 @@ Consider the inner product
     &= \Bigg[ p \Bigg( \dv{f^{*}}{x} g - f^{*} \dv{g}{x} \Bigg) \Bigg]_{a}^{b} + \int_{a}^{b} \Bigg\{ \Bigg[ -\dv{x} p \dv{x} + q \Bigg] f \Bigg\}^{*} g \dd{x} \nonumber \\
     &= \int_{a}^{b} ( \hat{L} f )^{*} g \dd{x} = ( \hat{L} f,g )
 .\end{align}
-Note that the boundary term from the integrations by parts is zero for certain homogeneous BCs we discussed above.
-This is straightforward to see for homogeneous Dirichlet BCs ($f(a) = f(b) = g(a) = g(b) = 0$) and Neumann BCs ($f'(a) = f'(b) = g'(a) = g'(b) = 0$).
+We get rid of the boundary terms in order to have this proof work.
+It is a defining property of an SL system that the boundary term (which serves as the BC for the problem) vanishes.
+This is straightforward to see for homogeneous Dirichlet BCs ($f(a) = f(b) = g(a) = g(b) = 0$) and Neumann BCs ($f'(a) = f'(b) = g'(a) = g'(b) = 0$) and can be proven for each of the types of SL problems and BCs enumerated above.
 
 \textbf{Theorem 2}: \textit{The eigenvalues of $\hat{L}$ are real}.
 Suppose $\phi_{\lambda} \not\equiv 0$ is the function with corresponding eigenvalue $\lambda$.
@@ -152,6 +153,117 @@ We really just posited that the eigenfunctions of $\hat{L}$ forms a complete bas
 The proof is quite involved and requires a more formal and advanced treatment than is within the scope of this discussion.
 We will assume that the mathematicians who have proven this result are quite competent\footnote{This argument is a bit flippant and depends on the assumption that the probability of a mistake being missed in the proof going to zero as the number of people who validated it goes to infinity (law of large numbers).} and will simply take it as fact.
 It is essential that this theorem is true, though, since many of our problems hinge on the completeness of the eigenfunctions and our ability to expand a solution of an arbitrary SL problem in this basis.
+
+
+\section{Rodrigues' Formula}
+
+In this section, we are looking ahead a bit.
+In our studies of the Legendre polynomials, we were told that the $l^{\rm th}$ polynomial can be written as
+\begin{eqnarray}
+    P_{l}(x) = \frac{1}{2^{l} l!} \dv[l]{x} (x^2 - 1)^{l}
+.\end{eqnarray}
+At the time, this formula seemed as if it were handed down from the heavens, requiring some divine inspiration that only applies to the case of Legendre polynomials.
+In some sense, this is true, but actually, for many physical systems, the eigenfunctions are some kind of polynomials, which in turn have their own ``Rodrigues' formula''.
+
+Let us consider a simplified SL problem of the form
+\begin{eqnarray}
+    \dv{x} \Big[ p(x) \dv{\phi}{x} \Big] = -\lambda r(x) \phi(x)
+.\end{eqnarray}
+All we have done here is set $q(x) = 0$.
+Let us expand out the derivative in the first term as
+\begin{eqnarray}
+    p(x) \phi'' + p'(x) \phi' + \lambda r(x) \phi = 0
+.\end{eqnarray}
+Let us now present $p(x) = r(x) g(x)$.
+Our differential equation then becomes
+\begin{eqnarray}
+    r(x) g(x) \phi'' + [r'(x) g(x) + r(x) g'(x)] \phi' + \lambda r(x) \phi = 0
+.\end{eqnarray}
+Dividing by $r(x)$,
+\begin{eqnarray}
+    g(x) \phi'' + \Big[ \frac{r'(x)}{r(x)} g(x) + g'(x) \Big] \phi' + \lambda \phi = 0
+.\end{eqnarray}
+We have arrived at an alternate (but equivalent) form for the SL equation.
+If we have a differential equation of the form
+\begin{eqnarray}
+    \label{eq:general-2nd-ode}
+    g(x) \phi'' + h(x) \phi' + \lambda \phi = 0
+,\end{eqnarray}
+we can multiply by a weight function $r(x)$ such that
+\begin{eqnarray}
+    h(x) = \frac{r'(x)}{r(x)} g(x) + g'(x)
+,\end{eqnarray}
+Solving for the form of $r$ needed to put the \eref{general-2nd-ode} into SL form, we have
+\begin{gather}
+    \frac{r'(x)}{r(x)} = \frac{1}{r} \dv{r}{x} = \frac{h}{g} - \frac{1}{g}\dv{g}{x} \nonumber \\
+    \int \frac{1}{r}\dv{r}{x} \dd{x} = \ln{r(x)} = \int \frac{h(x)}{g(x)} \dd{x} - \ln{g(x)} \nonumber \\
+    r(x) = \frac{1}{g(x)} \exp\Bigg( \int \frac{h(x)}{g(x)} \dd{x} \Bigg)
+.\end{gather}
+
+At this point, we can now formulate the Rodrigues formula given an SL problem posed as \eref{general-2nd-ode}.
+Let us restrict our attention to situations with $g(x) = g_2 x^2 + g_1 x + g_0$ and $h(x) = h_1 x + h_0$ and polynomial solutions to the differential equation of the form
+\begin{eqnarray}
+    \phi_{n}(x) = \sum_{k=0}^{n} \alpha_{k} x^{k}
+.\end{eqnarray}
+We will see that these specifications actually encompass many of the different systems we encounter and hence are general enough for our purposes here.
+If these restrictions are satisfied, then we claim that we can write
+\begin{eqnarray}
+    \label{eq:rodrigues-form-gen}
+    \phi_{n}(x) = \frac{1}{r(x)} \dv[n]{x} [r(x)g^{n}(x)]
+,\end{eqnarray}
+which is in fact Rodrigues' formula in full generality.
+
+We now want to embark on a proof of this fact, which ultimately means that we must show that \eref{rodrigues-form-gen} satisfies \eref{general-2nd-ode}.
+The first step of the proof is to determine the value $\lambda_{n}$:
+\begin{align}
+    (g_2x^2 + g_1x + g_0) \sum_{k=2}^{n} k(k-1) \alpha_{k} x^{k-2} + (h_1 x + h_0) \sum_{k=1}^{n} k \alpha_{k} x^{k-1} + \lambda_{n} \sum_{k=0}^{n} \alpha_{k} x^{k} = 0
+.\end{align}
+Looking at the $n^{\rm th}$ order term, we have
+\begin{eqnarray}
+    g_2 n(n-1) \alpha_{n} + h_1 n \alpha_{n} + \lambda_{n} \alpha_{n} = 0 ~{\rm or}~ \lambda_{n} = -g_2 n(n-1) - h_1 n
+.\end{eqnarray}
+Next, observe that
+\begin{eqnarray}
+    g[r g^{n}]' = g [ r' g^{n} + n r g^{n-1} g' ] = r g^{n} \Big[ r' + n r \frac{g'}{g} \Big] = r g^{n} [ (n-1)g' + h ]
+.\end{eqnarray}
+If we differentiate this equation $n + 1$ times and divide by $r$ we have
+\begin{align}
+    &\frac{1}{r} \dv[n+1]{x} g [ rg^{n} ]' = \frac{1}{r} \dv[n+1]{x} rg^{n} [ (n-1)g' + h ] \nonumber \\
+    \frac{1}{r} \sum_{k=0}^{n+1} \binom{n+1}{k} &\dv[k]{g}{x} \dv[n+2-k]{[rg^{n}]}{x} = \frac{1}{r} \sum_{k=0}^{n+1} \binom{n+1}{k} \dv[n+1-k]{[rg^{n}]}{x} \dv[k]{x} [ (n-1)g' + h ] \nonumber \\
+    \frac{g}{r} \dv[n+2]{[rg^{n}]}{x} &+ \frac{(n+1)g'}{r} \dv[n+1]{[rg^{n}]}{x} + \frac{n(n+1) g''}{2r} \dv[n]{[rg^{n}]}{x} = \nonumber \\
+    &\frac{(n-1)g' + h}{r} \dv[n+1]{[rg^{n}]}{x} + \frac{(n+1)[ (n-1)g'' + h' ]}{r} \dv[n]{[rg^{n}]}{x} \nonumber
+.\end{align}
+Note that $g^{(3)} = 0$ and $h^{(2)} = 0$ because they are quadratic and linear, respectively, which leaves us with only the few terms above upon the application of Leibniz's rule for differentiation of products:
+\begin{align}
+    \dv[n]{x} f(x) g(x) = \sum_{k=0}^{n} \binom{n}{k} f^{(k)}(x) g^{(n-k)}(x) = \sum_{k=0}^{n} \frac{n!}{k!(n-k)!} f^{(k)}(x) g^{(n-k)}(x)
+.\end{align}
+We now combine terms with common derivatives 
+\begin{align}
+    \frac{g}{r} \dv[n+2]{[rg^{n}]}{x} &= \frac{[(n-1)g' + h] - (n+1)g'}{r} \dv[n+1]{[rg^{n}]}{x} \nonumber \\
+    &+ \frac{2(n+1)[(n-1)g'' + h'] - n(n+1)g''}{2r} \dv[n]{[rg^{n}]}{x} \nonumber \\
+    &= \frac{-2g' + h}{r} \dv[n+1]{[rg^{n}]}{x} + \frac{(n-2)(n+1)g'' + 2(n+1)h'}{2r} \dv[n]{[rg^{n}]}{x}
+.\end{align}
+Let us move everything over to the left and rewrite some factors in terms of $\phi_{n}$:
+\begin{align}
+    \frac{g}{r} \dv[2]{x} [r\phi_{n}] + \frac{2g' - h}{r} \dv{x} [r\phi_{n}] - \Big[ \frac{n^2-n-2}{2} g'' + (n+1) h' \Big] \phi_{n} &= 0 \nonumber \\
+    \frac{g}{r} [ r\phi_{n}'' + 2r'\phi_{n}' + r'' \phi_{n} ] + \frac{2g' - h}{r} [ r'\phi_{n} + r\phi_{n}' ] - \Big[ \frac{n^2 - n - 2}{2} g'' + (n+1) h' \Big] \phi_{n} &= 0 \nonumber \\
+    g \phi_{n}'' + \Big[ 2 g \frac{r'}{r} + (2g'-h) \Big] \phi_{n}' + \Big[ g \frac{r''}{r} + (2g' - h) \frac{r'}{r} - \Big( \frac{n^2 - n - 2}{2} g'' + (n+1)h' \Big) \Big] \phi_{n} &= 0
+.\end{align}
+Recall that $r'/r = (h - g')/g$ and similarly
+\begin{eqnarray}
+    g\frac{r''}{r} = -\frac{r'}{r} (2g' - h) - (g'' - h')
+.\end{eqnarray}
+Plugging these into the equation above:
+\begin{gather}
+    g \phi_{n}'' + h \phi_{n}' + \Big[ \frac{r'}{r}(h - 2g') - (g'' - h') + \frac{r'}{r}(2g' - h) - \Big( \frac{n^2 - n - 2}{2} g'' + (n+1)h' \Big) \Big] \phi_{n} = 0 \nonumber \\
+    g \phi_{n}'' + h\phi_{n}' - \Big( \frac{n^2 - n}{2} g'' + n h' \Big) \phi_{n} = 0
+.\end{gather}
+Almost there!
+Let us just recall that $\lambda_{n} = -[ g'' n(n-1)/2 + n h']$, meaning
+\begin{eqnarray}
+    g \phi_{n}'' + h \phi_{n}' + \lambda_{n} \phi_{n} = 0
+,\end{eqnarray}
+which is exactly the simplified SL form we assumed $\phi_{n}$ satisfied in the first place, proving Rodrigues' formula\footnote{Note that there are usually pre-factors in front of the derivative when considering specific cases. Scaling by a constant (i.e. $\phi_{n} \rightarrow c \phi_{n}$) does not change anything except for normalization.}.
 
 
 
