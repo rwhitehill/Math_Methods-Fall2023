@@ -139,35 +139,30 @@ Thus, our solutions for $\gamma = 1$
 We therefore have a full set of solutions for integers $l \geq 0$.
 As a final note, we fix the undetermined constant $a_0$ by enforcing $P_{l}(1) = 1$.
 
-
 \section{Rodrigues' Formula}
 
-In the last section, we found the series solutions for the Legendre polynomials $P_{l}(x)$.
-It turns out that if a set of polynomials $P_{n}(x)$ satisfy the simplified SL equation
+In the chapter on Sturm-Liouville problems, we gave a general form for Rodrigues' formula.
+For the Legendre polynomials, we have $p(x) = 1-x^2$, $r(x) = 1$, and $g(x) = p(x)/r(x) = 1-x^2$.
+Thus, Rodrigues' formula for the Legendre polynomials is simply
 \begin{eqnarray}
-    \dv{x} \Big[ p(x) \dv{P_{n}}{x} \Big] + \lambda_{n} r(x) P_{n}(x) = 0
+    P_{l}(x) = \mathcal{N}_{l} \dv[l]{x} (1 - x^2)^{l}
 .\end{eqnarray}
-we can construct a generic Rodrigues' formula for the polynomials.
-Since the polynomials are solutions to an SL problem, they are orthogonal with
+All that remains now is to determine $\mathcal{N}_{l}$, which is done such that $P_{l}(1) = 1$.
+Before we do so, let us take $\mathcal{N}_{l} \rightarrow (-1)^{l} \mathcal{N}_{l}$ such that
 \begin{eqnarray}
-    \int_{a}^{b} r(x) P_{n}(x) P_{m}(x) \dd{x} = A_{n} \delta_{nm}
-,\end{eqnarray}
-for some $A_{n}$.
-If we impose that $p(a) = p(b) = 0$ and $p(x) = r(x) g(x)$, then we claim that the polynomials
-\begin{eqnarray}
-    P_{n}(x) = \frac{1}{A_{n} r(x)} \dv[n]{x} [r(x) g^{n}(x)]
-\end{eqnarray}
-if the following conditions are satisfied
-\begin{eqnarray}
-    \lim_{x \rightarrow a,b} \dv[r-1]{x} w(x) g^{n}(x) = 0
-\end{eqnarray}
-for $r \leq n$.
-
-We have also seen that the Legendre polynomials are given by Rodrigues' formula
-\begin{eqnarray}
-    P_{l}(x) = \frac{1}{l! 2^{l}} \dv[l]{x} (x^2 - 1)^{l}
+    P_{l}(x) = \mathcal{N}_{l} \dv[l]{x} (x^2 - 1)^{l}
 .\end{eqnarray}
+This is convenient so that we can avoid doing the accounting for the extra factors of $-1$ each time we take a derivative, and we have the freedom to do this since any compensating factors will naturally arise in our later work.
 
+Observe that by the binomial theorem ({\color{red} is it nicer to write $x^{2k}$ or $x^{2(l-k)}$})
+\begin{eqnarray}
+    (x^2 - 1)^{l} = \sum_{k=0}^{l} \binom{l}{k} x^{2k}
+.\end{eqnarray}
+Taking the $l^{\rm th}$ derivative and evaluating at $x = 1$, we have
+\begin{align}
+    \dv[l]{x} (x^2 - 1)^{l}\Big|_{x=1} &= \sum_{k= \lfloor l/2 \rfloor}^{l} \frac{l!}{k!(l-k)!} (2k)(2k-1)\ldots(2k-l+1) \nonumber \\
+                                       &= \sum_{k=\lfloor l/2 \rfloor}^{l} \frac{l! (2k)!}{k!(l-k)!(2k-l)!} = \sum_{k=\lfloor l/2 \rfloor}^{l} \frac{l!}{(l-k)!(2k-l)!} 2^{k} (2k-1)!! \nonumber \\
+.\end{align}
 
 \section{Generating Function}
 
