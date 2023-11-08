@@ -145,38 +145,248 @@ In the chapter on Sturm-Liouville problems, we gave a general form for Rodrigues
 For the Legendre polynomials, we have $p(x) = 1-x^2$, $r(x) = 1$, and $g(x) = p(x)/r(x) = 1-x^2$.
 Thus, Rodrigues' formula for the Legendre polynomials is simply
 \begin{eqnarray}
+    \label{eq:rodrigues-legendre}
     P_{l}(x) = \mathcal{N}_{l} \dv[l]{x} (1 - x^2)^{l}
 .\end{eqnarray}
 All that remains now is to determine $\mathcal{N}_{l}$, which is done such that $P_{l}(1) = 1$.
-Before we do so, let us take $\mathcal{N}_{l} \rightarrow (-1)^{l} \mathcal{N}_{l}$ such that
-\begin{eqnarray}
-    P_{l}(x) = \mathcal{N}_{l} \dv[l]{x} (x^2 - 1)^{l}
-.\end{eqnarray}
-This is convenient so that we can avoid doing the accounting for the extra factors of $-1$ each time we take a derivative, and we have the freedom to do this since any compensating factors will naturally arise in our later work.
 
-Observe that by the binomial theorem ({\color{red} is it nicer to write $x^{2k}$ or $x^{2(l-k)}$})
+Observe that by the binomial theorem 
 \begin{eqnarray}
-    (x^2 - 1)^{l} = \sum_{k=0}^{l} \binom{l}{k} x^{2k}
+    (1 - x^2)^{l} = \sum_{k=0}^{l} \binom{l}{k} (-x^2)^{l-k} = (-1)^{l} \sum_{k=0}^{l} \binom{l}{k} (-1)^{k} x^{2(l-k)}
 .\end{eqnarray}
 Taking the $l^{\rm th}$ derivative and evaluating at $x = 1$, we have
 \begin{align}
-    \dv[l]{x} (x^2 - 1)^{l}\Big|_{x=1} &= \sum_{k= \lfloor l/2 \rfloor}^{l} \frac{l!}{k!(l-k)!} (2k)(2k-1)\ldots(2k-l+1) \nonumber \\
-                                       &= \sum_{k=\lfloor l/2 \rfloor}^{l} \frac{l! (2k)!}{k!(l-k)!(2k-l)!} = \sum_{k=\lfloor l/2 \rfloor}^{l} \frac{l!}{(l-k)!(2k-l)!} 2^{k} (2k-1)!! \nonumber \\
+    \dv[l]{x} (1 - x^2)^{l}\Big|_{x=1} &= (-1)^{l} \sum_{k = 0}^{\lfloor l/2 \rfloor} \binom{l}{k} (-1)^{k} (2l - 2k)(2l-2k-1)\ldots(2l-2k-l+1) \nonumber \\
+    &= (-1)^{l} \sum_{k=0}^{\lfloor l/2 \rfloor} \frac{l!}{k!(l-k)!} \frac{[2(l-k)]!}{(l-2k)!} (-1)^{k} \nonumber \\
+    &= (-1)^{l} l! \sum_{k=0}^{\lfloor l/2 \rfloor} \frac{(-1)^{k}}{k!(l-2k)!} \frac{2^{2(l-k)}}{\sqrt{\pi}} \Gamma([l-k] + 1/2) \nonumber \\
+    &= (-1)^{l} 2^{l} l! \sum_{k=0}^{\lfloor l/2 \rfloor} \frac{1}{\sqrt{\pi}} \frac{(-1)^{k} 2^{l-2k}}{k!(l-2k)!} \Gamma(l-k+1/2) \nonumber \\
+    &= (-1)^{l} 2^{l} l! = \frac{1}{\mathcal{N}_{l}}
 .\end{align}
+At the moment, I do not have a derivation of the fact that the sum in the second-to-last-line gives 1.
+I plugged it into Wolfram, and it magically produced the result.
+We will take it at the moment unless some inspiration strikes that allows me to prove this without a computer algebra system.
+Anyway, putting this into \eref{rodrigues-legendre}, we find the result
+\begin{eqnarray}
+    P_{l}(x) = \frac{1}{2^{l} l!} \dv[l]{x} (x^2 - 1)^{l}
+.\end{eqnarray}
 
 \section{Generating Function}
 
-We have also found in Electricity \& Magnetism that the function
+In a previous section, we have seen that we can write a generating function for the Legendre polynomials as
+\begin{eqnarray}
+    g(x,t) = \sum_{l=0}^{\infty} t^{n} \frac{l!}{2 \pi i} \frac{1}{2^{l} l!} \oint_{C} \frac{(z^2 - 1)^{l}}{(z - x)^{l+1}} \dd{z}
+.\end{eqnarray}
+We now pull the sum into the integral and use the geometric sum formula (forcing the contour small enough such that the sum is convergent\footnote{The condition is formally that $| t(z^2 - 1)/[2(z-x)] | < 1$}) such that
+\begin{align}
+    g(x,t) &= \frac{1}{2 \pi i} \oint_{C} \frac{1}{z-x} \sum_{l=0}^{\infty} \Bigg( \frac{t(z^2 - 1)}{2(z-x)} \Bigg)^{l} \nonumber \\
+    &= \frac{1}{2 \pi i} \oint_{C} \frac{2}{2(z-x) - t(z^2 - 1)} \nonumber \\
+    &= \frac{1}{2 \pi i} \Bigg[- \frac{2}{t} \oint_{C} \Big( z^2 - \frac{2}{t} z - \frac{2x - t}{t} \Big)^{-1} \Bigg]
+.\end{align}
+Notice that we can write
+\begin{eqnarray}
+    z^2 - \frac{2}{t} z - \frac{2x - t}{t} = (z - z_{+}) (z - z_{-})
+,\end{eqnarray}
+where
+\begin{eqnarray}
+    z_{\pm} = \frac{1}{t} \pm \sqrt{ \frac{1}{t^2} - \frac{2x - t}{t} } = \frac{1}{t} \Big[ 1 \pm \sqrt{1 - 2xt + t^2} \Big]
+.\end{eqnarray}
+We now just have to apply the residue theorem to evaluate the integral.
+By forcing the contour to be small enough so that the sum converged, we made it so that only the pole $z = z_{-}$ is enclosed by the contour\footnote{This is a subtle point: for the convergence condition above if $x$ and $|t|$ are small, then $z_{+} \approx 2/t \rightarrow \infty$ and $z_{-} \approx 0$. It is an important point though because otherwise the integration gives zero if neither pole or both poles are enclosed.}.
+Using this fact, we have
+\begin{eqnarray}
+    \eref{eq:legendre-gen}
+    g(x,t) = -\frac{2}{t} \frac{1}{z_{-} - z_{+}} = \frac{2}{t} \frac{t}{2\sqrt{1 - 2xt + t^2}} = \frac{1}{\sqrt{1 - 2xt + t^2}}
+.\end{eqnarray}
+
+\eref{legendre-gen} is exactly the generating function we have been given in class.
+By definition, we have
 \begin{eqnarray}
     g(x,t) = \frac{1}{\sqrt{1 - 2xt + t^2}} = \sum_{n=0}^{\infty} P_{n}(x) t^{n}
+,\end{eqnarray}
+and now, we can derive a slew of recurrence relations between the Legendre polynomials and their derivatives that will come in handy.
+First, it is clear that
+\begin{eqnarray}
+    g(1,t) = \frac{1}{\sqrt{1-2t+t^2}} = \frac{1}{1 - t} = \sum_{n=0}^{\infty} t^{n}
+,\end{eqnarray}
+which gives that $P_{n}(1) = 0$ as needed.
+Additionally, we can determine $P_{n}(-1)$ in the same way:
+\begin{eqnarray}
+    g(-1,t) = \frac{1}{1 + t} = \sum_{n=0}^{\infty} (-1)^{n} t^{n}
 .\end{eqnarray}
-That is, the coefficients of the power series expansion of $g$ in powers of $t$ are the Legendre polynomials we found in the previous section.
-We show that this is the case by proving that the coefficients of $g(x,t)$ satisfies Legendre's equation.
-First, we take 
+We can also determine $P_{n}(0)$
+\begin{eqnarray}
+    g(0,t) = \frac{1}{\sqrt{1 + t^2}} = \sum_{n=0}^{\infty} (-1)^{n} \frac{(2n-1)!!}{(2n)!!} t^{2n}
+.\end{eqnarray}
+This says that $P_{2n+1}(0) = 0$ and $P_{2n}(0) = (-1)^{n} (2n-1)!!/(2n)!!$.
+
+Next, we derive the three-term recurrence formula.
+First, we take the derivative of $g$ with respect to $t$:
+\begin{eqnarray}
+    \pdv{g}{t} = \frac{x-t}{(1 - 2xt + t^2)^{3/2}} = \frac{x-t}{1-2xt+t^2} g(x,t) = \sum_{n=0}^{\infty} n P_{n}(x) t^{n-1}
+.\end{eqnarray}
+Thus,
+\begin{gather}
+    (x-t) \sum_{n=0}^{\infty} P_{n}(x) t^{n} = (1 - 2xt + t^2) \sum_{n=0}^{\infty} n P_{n}(x) t^{n-1} \nonumber \\
+    \sum_{n=0}^{\infty} nP_{n}(x) t^{n-1} - \sum_{n=0}^{\infty} (2n + 1) x P_{n}(x) t^{n} + \sum_{n=0}^{\infty} (n+1) P_{n}(x) t^{n+1} = 0 \nonumber \\
+    \sum_{n=0}^{\infty} (n+1) P_{n+1}(x) t^{n} - \sum_{n=0}^{\infty} (2n+1) x P_{n}(x) t^{n} + \sum_{n=1}^{\infty} n P_{n-1}(x) t^{n} \nonumber \\
+    [ P_1(x) - x P_0(x) ] + \sum_{n=1}^{\infty} [ (n+1)P_{n+1}(x) - (2n+1) x P_{n}(x) + n P_{n-1}(x) ] t^{n} = 0
+.\end{gather}
+We thus have a method to generate the Legendre polynomials iteratively.
+If we initiate the sequence with $P_0(x) = 1$, then $P_1(x) = xP_0(x) = x$ and the higher order polynomials are given by
+\begin{eqnarray}
+    \label{eq:gen-rec-relation}
+    P_{n+1}(x) = \frac{2n+1}{n+1} x P_{n}(x) - \frac{n}{n+1} P_{n-1}(x)
+.\end{eqnarray}
+
+If we instead take the derivative of $g$ with respect to $x$, we obtain
+\begin{eqnarray}
+    \pdv{g(x,t)}{x} = \frac{t}{(1 - 2xt + t^2)^{3/2}} = \frac{t}{1 - 2xt + t^2} g(x,t) = \sum_{n=0}^{\infty} P_{n}'(x) t^{n}
+.\end{eqnarray}
+Performing a series of manipulations
+\begin{gather}
+    \sum_{n=0}^{\infty} P_{n}'(x) t^{n} - \sum_{n=0}^{\infty} [ 2x P_{n}'(x) + P_{n}(x) ] t^{n + 1} + \sum_{n=0}^{\infty} P_{n}'(x) t^{n+2} = 0 \nonumber \\
+    P_0'(x) + [ P_1'(x) - ( 2xP_0'(x) + P_0(x) ) ] t + \sum_{n=0}^{\infty} [ P_{n+2}'(x) - 2x P_{n}' - P_{n}(x) - P_{n+1}(x) ] t^{n+2} = 0
+.\end{gather}
+Observing that $P_0'(x) = 0$ and $P_1'(x) = 1$, we have the following recurrence relation
+\begin{eqnarray}
+    \label{eq:deriv-rec-relation}
+    P_{n+1}'(x) + P_{n-1}'(x) = 2x P_{n}'(x) + P_{n}(x)
+.\end{eqnarray}
+We can rearrange \eref{gen-rec-relation}, and take its derivative such that we find
+\begin{eqnarray}
+    xP_{n}'(x) = \frac{n+1}{2n+1} P_{n+1}'(x) + \frac{n}{2n+1} P_{n-1}'(x) - P_{n}(x)
+.\end{eqnarray}
+Putting this into \eref{deriv-rec-relation}, we obtain
+\begin{gather}
+    P_{n+1}'(x) + P_{n-1}'(x) = \frac{2(n+1)}{2n+1} P_{n+1}'(x) + \frac{2n}{2n+1}P_{n-1}'(x) - P_{n}(x) \nonumber \\
+    P_{n}(x) = \frac{1}{2n+1} \Big[ P_{n+1}'(x) - P_{n-1}'(x) \Big]
+.\end{gather}
+This is another useful result.
+In particular, one thing we can derive with it is the following
+\begin{align}
+    \int_{-1}^{1} P_{n \ne 1}(x) \dd{x} &= \frac{1}{2n+1} [ P_{n+1}(x) - P_{n-1}(x) ]_{-1}^{1} \nonumber \\
+    &= \frac{1}{2n+1} [ P_{n+1}(-1) - P_{n-1}(-1) ] = \frac{(-1)^{n+1} - (-1)^{n-1}}{2n+1} = 0
+.\end{align}
+If $n = 1$, then the integral is just $2$.
+Similarly, if we adjust the lower bound to be zero
+\begin{align}
+    \int_{0}^{1} P_{n \ne 1}(x) \dd{x} &= \frac{P_{n+1}(0) - P_{n-1}(0)}{2n+1} = \begin{cases}
+        0 & {\rm if}~n=2k \\
+        P_{2(k-1)}(0) - P_{2(k-1)}(0) & {\rm if}~n=2k+1
+    \end{cases}
+.\end{align}
+If $n = 1$, the integral is just 1.
 
 
 
 
+\section{Normalization of Legendre polynomials}
+
+We already know from the chapter on SL theory that the Legendre polynomials are orthogonal in the sense that
+\begin{eqnarray}
+    (P_{n},P_{m}) = \int_{-1}^{1} P_{n}(x) P_{m}(x) \dd{x} = 0
+\end{eqnarray}
+if $n \ne m$.
+In the case where $n = m$, though, we would like to determine
+\begin{eqnarray}
+    || P_{n} ||^2 = (P_{n},P_{n}) = \int_{-1}^{1} P_{n}^2(x) \dd{x}
+.\end{eqnarray}
+We actually can do this by integrating the square of the generating function directly.
+That is
+\begin{align}
+    \int_{-1}^{1} g^2(x,t) \dd{x} = \int_{-1}^{1} \frac{\dd{x}}{1 - 2xt + t^2} &= \sum_{n,m=0}^{\infty} t^{n+m} \int_{-1}^{1} P_{n}(x) P_{m}(x) \dd{x} \nonumber \\
+    &= \sum_{n=0}^{\infty} t^{2n} \int_{-1}^{1} P_{n}^2(x) \dd{x}
+.\end{align}
+The integral on the left is simply solved by plugging it into Wolfram Alpha or pulling out an integral table
+\begin{align}
+    \int_{-1}^{1} \frac{\dd{x}}{1 - 2xt + t^2} = \frac{1}{t} \ln( \frac{1 + t}{1 - t} )
+.\end{align}
+We can now break out the Taylor expansion
+\begin{eqnarray}
+    \ln(1 \pm t) = \sum_{n=1}^{\infty} \frac{(-1)^{n}}{n} t^{n}
+,\end{eqnarray}
+to find
+\begin{align}
+    \frac{1}{t} \ln( \frac{1 + t}{1 - t} ) = \sum_{n=1}^{\infty} \frac{(-1)^{n+1} - 1}{n} t^{n-1} = \sum_{n=1}^{\infty} \frac{2}{2n-1} t^{2(n-1)} = \sum_{n=0}^{\infty} \frac{2}{2n+1} t^{2n}
+,\end{align}
+and equating this with the expansion of the generating function, we have
+\begin{eqnarray}
+    \sum_{n=0}^{\infty} \frac{2}{2n+1} t^{2n} = \sum_{n=0}^{\infty} t^{2n} (P_{n},P_{n})
+.\end{eqnarray}
+Thus, in full generality,
+\begin{eqnarray}
+    (P_{n},P_{m}) = \frac{2}{2n+1} \delta_{nm}
+.\end{eqnarray}
+
+
+\section{Associated Legendre polynomials}
+
+The previous sections were quite a long discussion of Legendre polynomials, which are only a solution of the associated Legendre equation with $m=0$.
+Here we will see how to solve the equation
+\begin{eqnarray}
+    \label{eq:associated-legendre-eq}
+    \dv{x} \Big[ (1-x^2) \dv{P(x)}{x} \Big] + \Big[ \lambda - \frac{m^2}{1-x^2} \Big] P(x) = 0
+\end{eqnarray}
+when $m$ is nonzero.
+The first insight is to write $P(x) = (1-x^2)^{r} \mathcal{P}(x)$ such that the factor $1-x^2$ in the denominator of the last term is eliminated.
+Putting this into \eref{associated-legendre-eq}, we have
+\begin{gather}
+    \dv{x} \Big[ (1 - x^2)^{r+1} \mathcal{P}' - 2 r x(1 - x^2)^{r} \mathcal{P} \Big] + \Big[ \lambda - \frac{m^2}{1-x^2} \Big] (1-x^2)^{r} \mathcal{P} = 0 \nonumber \\
+    (1-x^2)^{r+1}\mathcal{P}'' - 2x [ 2r + 1 ] (1-x^2)^{r} \mathcal{P}' + \Big[ \lambda - \frac{1}{1-x^2} ( m^2 + 2r[1 - (2r+1)x^2]) \Big] (1 - x^2)^{r} \mathcal{P} = 0
+.\end{gather}
+Dividing by $(1-x^2)^{r}$, we are left with
+\begin{eqnarray}
+    (1-x^2) \mathcal{P}'' - 2x(2r+1) \mathcal{P} + \Big[ \lambda - \frac{m^2 + 2r[ 1 - (2r + 1)x^2 ]}{1-x^2} \Big] \mathcal{P} = 0
+.\end{eqnarray}
+Observe that setting $r = m/2$ gets rid of this nuissance $1/(1-x^2)$ factor and leaves us with
+\begin{eqnarray}
+    (1-x^2) \mathcal{P}'' - 2x (m+1) \mathcal{P}' + [ \lambda - m(m+1) ] \mathcal{P} = 0
+.\end{eqnarray}
+We can proceed as in the case of Legendre polynomials and solve via a series solution.
+This certainly would work, but it is incredibly tedious and not terribly englightening.
+Instead, we can stand on the shoulders of our predecessors and perform the following steps.
+Let us take Legendre's equation ($m = 0$) and differentiate $m$ times (note that this is implicitly assuming that $m$ is positive):
+\begin{gather}
+    \dv[m]{x} \Big[ (1-x^2) P_{l}'' - 2x P_{l}' + l(l+1)P_{l} \Big] = 0 \nonumber \\
+    (1-x^2) \dv[m+2]{P_{l}}{x} - 2mx \dv[m+1]{P_{l}}{x} - m(m-1) \dv[m]{P_{l}}{x} - 2x \dv[m+1]{P_{l}}{x} - 2m \dv[m]{P_{l}}{x} + l(l+1) \dv[m]{P_{l}}{x}
+.\end{gather}
+If we set $\phi \equiv {\rm d} P_{l} / {\rm d}x$, then $\phi$ satisfies
+\begin{eqnarray}
+    (1-x^2) \phi'' - 2x(m+1) \phi' + [ l(l+1) - m(m+1) ] \phi = 0
+,\end{eqnarray}
+which is exactly the same equation that $\mathcal{P}$ satisfied above with $\lambda = l(l+1)$.
+Thus, the solution to the associated Legendre equation is just
+\begin{eqnarray}
+    P_{l}^{m}(x) = (-1)^{m}(1-x^2)^{m/2} \dv[m]{P_{l}(x)}{x}
+.\end{eqnarray}
+Note that the factor $(-1)^{m}$ is inserted by convention.
+Observe that we can include an additional constraint on the value of $m$ now.
+Originally, we only restricted $m$ to the integers, but now, it is clear that if $m > l$, then the $m^{\rm th}$ derivative of $P_{l}$, which is an $l^{\rm th}$ order polynomial, will be identically zero.
+We can obtain the solutions for $m < 0$ by inserting Rodrigues' formula for the Legendre polynomials, which gives
+\begin{eqnarray}
+    P_{l}^{m} = \frac{(-1)^{m}}{2^{l} l!} (1-x^2)^{m/2} \dv[l+m]{x} (x^2-1)^{l}
+.\end{eqnarray}
+Let us now prove the relation between solutions for $m < 0$ and $m > 0$.
+For the negative $m$ solutions, we have
+\begin{align}
+    P_{l}^{-m} &= \frac{(-1)^{m}}{2^{l} l!} (1-x^2)^{-m/2} \dv[l-m]{x} (x+1)^{l}(x-1)^{l} \nonumber \\
+    &= \frac{(-1)^{m}}{2^{l} l!} (-1)^{-m/2} (x^2 - 1)^{-m/2} \sum_{k=0}^{l-m} \binom{l-m}{k} \frac{l!}{(l-k)!} (x+1)^{l-k} \frac{l!}{(m+k)!} (x - 1)^{m+k} \nonumber \\
+    &= \frac{(-1)^{m/2}}{2^{l} l!} \sum_{k=0}^{l-m} \frac{(l-m)!}{k!(l-m-k)!} \frac{l!}{(l-k)!} \frac{l!}{(m+k)!} (x+1)^{l-k-m/2}(x-1)^{k+m/2}
+.\end{align}
+Next, we do the same for the positive $m$ solutions:
+\begin{align}
+    P_{l}^{m} &= \frac{(-1)^{m}}{2^{l} l!} (1-x^2)^{m/2} \sum_{k=m}^{l} \binom{l+m}{k} \frac{l!}{(l-k)!} \frac{l!}{(k-m)!} (x+1)^{l-k} (x-1)^{k-m} \nonumber \\
+    &= \frac{(-1)^{3m/2}}{2^{l} l!} \sum_{k=m}^{l} \frac{(l+m)!}{k!(l+m-k)!} \frac{l!}{(l-k)!} \frac{l!}{(k-m)!} (x+1)^{l-k+m/2} (x-1)^{k-m/2}
+.\end{align}
+If we shift indices such that $k \rightarrow k + m$, then
+\begin{align}
+    P_{l}^{m} &= \frac{(-1)^{3m/2}}{2^{l} l!} \sum_{k=0}^{l-m} \frac{(l+m)!}{(k+m)!(l-k)!} \frac{l!}{(l - m - k)!} \frac{l!}{k!} (x+1)^{l-k-m/2} (x-1)^{k+m/2} \nonumber \\
+    &= (-1)^{m} \frac{(l+m)!}{(l-m)!} P_{l}^{-m}
+.\end{align}
+This is equivalent to saying that
+\begin{eqnarray}
+    P_{l}^{-m}(x) = (-1)^{m} \frac{(l-m)!}{(l+m)!} P_{l}^{m}(x)
+.\end{eqnarray}
 
 
 

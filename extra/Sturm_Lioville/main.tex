@@ -266,6 +266,29 @@ Let us just recall that $\lambda_{n} = -[ g'' n(n-1)/2 + n h']$, meaning
 which is exactly the simplified SL form we assumed $\phi_{n}$ satisfied in the first place, proving Rodrigues' formula\footnote{Note that there are usually pre-factors in front of the derivative when considering specific cases. Scaling by a constant (i.e. $\phi_{n} \rightarrow c \phi_{n}$) does not change anything except for normalization.}.
 
 
+\section{Schlaefli integral and generating functions}
+
+We know from complex analysis that the $n^{\rm th}$ derivative of an analytic function is just
+\begin{eqnarray}
+    f^{(n)}(x) = \frac{n!}{2 \pi i} \oint_{C} \frac{f(z)}{(z - x)^{n+1}} \dd{x}
+,\end{eqnarray}
+where $z$ is in the region bounded by $C$ and $f$ is analytic on and inside $C$.
+It quickly follows then that we can transform the generic Rodrigues formula such that
+\begin{eqnarray}
+    \phi_{n}(x) = \frac{1}{r(x)} \frac{n!}{2 \pi i} \oint_{C} \frac{r(z) g^{n}(z)}{(z - x)^{n+1}} \dd{z}
+.\end{eqnarray}
+
+In some cases, the integral representation of the SL solutions is useful in deriving a generating function $G(x,t)$ such that its power series expansion\footnote{$G(x,t)$ here should not be confused with a Green function of some sort. Typically generating functions are denoted by $g(x,t)$, but alas, we have already used $g$ in a way that would make things confusing by reusing it.}
+\begin{eqnarray}
+    G(x,t) = \sum_{n} c_{n} \phi_{n}(x) t^{n}
+.\end{eqnarray}
+That is, the solutions to the SL problem (with some scalar) are just the coefficients of the expansion.
+If we put in the Schlaefli integral representation for $\phi_{n}(x)$, we have
+\begin{eqnarray}
+    G(x,t) = \sum_{n} c_{n} t^{n} \frac{n!}{2 \pi i} \oint_{C} \frac{r(x) g^{n}(x)}{(z - x)^{n+1}} \dd{z}
+.\end{eqnarray}
+This is not always useful since the integration must be possible to perform analytically, but there are a few cases of interest to us where we can use this to write down closed forms for the generating function.
+With such a function then, we will be able to write down recurrence relations that are useful in solving many different types of problems.
 
 
 
