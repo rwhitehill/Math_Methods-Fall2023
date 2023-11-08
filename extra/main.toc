@@ -19,3 +19,4 @@
 \contentsline {section}{\numberline {3.6}Associated Legendre polynomials}{23}{section.3.6}%
 \contentsline {subsection}{\numberline {3.6.1}Normalization}{25}{subsection.3.6.1}%
 \contentsline {chapter}{\numberline {4}Spherical Harmonics}{27}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Bessel's equation and Bessel functions}{29}{chapter.5}%

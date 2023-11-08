@@ -147,8 +147,9 @@ Then, using the most recent representation of the beta function
 .\end{eqnarray}
 We have already evaluated this integral via contour integration.
 I will evaluate it here again for completeness.
-We integrate over the contour shown in {\color{red} Fig. 1} with the analytic continuation $x \rightarrow w$:
+We integrate over the contour shown in \fref{contour} with the analytic continuation $x \rightarrow w$:
 \begin{align}
+    \label{eq:beta-contour-integral}
     2 \pi i (-1)^{z-1} &= \int_{C_{R \rightarrow \infty}} \frac{w^{z-1}}{1+w} \dd{w} + \int_{\infty}^{0} \frac{x^{1-z} e^{i 2\pi(z-1)}}{1+x} \dd{x} \nonumber \\
              &+ \int_{C_{\epsilon\rightarrow 0}} \frac{w^{z-1}}{1+w} \dd{w} + \int_{0}^{\infty} \frac{x^{z-1}}{1+x} \dd{x}
 .\end{align}
@@ -179,6 +180,33 @@ Suppose $z > 1$, then there exists $N > 0$ such that $w = z - N$ and
 \end{align}
 since $\cos{\pi N} = (-1)^{N}$.
 A similar logic can be applied for $z < 0$, so indeed, \eref{gamma-prod-sin} applies for any complex $z$.
+
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+    \draw [gray,thick,->] (-3,0) -- (3,0) node[anchor=west] {$\Re$};
+    \draw [gray,thick,->] (0,-3) -- (0,3) node[anchor=south] {$\Im$};
+
+\begin{scope}[scale=2]
+    \draw [black,thick,domain=5:355,samples=200,decoration={markings,mark=at position 0.3 with {\arrow{>}}},postaction={decorate}] plot ({cos(\x)},{sin(\x)});
+    \node at ({1.2*cos(108)},{1.2*sin(108)}) {$C_{R}$};
+
+    \draw [black,thick,domain=343.0888607:16.91113926,samples=100,decoration={markings,mark=at position 0.35 with {\arrow{>}}},postaction={decorate}] plot ({0.3*cos(\x)},{0.3*sin(\x)});
+    \node at ({0.45*cos(-130)},{0.45*sin(-130)}) {$C_{\epsilon}$};
+
+    \draw [black,thick,decoration={markings,mark=at position 0.5 with {\arrow{>}}},postaction={decorate}] ({0.3*cos(16.91113926},{0.3*sin(16.91113926)}) -- ({cos(5)},{sin(5)});
+    \draw [black,thick,decoration={markings,mark=at position 0.5 with {\arrow{>}}},postaction={decorate}] ({cos(355)},{sin(355}) -- ({0.3*cos(343.0888607)},{0.3*sin(343.0888607)});
+
+    \draw [red,->] (0,0) -- ({cos(45)},{sin(45)});
+    \node[red] at ({0.6*cos(56)},{0.6*sin(56)}) {$R$};
+    \draw [red,->] (0,0) -- ({0.3*cos(135)},{0.3*sin(135)});
+    \node[red] at ({0.15*cos(115)},{0.15*sin(115)}) {$\epsilon$};
+\end{scope}
+
+\end{tikzpicture}
+\caption{Contour definition for \eref{beta-contour-integral} to avoid multiple values along branch cut on the positive real axis.}
+\label{fig:contour}
+\end{figure}
 
 
 

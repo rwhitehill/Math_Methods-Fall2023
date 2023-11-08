@@ -1,10 +1,9 @@
 \chapter{Spherical Harmonics}
 
-The ramp up in this section will be fairly quick since in the previous chapter, we have already laid down most of the foundation.
-Spherical harmonics are functions $Y(\theta,\phi)$ which satisfy Laplace's equation, where $\theta$ and $\phi$ are the azimuthal and polar angles, respectively, in spherical coordinates.
-We have already seen that the equation governing the spherical harmonics is
+This section will be fairly quick since in the previous chapter, we have already laid down most of the foundation.
+The spherical harmonics are functions $Y(\theta,\phi)$ which satisfy Laplace's equation, where $\theta$ and $\phi$ are the azimuthal and polar angles, respectively, in spherical coordinates:
 \begin{eqnarray}
-    \frac{1}{\sin{\theta}} \pdv{\theta} \Big( \sin{\theta} \pdv{Y(\theta,\phi)}{\theta} \Big) + \frac{1}{\sin^2{\theta}} \pdv[2]{Y(\theta,\phi)}{\phi} = 0
+    r^2 \laplacian Y(\theta,\phi) = \frac{1}{\sin{\theta}} \pdv{\theta} \Big( \sin{\theta} \pdv{Y(\theta,\phi)}{\theta} \Big) + \frac{1}{\sin^2{\theta}} \pdv[2]{Y(\theta,\phi)}{\phi} = 0
 .\end{eqnarray}
 In the last chapter, we proceeded to solve this equation via a separable ansatz $Y(\theta,\phi) = P(\theta) T(\phi)$ and found that the azimuthal dependence is given by the associated Legendre polynomials $P(\theta) = P_{l}^{m}(\cos{\theta})$ and the polar dependence is given by phase factors $e^{i m \phi}$, where $l \geq 0$ and $-l \leq m \leq l$ are integers.
 The full separable solution is then just
@@ -28,6 +27,24 @@ Solving for $\mathcal{N}_{lm}$ then gives the normalized spherical harmonics as
 ,\end{eqnarray}
 and that is the spherical harmonics in a nutshell.
 
+One final note is about the completeness of the spherical harmonics.
+Consistent with what we claimed in the Sturm-Liouville section, for any square-integrable function $f(\theta,\phi)$, we can expand it in spherical harmonics as
+\begin{eqnarray}
+    f(\theta,\phi) = \sum_{l=0}^{\infty} \sum_{m=-l}^{l} f_{lm} Y_{lm}(\theta,\phi)
+,\end{eqnarray}
+where the coefficients are given through the orthonormality condition
+\begin{eqnarray}
+    f_{lm} = \int \dd{\Omega} Y_{lm}^{*}(\theta,\phi) f(\theta,\phi)
+.\end{eqnarray}
+
+If our function is rotationally symmetric about the $z$-axis then $f(\theta,\phi) = f(\theta)$ and only the $m = 0$ term survives, yielding an expansion in Legendre polynomials:
+\begin{eqnarray}
+    f(\theta) = \sum_{l=0}^{\infty} f_{l} P_{l}(\cos{\theta})
+\end{eqnarray}
+with some constants absorbed into the coefficients
+\begin{eqnarray}
+    f_{l} = \frac{2l+1}{2} \int_{0}^{\pi} \dd{\theta} \sin{\theta} P_{l}(\cos{\theta}) f(\theta)
+.\end{eqnarray}
 
 
 
