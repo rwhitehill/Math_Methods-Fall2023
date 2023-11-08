@@ -1,7 +1,5 @@
-\chapter{Legendre's Differential Equation and Legendre Polynomials}
+\chapter{Legendre's Equation and Legendre Polynomials}
 
-
-\section{Legendre's Sturm-Liouville problem}
 
 \section{Derivation of the differential equation}
 
@@ -387,6 +385,54 @@ This is equivalent to saying that
 \begin{eqnarray}
     P_{l}^{-m}(x) = (-1)^{m} \frac{(l-m)!}{(l+m)!} P_{l}^{m}(x)
 .\end{eqnarray}
+
+\subsection{Normalization}
+
+When using the associated Legendre polynomials, which are related to spherical harmonics and hence are quite ubiquitous in physics applications, it is crucial to know their corresponding orthogonality relations (i.e. inner products):
+\begin{eqnarray}
+    (P_{l'}^{m'},P_{l}^{m}) = \frac{2}{2l+1} \frac{(l+m)!}{(l-m)!} \delta_{ll'} \delta_{mm'}
+.\end{eqnarray}
+Very rarely though do we ever see the proof of this fact.
+The kronecker-delta factors are obvious given that solutions of an SL problem corresponding to distinct eigenvalues are orthogonal.
+It remains then to show that
+\begin{eqnarray}
+    (P_{l}^{m},P_{l}^{m}) = \frac{2}{2l+1} \frac{(l+m)!}{(l-m)!}
+.\end{eqnarray}
+The first factor is exactly that of the Legendre polynomials ($m = 0$), and we have seen the second factor when relating the $-m$ and $m$ associated Legendre polynomials to each other.
+This gives some indication for how to derive this fact then.
+First, we write explicitly the meaning of the inner product:
+\begin{eqnarray}
+    (P_{l}^{m},P_{l}^{m}) = \int_{-1}^{1} [P_{l}^{m}(x)]^2 \dd{x}
+.\end{eqnarray}
+We can relate one factor of $P_{l}^{m}$ to its counterpart $P_{l}^{-m}$ and write both in terms of the Rodrigues formula:
+\begin{align}
+    (P_{l}^{m},P_{l}^{m}) &= (-1)^{m}\frac{(l+m)!}{(l-m)!} \int_{-1}^{1} P_{l}^{-m}(x) P_{l}^{m}(x) \nonumber \\
+                          &= \frac{(-1)^{m}}{(2^{l} l!)^2} \frac{(l+m)!}{(l-m)!} \int_{-1}^{1} \Big[ (1-x^2)^{-m/2} \dv[l-m]{x} (x^2 - 1)^{l} \Big] \Big[ (1 - x^2)^{m/2} \dv[l+m]{x} (x^2 - 1)^{l} \Big] \dd{x} \nonumber \\
+                          &= \frac{(-1)^{m}}{(2^{l} l!)^{2}} \frac{(l+m)!}{(l-m)!} \int_{-1}^{1} \dv[l-m]{x} (x^2 - 1)^{l} \dv[l+m]{x} (x^2 - 1)^{l} \dd{x}
+.\end{align}
+At this point, we will integrate by parts, taking derivatives successively from the second factor and appending them to the left factor until both are derivatives of order $l$.
+It will turn out that the boundary terms all vanish in the process:
+\begin{align}
+    \int_{-1}^{1} \dv[l-m]{x} &(x^2-1)^{l} \dv[l+m]{x} (x^2 - 1)^{l} \dd{x} = \dv[l-m]{x} (x^2 - 1)^{l} \dv[l+m-1]{x} (x^2-1)^{l} \Big|_{-1}^{1} \nonumber \\
+                                                                           &- \int_{-1}^{1} \dv[l-m+1]{x} (x^2 - 1)^{l} \dv[l+m-1]{x} (x^2 - 1)^{l} \dd{x} \nonumber \\
+    \ldots &= \sum_{k=1}^{m} (-1)^{k+1} \dv[l-m+(k-1)]{x} (x^2 - 1)^{l} \dv[l+m-k]{x} (x^2-1)^{l}\Big|_{-1}^{1} + (-1)^{m} \int_{-1}^{1} \Big[ \dv[l]{x} (x^2-1)^{l} \Big]^2 \dd{x} \nonumber \\
+           &= (-1)^{m} (2^{l} l!)^2 (P_{l},P_{l}) = (-1)^{m} (2^{l} l!)^{2} \frac{2}{2l+1}
+.\end{align}
+Once we show why the boundary terms are zero, we will essentially be finished.
+The observation is simply that 
+\begin{eqnarray}
+    \dv[l-m+k]{x} (x^2 - 1)^{l} = (x^2 - 1)^{m-k} f(x)
+,\end{eqnarray}
+where $0 \leq k < m$ and $f(x)$ is some polynomial.
+Thus, since $m > k$, evaluating at $x = \pm 1$ always gives zero for the boundary terms.
+
+Putting everything together, we finally have the normalization condition that was first quoted
+\begin{eqnarray}
+    (P_{l'}^{m'},P_{l}^{m}) = \frac{2}{2l+1} \frac{(l+m)!}{(l-m)!} \delta_{l'l} \delta_{m'm}
+.\end{eqnarray}
+
+
+
 
 
 

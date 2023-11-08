@@ -1,0 +1,36 @@
+\chapter{Spherical Harmonics}
+
+The ramp up in this section will be fairly quick since in the previous chapter, we have already laid down most of the foundation.
+Spherical harmonics are functions $Y(\theta,\phi)$ which satisfy Laplace's equation, where $\theta$ and $\phi$ are the azimuthal and polar angles, respectively, in spherical coordinates.
+We have already seen that the equation governing the spherical harmonics is
+\begin{eqnarray}
+    \frac{1}{\sin{\theta}} \pdv{\theta} \Big( \sin{\theta} \pdv{Y(\theta,\phi)}{\theta} \Big) + \frac{1}{\sin^2{\theta}} \pdv[2]{Y(\theta,\phi)}{\phi} = 0
+.\end{eqnarray}
+In the last chapter, we proceeded to solve this equation via a separable ansatz $Y(\theta,\phi) = P(\theta) T(\phi)$ and found that the azimuthal dependence is given by the associated Legendre polynomials $P(\theta) = P_{l}^{m}(\cos{\theta})$ and the polar dependence is given by phase factors $e^{i m \phi}$, where $l \geq 0$ and $-l \leq m \leq l$ are integers.
+The full separable solution is then just
+\begin{eqnarray}
+    Y_{lm}(\theta,\phi) = \mathcal{N}_{lm} P_{l}^{m}(\cos{\theta}) e^{im\phi}
+.\end{eqnarray}
+The normalization factor is fixed by requiring (as is conventional) that
+\begin{eqnarray}
+    \int \dd{\Omega} Y_{l'm'}^{*}(\theta,\phi) Y_{lm}^{*}(\theta,\phi) = \delta_{l'l} \delta_{m'm}
+.\end{eqnarray}
+The orthogonality is already a given with the associated Legendre polynomials and phase factors.
+We can determine the normalization factor quite easily then:
+\begin{align}
+    1 = \int_{0}^{2\pi} \dd{\phi} \int_{0}^{\pi} \dd{\theta} \sin{\theta} |Y_{lm}(\theta,\phi)|^2 &= \mathcal{N}_{lm}^2 (2 \pi) \int_{0}^{\pi} \dd{\theta} \sin{\theta} [P_{l}^{m}(\cos{\theta})]^2 \nonumber \\
+                                                                                              &= \mathcal{N}_{lm}^2 (2 \pi) \int_{-1}^{1} \dd{x} [ P_{l}^{m}(x) ]^2 \nonumber \\
+                                                                                              &= \mathcal{N}_{lm} \frac{4 \pi}{2l+1} \frac{(l+m)!}{(l-m)!}
+.\end{align}
+Solving for $\mathcal{N}_{lm}$ then gives the normalized spherical harmonics as
+\begin{eqnarray}
+    Y_{lm}(\theta,\phi) = \sqrt{\frac{2l+1}{4 \pi} \frac{(l-m)!}{(l+1)!}} P_{l}^{m}(\cos{\theta}) e^{im\phi}
+,\end{eqnarray}
+and that is the spherical harmonics in a nutshell.
+
+
+
+
+
+
+
