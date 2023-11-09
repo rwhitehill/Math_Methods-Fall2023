@@ -10,7 +10,7 @@ Laplace's equation is generically given as
 \begin{eqnarray}
     \laplacian \phi(\va*{r}) = 0
 .\end{eqnarray}
-In spherical coordinates, the Laplacian operator is
+In spherical coordinates, Laplace's equation is
 \begin{eqnarray}
     \Bigg[ \frac{1}{r^2} \pdv{r} \Big( r^2 \pdv{r} \Big) + \frac{1}{r^2 \sin{\theta}} \pdv{\theta} \Big( \sin{\theta} \pdv{\theta} \Big) + \frac{1}{r^2 \sin^2{\theta}} \pdv[2]{\phi} \Bigg] \psi(r,\theta,\phi) = 0
 .\end{eqnarray}
@@ -36,8 +36,7 @@ which leads to
 .\end{align}
 Again, $H$ and $I$ must be independent of $r$ and $\theta$, and we will set $I(\theta) = -\lambda$, which also means that $H(r) = \lambda$.
 Typically, we write the eigenvalue in a convenient form, but here we will remain oblivious to its form and recover the conventional $l(l+1)$ behavior later.
-For now, we ignore the radial dependence.
-The solution is not terribly difficult, but the associated Legendre polynomials we care about are the solutions to azimuthal angle dependent differential equation:
+For now, we ignore the radial dependence since the associated Legendre polynomials we care about are the solutions to anglular portion of Laplace's equation:
 \begin{align}
     \frac{1}{\sin{\theta}} \dv{\theta}\Big( \sin{\theta} \dv{P(\theta)}{\theta} \Big) + \Big[ \lambda - \frac{m^2}{\sin^2{\theta}} \Big] P(\theta) = 0
 .\end{align}
@@ -111,12 +110,12 @@ As a first pass, let us perform the ratio test:
 \begin{eqnarray}
     \lim_{n \rightarrow \infty} \Big| \frac{a_{n+2}}{a_{n}} \Big| = \lim_{n \rightarrow \infty} \frac{(n+\gamma)(n+\gamma+1) - \lambda}{(n+\gamma+1)(n+\gamma+2)} = 1
 .\end{eqnarray}
-The test is indeterminate, so we cannot conclude anything about the series about its convergence (or lack thereof).
-Another, more obscure test for us physicists, is the Gauss test.
-The theorem is this: \textit{Consider a series $\sum_{k} a_{k}$ such that $a_{k} > 0$. Given a bounded function $B(k)$ as $k \rightarrow \infty$, if $|a_{k}/a_{k+1}| = 1 + A/n + B(n)/n^{r}$ with $r > 1$, then the series is divergent for $A \leq 1$ and convergent for $A > 1$.}
+The test is indeterminate, so we cannot conclude anything about the convergence (or lack thereof) of the series.
+A more obscure test, yet equally valid one, is the Gauss test.
+The theorem is this: \textit{Consider a series $\sum_{k}^{\infty} a_{k}$ such that $a_{k} > 0$. Given a bounded function $B(k)$ as $k \rightarrow \infty$, if $|a_{k}/a_{k+1}| = 1 + A/k + B(k)/k^{r}$ with $r > 1$, then the series is divergent for $A \leq 1$ and convergent for $A > 1$.}
 We can expand the ratio of successive coefficients in the limit $n \rightarrow \infty$\footnote{Tell wolfram the following: \textbf{expand (2k+gamma+1)(2k+gamma+2)/((2k+gamma)(2k+gamma+1) - lambda) as k -> infty}}
 \begin{eqnarray}
-    \frac{a_{2k}}{a_{2k+2}} = \frac{(2k+\gamma+1)(2k+\gamma+2)}{(2k+\gamma)(2k+\gamma+1) - \lambda} = 1 + \frac{1}{k} + \frac{\lambda - 2\gamma}{4n^2} + \ldots
+    \frac{a_{2k}}{a_{2k+2}} = \frac{(2k+\gamma+1)(2k+\gamma+2)}{(2k+\gamma)(2k+\gamma+1) - \lambda} = 1 + \frac{1}{k} + \frac{\lambda - 2\gamma}{4k^2} + \ldots
 .\end{eqnarray}
 We see from here that $A = 1$, implying that our series formally diverges for every $\lambda$ if for every $n \geq 0$ there exists $N > n$ such that $a_{N} \ne 0$\footnote{This is just a formal way of saying that the series includes an infinite number of nonzero coefficients.}.
 We, therefore, have to truncate our series such that there exists some $n=l$ with $a_{l} \ne 0$ but for each $n > l$ the coefficient $a_{n} = 0$.
@@ -192,7 +191,7 @@ We now just have to apply the residue theorem to evaluate the integral.
 By forcing the contour to be small enough so that the sum converged, we made it so that only the pole $z = z_{-}$ is enclosed by the contour\footnote{This is a subtle point: for the convergence condition above if $x$ and $|t|$ are small, then $z_{+} \approx 2/t \rightarrow \infty$ and $z_{-} \approx 0$. It is an important point though because otherwise the integration gives zero if neither pole or both poles are enclosed.}.
 Using this fact, we have
 \begin{eqnarray}
-    \eref{eq:legendre-gen}
+    \label{eq:legendre-gen}
     g(x,t) = -\frac{2}{t} \frac{1}{z_{-} - z_{+}} = \frac{2}{t} \frac{t}{2\sqrt{1 - 2xt + t^2}} = \frac{1}{\sqrt{1 - 2xt + t^2}}
 .\end{eqnarray}
 
@@ -347,7 +346,7 @@ Let us take Legendre's equation ($m = 0$) and differentiate $m$ times (note that
     \dv[m]{x} \Big[ (1-x^2) P_{l}'' - 2x P_{l}' + l(l+1)P_{l} \Big] = 0 \nonumber \\
     (1-x^2) \dv[m+2]{P_{l}}{x} - 2mx \dv[m+1]{P_{l}}{x} - m(m-1) \dv[m]{P_{l}}{x} - 2x \dv[m+1]{P_{l}}{x} - 2m \dv[m]{P_{l}}{x} + l(l+1) \dv[m]{P_{l}}{x}
 .\end{gather}
-If we set $\phi \equiv {\rm d} P_{l} / {\rm d}x$, then $\phi$ satisfies
+If we set $\phi \equiv {\rm d^{n}} P_{l} / {\rm d}x^{n}$, then $\phi$ satisfies
 \begin{eqnarray}
     (1-x^2) \phi'' - 2x(m+1) \phi' + [ l(l+1) - m(m+1) ] \phi = 0
 ,\end{eqnarray}
@@ -387,9 +386,9 @@ This is equivalent to saying that
 
 \subsection{Normalization}
 
-When using the associated Legendre polynomials, which are related to spherical harmonics and hence are quite ubiquitous in physics applications, it is crucial to know their corresponding orthogonality relations (i.e. inner products):
+When using the associated Legendre polynomials, which are related to spherical harmonics and hence are quite ubiquitous in physics applications, it is crucial to know their corresponding orthogonality relations (i.e. inner products)\footnote{Note that $(P_{l}^{m'},P_{l}^{m}) \ne 0$ generally since for fixed $l$ the associated Legendre polynomials $P_{l}^{m}$ and $P_{l}^{m'}$ both correspond to the same eigenvalue $l(l+1)$ of the SL equation.}:
 \begin{eqnarray}
-    (P_{l'}^{m'},P_{l}^{m}) = \frac{2}{2l+1} \frac{(l+m)!}{(l-m)!} \delta_{ll'} \delta_{mm'}
+    (P_{l'}^{m},P_{l}^{m}) = \frac{2}{2l+1} \frac{(l+m)!}{(l-m)!} \delta_{ll'}
 .\end{eqnarray}
 Very rarely though do we ever see the proof of this fact.
 The kronecker-delta factors are obvious given that solutions of an SL problem corresponding to distinct eigenvalues are orthogonal.
@@ -418,7 +417,7 @@ It will turn out that the boundary terms all vanish in the process:
            &= (-1)^{m} (2^{l} l!)^2 (P_{l},P_{l}) = (-1)^{m} (2^{l} l!)^{2} \frac{2}{2l+1}
 .\end{align}
 Once we show why the boundary terms are zero, we will essentially be finished.
-The observation is simply that 
+The observation is simply that\footnote{The observation is made rigorous via a proof by induction.}
 \begin{eqnarray}
     \dv[l-m+k]{x} (x^2 - 1)^{l} = (x^2 - 1)^{m-k} f(x)
 ,\end{eqnarray}
@@ -427,7 +426,7 @@ Thus, since $m > k$, evaluating at $x = \pm 1$ always gives zero for the boundar
 
 Putting everything together, we finally have the normalization condition that was first quoted
 \begin{eqnarray}
-    (P_{l'}^{m'},P_{l}^{m}) = \frac{2}{2l+1} \frac{(l+m)!}{(l-m)!} \delta_{l'l} \delta_{m'm}
+    (P_{l'}^{m},P_{l}^{m}) = \frac{2}{2l+1} \frac{(l+m)!}{(l-m)!} \delta_{l'l}
 .\end{eqnarray}
 
 

@@ -145,8 +145,6 @@ Then, using the most recent representation of the beta function
 \begin{eqnarray}
     \Gamma(z)\Gamma(1-z) = B(z,1-z) \Gamma(1) = B(z,1-z) = \int_{0}^{\infty} \frac{x^{z-1}}{1+x} \dd{x}
 .\end{eqnarray}
-We have already evaluated this integral via contour integration.
-I will evaluate it here again for completeness.
 We integrate over the contour shown in \fref{contour} with the analytic continuation $x \rightarrow w$:
 \begin{align}
     \label{eq:beta-contour-integral}
@@ -162,14 +160,14 @@ Along the path $C_{R}$, we can write $w = R e^{i \phi}$, giving
 \begin{eqnarray}
     \int_{C_{R \rightarrow 0}} \frac{w^{z-1}}{1 + w} \dd{w} = i \int_{0}^{2\pi} \frac{R^{z} e^{iz\phi}}{1 + R e^{i\phi}} \dd{\phi}
 .\end{eqnarray}
-Taking $R \Rightarrow \infty$, this is zero, restricting $0 < z < 1$.
+Taking $R \rightarrow \infty$, this is zero if we restrict $0 < z < 1$.
 Recycling most of the work and replacing $R$ with $\epsilon$, it is trivial to see that the integral along the path $C_{\epsilon \rightarrow 0}$ is zero.
 Thus,
 \begin{eqnarray}
     \Gamma(z) \Gamma(1-z) = B(z,1-z) = \frac{-2 \pi i e^{i \pi z}}{1 - e^{i 2 \pi z}} = \pi \frac{2i}{e^{i \pi z} - e^{-i \pi z}} = \frac{\pi}{\sin{\pi z}}
 .\end{eqnarray}
 At the moment, it seems that this result only holds for $0 < z < 1$.
-If we are outside this interval, we can always use the reciprocity relation and find an integer $N$ such that $w = z + n$ is inside the interval $(0,1)$.
+If we are outside this interval, we can always use the reciprocity relation and find an integer $N$ such that $w = z + N$ is inside the interval $(0,1)$.
 Suppose $z > 1$, then there exists $N > 0$ such that $w = z - N$ and
 \begin{align}
     \Gamma(z)\Gamma(1-z) &= \Gamma(w + N) \Gamma(1 - [w + N]) \nonumber \\
