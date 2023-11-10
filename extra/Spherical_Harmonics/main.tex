@@ -27,6 +27,8 @@ Solving for $\mathcal{N}_{lm}$ then gives the normalized spherical harmonics as
 ,\end{eqnarray}
 and that is the spherical harmonics in a nutshell.
 
+\section{Expansions in spherical harmonics}
+
 One final note is about the completeness of the spherical harmonics.
 Consistent with what we claimed in the Sturm-Liouville section, for any square-integrable function $f(\theta,\phi)$, we can expand it in spherical harmonics as
 \begin{eqnarray}
@@ -45,6 +47,52 @@ with some constants absorbed into the coefficients
 \begin{eqnarray}
     f_{l} = \frac{2l+1}{2} \int_{0}^{\pi} \dd{\theta} \sin{\theta} P_{l}(\cos{\theta}) f(\theta)
 .\end{eqnarray}
+
+
+\section{Parity}
+
+In the section on associated Legendre polynomials, we introduced the parity operator, which is effectively a spatial inversion operator, and derived the action of this transformation on the associated Legendre functions.
+Here, we would like to do the same for the spherical harmonics.
+First, we must understand how the parity operator acts on the spherical coordinates themselves.
+Under parity, the cartesian coordinates transform trivially with a minus sign.
+We then easily obtain
+\begin{align}
+    r = \sqrt{x^2 + y^2 + z^2} &\rightarrow r \\
+.\end{align}
+The angles are perhaps a bit trickier since we must consider the domains of the trigonometric functions which define them.
+For example,
+\begin{eqnarray}
+    \phi = \arctan(\frac{y}{x}) \rightarrow \phi' = \arctan(\frac{-y}{-x})
+.\end{eqnarray}
+It is important not to simply cancel the minus signs without considering the fact that $\arctan{x}$ is only defined on $[-\pi/2,\pi/2]$, so it is only sensitive to the relative sign of $x$ and $y$.
+On the other hand, though, the parity operator is a reflection through the origin, taking $(x,y)$ into the point $(-x,-y)$, which is antiparallel to the original position vector projected into the $xy$-plane.
+Hence, this reflection through the origin is also equivalent to a $180^{\circ}$ rotation about the $z$-axis, meaning the parity operator takes $\phi \rightarrow \phi + \pi$.
+Similarly, for the azimuthal angle
+\begin{eqnarray}
+    \theta = \arctan(\frac{\sqrt{x^2 + y^2}}{z}) \rightarrow \theta' = \arctan(\frac{\sqrt{x^2 + y^2}}{-z})
+.\end{eqnarray}
+We can see geometrically that the the parity operator is a reflection about the $xy$-plane with respect to $z$.
+Hence, if we define the angle $\vartheta$ as the angle that the position vector makes with the negative $z$-axis, then we have the simple relation $\vartheta + \theta = \pi$, and after the parity operation $\vartheta = \theta$, meaning that $\theta' = \pi - \vartheta = \pi - \theta$.
+As a summary, we then have
+\begin{eqnarray}
+    r \rightarrow r,~ \phi \rightarrow \phi + \pi,~{\rm and}~\theta \rightarrow \pi - \theta
+.\end{eqnarray}
+
+Recall the spherical harmonics are given as
+\begin{eqnarray}
+    Y_{lm}(\theta,\phi) = \sqrt{\frac{2l+1}{4\pi} \frac{(l-m)!}{(l+m)!}} P_{l}^{m}(\cos{\theta}) e^{im\phi}
+,\end{eqnarray}
+so under parity
+\begin{align}
+    Y_{lm}(\theta,\phi) \rightarrow Y_{lm}(\pi-\theta,\phi+\pi) = \sqrt{\frac{2l+1}{4\pi}\frac{(l-m)!}{(l+m)!}} P_{l}^{m}(\cos(\pi - \theta)) e^{im(\phi + \pi)}
+.\end{align}
+Recall that $\cos(\pi - \theta) = -\cos{\theta}$ and $e^{im\pi} = \cos{m\pi} = (-1)^{m}$, so
+\begin{align}
+    Y_{lm}(\theta,\phi) \rightarrow Y_{lm}(\pi-\theta,\phi+\pi) &= (-1)^{m} \sqrt{\frac{2l+1}{4\pi} \frac{(l-m)!}{(l+m)!}} P_{l}^{m}(-\cos{\theta}) e^{im\phi} \nonumber \\
+                                &= (-1)^{l} Y_{lm}(\theta,\phi)
+,\end{align}
+where we have used $P_{l}^{m}(-x) = (-1)^{l+m} P_{l}^{m}(x)$.
+
 
 
 

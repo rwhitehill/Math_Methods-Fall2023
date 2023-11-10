@@ -1,0 +1,29 @@
+\contentsline {chapter}{\numberline {1}Sturm-Liouville Differential Equation}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Motivation}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Boundary Conditions}{1}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Definitions}{2}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Properties of the Sturm-Liouville System}{2}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Sturm-Lioville Operator}{2}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Facts about solutions and eigenvalues of the Sturm-Lioville problem}{3}{subsection.1.4.2}%
+\contentsline {section}{\numberline {1.5}Rodrigues' Formula}{5}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Schlaefli integral and generating functions}{8}{section.1.6}%
+\contentsline {chapter}{\numberline {2}Gamma Function}{9}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Definition}{9}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Important Identities}{10}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Half-integer arguments}{10}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Euler reflection formula}{11}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Legendre duplication formula}{13}{subsection.2.2.3}%
+\contentsline {chapter}{\numberline {3}Legendre's Equation and Legendre Polynomials}{15}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Derivation of the differential equation}{15}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Series solution with $m=0$}{16}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Rodrigues' Formula}{18}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Generating Function}{19}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Normalization of Legendre polynomials}{22}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Associated Legendre polynomials}{23}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Normalization}{25}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Parity}{26}{subsection.3.6.2}%
+\contentsline {chapter}{\numberline {4}Spherical Harmonics}{27}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Expansions in spherical harmonics}{28}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Parity}{28}{section.4.2}%
+\contentsline {chapter}{\numberline {5}Bessel's equation and Bessel functions}{31}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Green Functions}{33}{chapter.6}%

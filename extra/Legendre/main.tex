@@ -430,7 +430,27 @@ Putting everything together, we finally have the normalization condition that wa
 .\end{eqnarray}
 
 
+\subsection{Parity}
 
+
+Let us define a parity transformation $f(\va*{r}) \rightarrow f(-\va*{r})$.
+Denote the operator which enacts this transformation as $\hat{\mathcal{P}}$.
+In many problems, parity is an important symmetry to consider, and many of these problems (e.g. quantum mechanics) involve spherical harmonics, which in turn depend on the associated Legendre polynomials.
+This will not be too complicated to derive.
+Consider the parity transformation of the associated Legendre polynomials, which we represent with the Rodrigues formula:
+\begin{eqnarray}
+    \hat{\mathcal{P}} P_{l}^{m}(x) = P_{l}^{m}(-x) = \frac{(-1)^{m}}{2^{l} l!} (1 - x^2)^{m/2} \dv[l+m]{(x)} (x^2-1)^{l}
+.\end{eqnarray}
+Clearly, the only place where the parity operation is non-trivial is on the derivative operator, but the image of the derivative under parity is not too difficult to derive:
+\begin{eqnarray}
+    \hat{\mathcal{P}} \dv{x} = \dv{(-x)} = \dv{(-x)}{x} \dv{x} = -\dv{x}
+.\end{eqnarray}
+Thus, taking $l+m$ derivatives equates to a factor $(-1)^{l+m}$ appended to the derivative operator under parity, yielding
+\begin{eqnarray}
+    P_{l}^{m}(-x) = (-1)^{l+m} P_{l}^{m}(x)
+.\end{eqnarray}
+This is it for now.
+In the section on spherical harmonics, we will use this result to understand the action of the parity operator on the spherical harmonics.
 
 
 
