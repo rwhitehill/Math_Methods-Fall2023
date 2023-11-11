@@ -26,4 +26,5 @@
 \contentsline {section}{\numberline {4.1}Expansions in spherical harmonics}{28}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Parity}{28}{section.4.2}%
 \contentsline {chapter}{\numberline {5}Bessel's equation and Bessel functions}{31}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Green Functions}{33}{chapter.6}%
+\contentsline {section}{\numberline {5.1}Bessel function of the first kind}{32}{section.5.1}%
+\contentsline {chapter}{\numberline {6}Green Functions}{35}{chapter.6}%

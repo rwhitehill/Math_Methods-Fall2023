@@ -1,8 +1,80 @@
 \chapter{Bessel's equation and Bessel functions}
 
-In progress $\ldots$
+
+We saw in the last few sections how the associated Legendre polynomials arose when solving Laplace's equation in spherical coordinates.
+In this section, we will see Bessel functions when solving Laplace's equation in cylindrical coordinates:
+\begin{eqnarray}
+    \frac{1}{s} \pdv{s} \Big( s \pdv{\psi}{s} \Big) + \frac{1}{s^2} \pdv[2]{\psi}{\phi} + \pdv[2]{\psi}{z} = 0
+.\end{eqnarray}
+Again, we pose a separable ansatz $\psi(s,\phi,z) = R(s)T(\phi)Z(z)$, and plugging this in, we find
+\begin{eqnarray}
+    \frac{1}{s R} \dv{s} \Big( s \dv{R}{s} \Big) + \frac{1}{s^2 T} \dv[2]{T}{\phi} + \frac{1}{Z}\dv[2]{Z}{z} = 0
+.\end{eqnarray}
+It is clear from this that the two terms are independent of $z$, but the sign of this term is not immediately clear and depends on the boundary conditions of our particular problem.
+Let us write 
+\begin{eqnarray}
+    \frac{1}{Z} \dv[2]{Z}{z} = k^2
+\end{eqnarray}
+with $k$ not necessarily being real, meaning that $k^2$ can be any real number (positive, negative, or zero).
+Thus,
+\begin{align}
+    \frac{s}{R} \dv{s} \Big( s \dv{R}{s} \Big) + k^2 s^2 + \frac{1}{T} \dv[2]{T}{\phi} = 0
+.\end{align}
+The form of this term is exactly as in the spherical case since we must have $T(\phi + 2\pi) = T(\phi)$, meaning that
+\begin{eqnarray}
+    \frac{1}{T} \dv[2]{T}{\phi} = -\nu^2
+\end{eqnarray}
+for $\nu \in \Z$.
+The equation for the $s$-dependence then becomes
+\begin{eqnarray}
+    s \dv{s} \Big( s \dv{R}{s} \Big) + (k^2 s^2 - \nu^2) R = 0
+.\end{eqnarray}
+This equation is actually of the Sturm-Liouville type, but it will be easier to discuss after we form a solution.
+If we make the substitution $x = ks$, then the we have Bessel's equation
+\begin{eqnarray}
+    x \dv{x}\Big( x \dv{R}{x} \Big) + (x^2 - \nu^2)R = 0
+.\end{eqnarray}
 
 
+\section{Bessel function of the first kind}
+
+As in the section on Legendre polynomials, we write $R$ in a series as
+\begin{eqnarray}
+    R(x) = \sum_{n=0}^{\infty} a_{n} x^{n + \gamma}
+,\end{eqnarray}
+with $a_0 \ne 0$, which yields
+\begin{gather}
+    \sum_{n=0}^{\infty} [ (n + \gamma)^2 - \nu^2] a_{n} x^{n+\gamma} + \sum_{n=0}^{\infty} a_{n} x^{n+\gamma+2} = 0 \nonumber \\
+    (\gamma^2 - \nu^2)a_0 + [(\gamma+1)^2 - \nu^2] a_1 x + \sum_{n=0}^{\infty} \Big[ [(n+2+\gamma)^2 - \nu^2]a_{n+2} + a_{n} \Big] x^{n+\gamma+2} = 0
+.\end{gather}
+In order to have this expression be identically zero, we need
+\begin{align}
+    \gamma &= \pm \nu \\
+    a_1 &= 0 \\
+    a_{n+2} &= -\frac{1}{(n+2+\gamma)^2 - \gamma^2}a_{n} \nonumber \\
+            &= -\frac{1}{(n+2)(n+2+2\gamma)} a_{n}
+.\end{align}
+Note that by the recurrence relation all the odd terms are zero, so we can rewrite $n \rightarrow 2(n-1)$ such that
+\begin{align}
+    a_{2n} &= -\frac{1}{4n(n+\gamma)} a_{2(n-1)} = \Big( - \frac{1}{4} \Big)^{n} \frac{1}{[n(n-1)\ldots(2)(1)][(n+\gamma)(n+\gamma-1)\ldots(\gamma+1)]} a_0 \nonumber \\
+           &= (-1)^{n} \Big( \frac{1}{2} \Big)^{2n} \frac{\gamma!}{n!(n+\gamma)!} c_0
+,\end{align}
+and if we choose $a_0 = 1/[2^{\gamma} \Gamma(\gamma+1)]$ (this is only so that we can factor some terms and avoid carrying an overall factor), we obtain Bessel's function of the first kind:
+\begin{align}
+    J_{\nu}(x) = \Big( \frac{x}{2} \Big)^{\nu} \sum_{n=\min(0,\nu)}^{\infty} \frac{(-1)^{n}}{n!(n+\nu)!} \Big( \frac{x}{2} \Big)^{2n}
+,\end{align}
+where we allow $\nu$ to be any integer\footnote{Actually, there are other systems with different BCs and behaviors which do not restrict $\nu$ to the integers, and since the series solution did not depend on $\nu$ other than in the indicial equation, this is true for any $\nu$ and $(n+\nu)! \rightarrow \Gamma(n+\nu+1)$}.
+
+At this point, we cannot quite claim victory in the solution of Laplace's equation.
+if $\nu$ is in fact an integer, then $J_{\nu}$ and $J_{-\nu}$ are linearly dependent, meaning that these do not form a complete set of solutions to the Bessel equation.
+We can show this as follows.
+Let $\nu > 0$.
+Then,
+\begin{align}
+    J_{-\nu}(x) = \sum_{n=-\nu}^{\infty} \frac{(-1)^{n}}{n!(n-\nu)!} \Big( \frac{x}{2} \Big)^{2n-\nu} = (-1)^{\nu} J_{\nu}(x)
+.\end{align}
+
+{\color{red} This needs to be refined a bit. Motivate index for $-\nu$ better.}
 
 
 
