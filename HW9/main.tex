@@ -1,0 +1,201 @@
+\def\duedate{\today}
+\def\HWnum{9}
+\input{../preamble.tex}
+
+\begin{document}
+
+\prob{1}{
+
+For a region of volume $V$, calculate the following integrals taken over the surface of this region:
+\begin{eqnarray}
+    \va*{I}_1 = \oint_{S} \va*{r}(\va*{a} \cdot \vu*{n}) \dd{S}, \quad \va*{I}_2 = \oint_{S} (\va*{a} \cdot \va*{r}) \vu*{n} \dd{S}
+,\end{eqnarray}
+where $\vu*{n}(\va*{r})$ is a local unit vector normal to the surface and $\va*{a}$ is a constnat vector.
+
+HINT: Try to multiply $I_1$ and $I_2$ by an auxiliary constant vector $\va*{b}$.
+
+}
+
+\sol{
+
+For the first integral notice that
+\begin{eqnarray}
+\begin{aligned}
+    \va*{I}_1 \cdot \va*{b} &= \oint_{S} (\va*{b} \cdot \va*{r}) \va*{a} \cdot \vu*{n} \dd{S} \\
+                            &= \int_{V} \div{ (\va*{b} \cdot \va*{r}) \va*{a} } \, \dd{V} = \int_{V} \va*{a} \cdot \grad{ (\va*{b} \cdot \va*{r}) } \, \dd{V} \\
+                            &= \int_{V} \va*{a} \cdot [ (\va*{b} \cdot \grad) \va*{r} + \va*{b} \cross ( \curl{\va*{r}} ) ] \dd{V} = (\va*{b} \cdot \va*{a}) V
+.\end{aligned}
+\end{eqnarray}
+Thus, we have
+\begin{eqnarray}
+    \va*{I}_{1} = V \va*{a}
+\end{eqnarray}
+for any generic volume $V$ with bounding surface $S$.
+
+Similarly, for the second integration,
+\begin{eqnarray}
+    \va*{I}_2 &= \oint_{S} (\va*{a} \cdot \va*{r}) \va*{b} \cdot \vu*{n} \dd{S} = \int_{V} \div{ (\va*{a} \cdot \va*{r})\va*{b} } = V \va*{a}
+.\end{eqnarray}
+
+}
+
+
+\prob{2}{
+
+Calculate  the following determinant:
+\begin{eqnarray}
+    \begin{vmatrix}
+        E & V & V \\
+        V & E & V \\
+        V & V & E
+    \end{vmatrix}
+.\end{eqnarray}
+Find $E$ at which the determinant vanishes.
+Solution of this problem determines the energy levels of an electron in a triangular molecule.
+
+}
+
+\sol{
+
+The determinant of the matrix above is just
+\begin{eqnarray}
+    E( E^2 - V^2 ) + V( V^2 - EV ) + V( EV - V^2 ) = E(E^2 - V^2)
+.\end{eqnarray}
+If we require this be zero, then it is clear that the solutions are $E = -V,0,V$.
+
+}
+
+
+\prob{3}{
+
+Calculate the inverese matrix $A^{-1}$ for 
+\begin{eqnarray}
+    A = \begin{pmatrix}
+        1 & 2 & 3 \\
+        2 & 3 & 1 \\
+        3 & 1 & 2
+    \end{pmatrix}
+.\end{eqnarray}
+
+}
+
+\sol{
+
+We will solve this by using the cofactor method, which is somewhat tedious already at $3 \times 3$ but also the most direct.
+First, we have $\det(A) = -18$.
+Next, the cofactor matrix is just
+\begin{eqnarray}
+    C = \begin{pmatrix}
+        5 & -1 & -7 \\
+        -1 & -7 & 5 \\
+        -7 & 5 & -1
+    \end{pmatrix}
+.\end{eqnarray}
+The inverse matrix is then just
+\begin{eqnarray}
+    A^{-1} = \frac{1}{18} \begin{pmatrix}
+        -5 & 1 & 7 \\
+        1 & 7 & -5 \\
+        7 & -5 & 1
+    \end{pmatrix}
+.\end{eqnarray}
+
+}
+
+
+\prob{4}{
+
+Consider two Hermitian matrices:
+\begin{eqnarray}
+    A = \begin{pmatrix}
+        a & 0 & 0 \\
+        0 & b & 0 \\
+        0 & 0 & c
+    \end{pmatrix}
+    ,\quad
+    B = \begin{pmatrix}
+        0 & iv & 0 \\
+        -iv & 0 & 0 \\
+        0 & 0 & u
+    \end{pmatrix}
+,\end{eqnarray}
+where $a,~b,~c,~u~,{\rm and}~v$ are real constants.
+
+(a) Is the product $AB$ a Hermitian matrix?
+
+(b) Do $A$ and $B$ commute?
+
+(c) What are the relations between $a,b,c,u,v$ for which the answer to the questions $1$ and $2$ is yes?
+
+}
+
+\sol{
+
+(a) It is a general fact that if $A$ and $B$ are hermitian, then their product $AB$ is also Hermitian: $(AB)^{\dagger}(AB) = B^{\dagger} A^{\dagger} A B = B^{\dagger} B = I$.
+
+(b) It is easy to see that $A$ and $B$ do not commute in general:
+\begin{eqnarray}
+    AB = \begin{pmatrix}
+        0 & iav & 0 \\
+        -ibv & 0 & 0 \\
+        0 & 0 & cu
+    \end{pmatrix}
+    , \quad
+    BA = \begin{pmatrix}
+        0 & ibv & 0 \\
+        -iav & 0 & 0 \\
+        0 & 0 & cu
+    \end{pmatrix}
+.\end{eqnarray}
+
+(c) As stated in part (a), these product of these Hermitian matrices is Hermitian for any $a,b,c,u,v$.
+In part (b), though, we saw that the products $AB$ and $BA$ do not generally commute with each other.
+However, if $a = -b$, then $[A,B] = 0$.
+
+}
+
+
+\prob{5}{
+
+Find the eigenvalues and eigenvectors of this matrix:
+\begin{eqnarray}
+    A = \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & 0 & i \\
+        0 & -i & 1
+    \end{pmatrix}
+.\end{eqnarray}
+
+}
+
+\sol{
+
+By inspection, we can see that $1$ is an eigenvalue corresponding to the eigenvector $\begin{pmatrix} 1 & 0 & 0 \end{pmatrix}^{T}$.
+We therefore only have to solve for the eigenvalues and eigenvectors of the square matrix in the lower right block of $A$:
+\begin{eqnarray}
+    \begin{vmatrix}
+        -\lambda & i \\
+        -i & 1-\lambda
+    \end{vmatrix}
+    = \lambda(\lambda - 1) - 1 = \lambda^2 - \lambda - 1 = 0
+.\end{eqnarray}
+This gives the other two eigenvalues as
+\begin{eqnarray}
+    \lambda_{\pm} = \frac{1 \pm \sqrt{5}}{2}
+.\end{eqnarray}
+We then can solve for the other two eigenvectors (up to a constant) by imposing
+\begin{eqnarray}
+    -\lambda_{\pm} x_1 + i x_2 = 0 \Rightarrow x_2 = -i \lambda_{\pm} x_1
+.\end{eqnarray}
+Thus, the eigenvector
+\begin{eqnarray}
+    x_{\pm} = \begin{pmatrix}
+    1 \\ -i \lambda_{\pm}
+    \end{pmatrix}
+.\end{eqnarray}
+
+}
+
+
+
+\end{document}
