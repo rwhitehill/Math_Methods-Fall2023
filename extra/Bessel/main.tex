@@ -56,25 +56,177 @@ In order to have this expression be identically zero, we need
 .\end{align}
 Note that by the recurrence relation all the odd terms are zero, so we can rewrite $n \rightarrow 2(n-1)$ such that
 \begin{align}
-    a_{2n} &= -\frac{1}{4n(n+\gamma)} a_{2(n-1)} = \Big( - \frac{1}{4} \Big)^{n} \frac{1}{[n(n-1)\ldots(2)(1)][(n+\gamma)(n+\gamma-1)\ldots(\gamma+1)]} a_0 \nonumber \\
-           &= (-1)^{n} \Big( \frac{1}{2} \Big)^{2n} \frac{\gamma!}{n!(n+\gamma)!} c_0
+    a_{2n} &= -\frac{1}{4n(n+\gamma)} a_{2(n-1)} \nonumber \\
+           &= \Big( - \frac{1}{4} \Big)^{n} \frac{1}{[n(n-1)\ldots(2)(1)][(n+\gamma)(n+\gamma-1)\ldots(\gamma+1)]} a_0 \nonumber \\
+           &= (-1)^{n} \Big( \frac{1}{2} \Big)^{2n} \frac{\gamma!}{n!(n+\gamma)!} a_0
 ,\end{align}
 and if we choose $a_0 = 1/[2^{\gamma} \Gamma(\gamma+1)]$ (this is only so that we can factor some terms and avoid carrying an overall factor), we obtain Bessel's function of the first kind:
 \begin{align}
-    J_{\nu}(x) = \Big( \frac{x}{2} \Big)^{\nu} \sum_{n=\min(0,\nu)}^{\infty} \frac{(-1)^{n}}{n!(n+\nu)!} \Big( \frac{x}{2} \Big)^{2n}
+    \label{eq:Jnu-series}
+    J_{\nu}(x) = \Big( \frac{x}{2} \Big)^{\nu} \sum_{n=0}^{\infty} \frac{(-1)^{n}}{n!(n+\nu)!} \Big( \frac{x}{2} \Big)^{2n}
 ,\end{align}
 where we allow $\nu$ to be any integer\footnote{Actually, there are other systems with different BCs and behaviors which do not restrict $\nu$ to the integers, and since the series solution did not depend on $\nu$ other than in the indicial equation, this is true for any $\nu$ and $(n+\nu)! \rightarrow \Gamma(n+\nu+1)$}.
 
 At this point, we cannot quite claim victory in the solution of Laplace's equation.
-if $\nu$ is in fact an integer, then $J_{\nu}$ and $J_{-\nu}$ are linearly dependent, meaning that these do not form a complete set of solutions to the Bessel equation.
+If $\nu$ is in fact an integer, then $J_{\nu}$ and $J_{-\nu}$ are linearly dependent, meaning that these do not form a complete set of solutions to the Bessel equation.
 We can show this as follows.
 Let $\nu > 0$.
 Then,
 \begin{align}
-    J_{-\nu}(x) = \sum_{n=-\nu}^{\infty} \frac{(-1)^{n}}{n!(n-\nu)!} \Big( \frac{x}{2} \Big)^{2n-\nu} = (-1)^{\nu} J_{\nu}(x)
+    J_{-\nu}(x) &= \sum_{n=\nu}^{\infty} \frac{(-1)^{n}}{n!(n-\nu)!} \Big( \frac{x}{2} \Big)^{2n-\nu} \nonumber \\
+                &= \sum_{n=0}^{\infty} \frac{(-1)^{n+\nu}}{n!(n+\nu)!} \Big( \frac{x}{2} \Big)^{2n + \nu} \nonumber \\
+                &= (-1)^{\nu} J_{\nu}(x)
+.\end{align}
+Note that the lowest index in the first equation is $\nu$ instead of zero since if $n < \nu$, then $(n-\nu)! = \Gamma(n - \nu + 1) = 0$.
+Let us discuss some things related to the Bessel functions of the first kind and return in the next section to a discussion of a second solution for Bessel's equation.
+
+
+\subsection{Generating Function for integer $\nu$}
+
+In the section on Legendre polynomials we derived exactly the generating function by writing down the Schlaefli integral with the Rodrigues formula definition of $P_{n}(x)$, summing the series, and then performing the contour integration.
+The situation for Bessel functions is not quite as nice.
+Our derivation of the general Rodrigues formula for a solution of a Sturm-Liouville equation requires that the solutions be polynomials, but we have already seen in the previous section that this is not the case for Bessel functions, which are infinite series.
+We actually neglected this point on convergence, but it should be simple to see that the series \eref{Jnu-series} is absolutely convergent for all $x,\nu$:
+\begin{align}
+    \lim_{n \rightarrow \infty} &\Bigg[ \frac{1}{(n+1)!(n+1+\nu)!} \Big( \frac{x}{2} \Big)^{2(n+1)} \Bigg] \Bigg[ n! (n+\nu)! \Big( \frac{x}{2} \Big)^{-2n} \Bigg] \nonumber \\
+                                &= \frac{x^2}{4} \lim_{n \rightarrow \infty} \frac{1}{n(n+\nu+1)} = 0
 .\end{align}
 
-{\color{red} This needs to be refined a bit. Motivate index for $-\nu$ better.}
+The generating function for Bessel functions of the first kind is given by the Laurent series
+\begin{align}
+    g(x,t) = e^{(x/2)(t - 1/t)} = \sum_{n=-\infty}^{\infty} J_{n}(x) t^{n}
+.\end{align}
+While we will not derive this fact, we can show that the coefficients in the expansion of the generating function are in fact $J_{n}$.
+To do so, we will write
+\begin{align}
+    g(x,t) &= e^{xt/2}e^{-x/2t} = \Bigg[ \sum_{k=0}^{\infty} \frac{1}{k!} \Big( \frac{xt}{2} \Big)^{k} \Bigg] \Bigg[ \sum_{l=0}^{\infty} \frac{1}{l!} \Big( -\frac{x}{2t} \Big)^{l} \Bigg] \nonumber \\
+           &= \sum_{k=0}^{\infty} \sum_{l=0}^{\infty} \frac{(-1)^{l}}{k!l!} \Big( \frac{x}{2} \Big)^{k+l} t^{k-l}
+.\end{align}
+We are almost there.
+Let us shift indices, defining $n = k - l$, giving
+\begin{eqnarray}
+    g(x,t) = \sum_{n=-\infty}^{\infty} \Bigg[ \sum_{l=0}^{\infty} \frac{(-1)^{l}}{l!(l+n)!} \Big( \frac{x}{2} \Big)^{2l+n} \Bigg] t^{n} = \sum_{n=-\infty}^{\infty} J_{n}(x) t^{n}
+,\end{eqnarray}
+which is exactly what we wanted to show.
+
+
+\subsection{Recurrence Relations}
+
+As we saw in the chapter on Legendre polynomials, the generating function is useful in deriving recurrence relations.
+We will not go through the exact derivations.
+The generic steps for deriving these relations are exactly like what we did for the Legendre polynomials.
+Differentiating with respect to $t$, we find
+\begin{eqnarray}
+    \label{eq:rec-rel-t}
+    J_{n-1}(x) + J_{n+1}(x) = \frac{2n}{x} J_{n}(x)
+,\end{eqnarray}
+or alternatively, differentiating with respect to $x$, we find
+\begin{eqnarray}
+    \label{eq:rec-rel-x}
+    J_{n-1}(x) - J_{n+1}(x) = 2 J_{n}'(x)
+.\end{eqnarray}
+If we consider the previous equation with $n = 0$, we have
+\begin{align}
+    J_{-1}(x) - J_{1}(x) = -2 J_1(x) = 2 J_0'(x) \Rightarrow J_0'(x) = - J_1(x)
+.\end{align}
+
+We can also combine \erefs{rec-rel-t}{rec-rel-x} to derive more recurrence relations.
+First, let us add the two equations:
+\begin{eqnarray}
+    \label{eq:intermediate-rec-rel}
+    \frac{2n}{x} J_{n}(x) + 2 J_{n}'(x) = 2J_{n-1}(x)
+.\end{eqnarray}
+Let us cancel the factor of $2$ and multiply both sides by $x^{n}$, giving
+\begin{eqnarray}
+    nx^{n-1} J_{n}(x) + x^{n} J_{n}'(x) = \dv{x} [ x^{n} J_{n}(x) ] = x^{n} J_{n-1}(x)
+.\end{eqnarray}
+If we instead subtract the equations and multiply by $x^{-n}$, we find instead that
+\begin{eqnarray}
+    \label{eq:derivative-rec-rel-2}
+    \dv{x} [ x^{-n} J_{n}(x) ] = - x^{-n} J_{n+1}(x)
+.\end{eqnarray}
+Next, we can take the if we shift $n \rightarrow n + 1$, we can write \eref{intermediate-rec-rel}
+\begin{align}
+    J_{n}(x) = \frac{n+1}{x} J_{n+1}(x) + J_{n+1}'(x)
+,\end{align}
+and doing a similar thing for the intermediate step of the derivation of \eref{derivative-rec-rel-2}, we find
+\begin{eqnarray}
+    J_{n}(x) = \frac{n-1}{x} J_{n-1}(x) - J_{n-1}'(x)
+.\end{eqnarray}
+
+\subsection{General Solutions of Bessel's equation}
+
+Let us consider functions $Z_{\nu}(x)$ which satisfy the basic recurrence relations \erefs{rec-rel-t}{rec-rel-x}.
+It is actually the case that this is sufficient to gurantee that $Z_{\nu}$ also satisfies Bessel's equation:
+\begin{align}
+    x^2 &Z_{\nu}''(x) + x Z_{\nu}'(x) + (x^2 - \nu^2) Z_{\nu}(x) \nonumber \\
+        &= \frac{x^2}{2} [ Z_{\nu-1}'(x) - Z_{\nu+1}'(x) ] + \frac{x}{2}[ Z_{\nu-1}(x) - Z_{\nu+1}(x) ] + (x^2 - \nu^2) Z_{\nu}(x) \nonumber \\
+        &= \frac{x^2}{2} \Big[ \Big( -Z_{\nu}(x) + \frac{\nu - 1}{x} Z_{\nu-1}(x) \Big) - \Big( Z_{\nu}(x) - \frac{\nu+1}{x} Z_{\nu+1}(x) \Big) \Big] \nonumber \\
+        &+ \frac{x}{2} [ Z_{\nu-1}(x) - Z_{\nu+1}(x) ] + (x^2 - \nu^2) Z_{\nu}(x) \nonumber \\
+        &= -x^2 Z_{\nu}(x) + \frac{x}{2} \nu [ Z_{\nu-1}(x) + Z_{\nu+1}(x) ] + (x^2 - \nu^2) Z_{\nu}(x) \nonumber \\
+        &= \frac{x}{2} \nu \frac{2\nu}{x} Z_{\nu}(x) - \nu^2 Z_{\nu}(x) = 0
+.\end{align}
+
+\subsection{Integral representation of Bessel functions}
+
+Consider the following:
+\begin{align}
+    \oint_{C} \dd{z} \frac{e^{(x/2)(z - 1/z)}}{z^{n+1}} &= \sum_{m} J_{m}(x) \oint_{C} \dd{z} z^{m-n-1} = \sum_{m} J_{m}(x) [ 2 \pi i \delta_{mn} ] \nonumber \\
+                                                        &= J_{n}(x)
+,\end{align}
+where we choose the contour $C$ to encircle the singularity at $z = 0$.
+If we choose the contour where $t = e^{i\theta}$, then we have
+\begin{eqnarray}
+    J_{n}(x) = \frac{1}{2 \pi} \int_{0}^{2\pi} \dd{\theta} e^{i(x\sin{\theta} - n\theta)}
+.\end{eqnarray}
+If $x$ is real, then the imaginary part of the integral 
+\begin{eqnarray}
+    \int_{0}^{2\pi} \sin(x\sin{\theta} - n\theta) \dd{\theta} = 0
+\end{eqnarray}
+and we have
+\begin{eqnarray}
+    J_{n}(x) = \frac{1}{2\pi} \int_{0}^{2\pi} \cos(x\sin{\theta} - n \theta) \dd{\theta}
+.\end{eqnarray}
+
+\subsection{Zeros of $J_{n}$}
+
+In many cases where Bessel functions are involved in the description of a physical system, the zeros of $J_{\nu}$ are intimately related to its important physical characteristics.
+While there is no closed form expression for the zeros, there are still a few important facts to be enumerated.
+The theorem of interest here is called the Sturm comparison theorem: 
+\textit{Let $\phi_1$ and $\phi_2$ be non-trivial solutions of equations
+\begin{align}
+    \label{eq:SL1-zeros}
+    \phi'' + q_1(x) \phi &= 0 \\
+    \label{eq:SL2-zeros}
+    \phi'' + q_2(x) \phi &= 0
+,\end{align}
+respectively, on some interval $[a,b]$, where $q_{1,2}$ are continuous functions such that $q_1 \leq q_2$ on $[a,b]$.
+Then between any two consecutive zeros $x_1$ and $x_2$ of $\phi_1$, there exists at least one zero of $\phi_2$ unless $q_1(x) \equiv q_2(x)$ on $(x_1,x_2)$.
+}
+We will not prove this theorem here since it is outside the scope of these notes.
+One note to make is that while the forms of \eref{SL1-zeros}{SL2-zeros} does not appear to be of the standard SL form we are familiar with, it turns out that we can always make an appropriate substitution for $\phi$ to bring it into the standard SL form.
+For Bessel functions, let us demonstrate this fact by writing $J_{\nu} = x^{-1/2} y_{\nu}$.
+If we take derivatives of $J_{\nu}$ and write in terms of $y_{\nu}$, we arrive at the differential equation which $y_{\nu}$ must satisfy:
+\begin{eqnarray}
+    y_{\nu}'' + \Bigg[ 1 + \frac{1 - 4 \nu^2}{4 x^2} \Bigg] y_{\nu} = 0
+.\end{eqnarray}
+Recall that $x > 0$ is the interval of interest for the Bessel equation.
+Let us consider a few cases then.
+First, if $0 < \nu < 1/2$, then $1 - 4 \nu^2 > 0$ and $1 < 1 + (1 - 4\nu^2)/x^2$.
+Thus, we can compare to the differential equation $y'' + y = 0$, which has known solutions $\sin{x}$ and $\cos{x}$.
+We can write consecutive zeros of $\sin{x}$ for example as $((n-1)\pi,n\pi)$, where $n \in \N$, and we also can write consecutive zeros of $\cos{x}$ for example as $((n-1/2)\pi,(n+1/2)\pi)$.
+Thus, there must be at least one zero of $y_{\nu}$, and therefore also $J_{\nu}$, within these intervals, and furthermore, since there are an infinite number of these intervals, $J_{\nu}$ has an infinite number of zeros.
+Next, consider the case $\nu > 1/2$.
+We can consider $y'' + y = 0$ again.
+Let $\alpha$ and $\beta$ be consecutive zeros of $J_{\nu}$.
+It follows that there exists $n \in \N$ such that $\alpha < n\pi < \beta$, meaning that $J_{\nu}$ has an infinite set of non-trivial zeros.
+
+
+
+\subsection{Orthogonality}
+
+
+
 
 
 
