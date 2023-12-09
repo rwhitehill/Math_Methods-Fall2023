@@ -30,8 +30,10 @@ Thus, the components of the eigenvectors satisfy
 \begin{eqnarray}
     -\lambda a_1 = i a_2 \Rightarrow a_2 = i \lambda a_1
 ,\end{eqnarray}
-and the normalized eigenvectors are then (up to a normalizing constant)
-\begin{align}
+and the eigenvectors are then (up to some constant)
+\begin{eqnarray}
+\eqbox{
+\begin{aligned}
     \begin{pmatrix}
         1 \\ i
     \end{pmatrix}
@@ -41,14 +43,18 @@ and the normalized eigenvectors are then (up to a normalizing constant)
         1 \\ -i
     \end{pmatrix}
     &\leftrightarrow -1
-.\end{align}
+\end{aligned}
+}
+.\end{eqnarray}
 
-(b) We can easily diagonalize $\sigma_{y}$ then by writing
+(b) We can easily diagonalize $\sigma_{y}$ by writing
 \begin{eqnarray}
+\eqbox{
     U = \frac{1}{\sqrt{2}} \begin{pmatrix}
         1 & 1 \\
         i & -i
     \end{pmatrix}
+}
 ,\end{eqnarray}
 where
 \begin{eqnarray}
@@ -77,7 +83,7 @@ Find the inverse matrix $a^{-1}$.
 
 \sol{
 
-Since $a$ is a rotation matrix, it must be hermitian.
+Since $a$ is a rotation matrix, it must be unitary.
 We prove this as follows.
 Let us posit a defining property of rotation matrices: they preserve the norm of a vector under a transformation.
 That is, $||v|| = ||R v ||$.
@@ -89,15 +95,17 @@ Using this we see that
 Another way to see this is by recalling from Quantum Mechanics that the angular momentum operator $J$ is the generator of rotations.
 That is, we can define a generic rotation operator through an angle $\theta$ about an axis defined by a unit vector $\vu*{n}$ as $R = \exp(-i \theta \vu*{n} \cdot \va*{J})$, which has inverse $R^{-1} = R^{\dagger}$.
 This is a more abstract object than a matrix in general: it performs a rotation of states $\ket{\psi} \rightarrow \ket{\psi'} = R \ket{\psi}$ in the Hilbert space.
-We can, however, represent the operator $R$ using a matrix, and if our Hilbert space has dimension 3 (e.g. a spin-1 system), then our rotation matrix $R \in \mathbb{C}^{3 \times 3}$.
+We can, however, typically represent the operator $R$ using a matrix, and if our Hilbert space has dimension 3 (e.g. a spin-1 system), then our rotation matrix $R \in \mathbb{C}^{3 \times 3}$.
 
 Finally, we write down explicitly
 \begin{eqnarray}
+\eqbox{
     a^{-1} = a^{\dagger} = \begin{pmatrix}
         a_{11}^{*} & a_{21}^{*} & a_{31}^{*} \\
         a_{12}^{*} & a_{22}^{*} & a_{32}^{*} \\
         a_{13}^{*} & a_{23}^{*} & a_{33}^{*}
     \end{pmatrix}
+}
 .\end{eqnarray}
 
 }
@@ -120,11 +128,13 @@ From the definition of the exponential of an operator, we can write
 .\end{eqnarray}
 Let us split the sum over even and odd $n$ such that
 \begin{eqnarray}
+\eqbox{
 \begin{aligned}
     \exp(i \theta \sigma_{z}) &= \sum_{n=0}^{\infty} \frac{1}{(2n)!} (i \theta \sigma_{z})^{2n} + \sum_{n=0}^{\infty} \frac{1}{(2n+1)!} (i \theta \sigma_{z})^{2n+1} \\
                               &= \sum_{n=0}^{\infty} \frac{(-1)^{n}}{(2n)!} \theta^{2n} \mathbb{I} + i \sum_{n=0}^{\infty} \frac{(-1)^{n}}{(2n+1)!} \theta^{2n+1} \sigma_{z} \\
                               &= \cos{\theta} \mathbb{I} + i \sin{\theta} \sigma_{z}
 \end{aligned}
+}
 .\end{eqnarray}
 
 

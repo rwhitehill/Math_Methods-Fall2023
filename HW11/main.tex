@@ -1,0 +1,158 @@
+\def\duedate{\today}
+\def\HWnum{11}
+\input{../preamble.tex}
+
+\begin{document}
+
+\prob{1}{
+
+Write down a general solution of the Tomas-Fermi equation
+\begin{eqnarray}
+    \laplacian{\varphi} - \lambda^{-2} \varphi = f(\va*{r})
+\end{eqnarray}
+with the boundary condition $\varphi(x,y,0) = 0$ at a conducting plane $z = 0$ and $\varphi(x,y,z) \rightarrow 0$ at $x,y \rightarrow \infty$.
+The function $f(\va*{r})$ tends to zero at infinity.
+
+}
+
+\sol{
+
+In class we found the Green function for the Tomas-Fermi problem in $\mathbb{R}^3$ (i.e. the boundary conditions are just that $G \rightarrow 0$ as $\va*{r}' \rightarrow \infty$) as
+\begin{eqnarray}
+    G_{\infty}(x,y,z;x',y',z') = -\frac{e^{-|\va*{r}-\va*{r}'|/\lambda}}{4 \pi |\va*{r} - \va*{r}'|}
+.\end{eqnarray}
+We can solve the problem in the half-space $z \geq 0$ with the Green's function
+\begin{eqnarray}
+    G(x,y,z;x',y',z') = G_{\infty}(x,y,z;x',y',z') - G_{\infty}(x,y,z;x',y',-z')
+.\end{eqnarray}
+Essentially, we have used the method of images where we placed an ``image source'' reflected over the $xy$-plane from the point source described by $G_{\infty}$.
+Notice that on the plane we then have $G(x,y,z;x',y',0) = 0$ and $G(x,y,z;x'\rightarrow \infty,y'\rightarrow \infty, z') = 0$ automatically since as $x',y' \rightarrow \infty$ we have $|\va*{r} - \va*{r}'| \rightarrow \infty$ and therefore $G_{\infty} \rightarrow 0$ under this condition by construction.
+The solution is then
+\begin{eqnarray}
+    \eqbox{ \varphi(\va*{r}) = -\frac{1}{4 \pi} \int_{-\infty}^{\infty} \dd{x'} \int_{-\infty}^{\infty} \dd{y'} \int_{0}^{\infty} \dd{z'} G(x,y,z;x',y',z') f(\va*{r}') }
+.\end{eqnarray}
+
+
+}
+
+
+\prob{2}{
+
+Transverse displacements $u(x,t)$ of a string of length $L$ with fixed ends are desribed by the wave equation
+\begin{eqnarray}
+    \pdv[2]{u}{t} = s^2 \pdv[2]{u}{x}
+\end{eqnarray}
+with the boundary condition $u(0,t) = u(L,t) = 0$.
+At $t = 0$ a hammer of width $a < L$ hits the string which was initially at rest, $u(x,0) = 0$.
+The impact caused an instantaneous velocity $v_0$ in the central region of the string:
+\begin{eqnarray}
+    \dot{u}(x,0) = v_0
+\end{eqnarray}
+for $|x - L/2| < a$ and $\dot{u}(x,0) = 0$ for $|x - L/2| > a$.
+Find the full solution $u(x,t)$ at $t > 0$.
+
+}
+
+\sol{
+
+We solved the one-dimensional wave equation on $x \in [0,L], t \geq 0$ for generic initial conditions and fixed endpoints $u(0,t) = u(L,t) = 0$ as boundary conditions as
+\begin{eqnarray}
+    u(x,t) = \sum_{n=1}^{\infty} \Big[ A_{n} \cos( \frac{n \pi s t}{L} ) + B_{n} \sin( \frac{n \pi s t}{L} ) \Big] \sin( \frac{n \pi x}{L} )
+.\end{eqnarray}
+Notice that at $t = 0$, the position of the string is
+\begin{eqnarray}
+    u(x,0) = \sum_{n=1}^{\infty} A_{n} \sin(\frac{n \pi x}{L}) = 0
+.\end{eqnarray}
+Since this must be true for all $x$ and the different modes are orthogonal, we must have $A_{n} = 0$ for all $n$.
+Next, we have the initial velocity of the string
+\begin{eqnarray}
+    \dot{u}(x,0) = \sum_{n=1}^{\infty} B_{n} \frac{n \pi s}{L} \sin(\frac{n \pi x}{L}) = v_0 \theta( |x - L/2| < a )
+.\end{eqnarray}
+We can use the orthogonality relations between sine modes, which gives
+\begin{eqnarray}
+    B_{n} = \frac{L}{n \pi s} \frac{2}{L} \int_{0}^{L} v_0 \theta(|x - L/2| < a) \dd{x} = \frac{4 v_0 a}{n \pi s}
+.\end{eqnarray}
+Putting this into the expansion for $u$, we have
+\begin{eqnarray}
+    \eqbox{ u(x,t) = \frac{4 v_0 a}{\pi s} \sum_{n=1}^{\infty} \frac{1}{n} \sin( \frac{n \pi s t}{L} ) \sin(\frac{n \pi x}{L}) }
+.\end{eqnarray}
+
+}
+
+
+\prob{3}{
+
+Solve the Laplace equation
+\begin{eqnarray}
+    \laplacian u = 0
+\end{eqnarray}
+for a circle of radius $a$ with the boundary condition $u(a,\varphi) = u_0 \sin^3{\varphi}$.
+
+\vspace{1em}
+
+(a) Show that the solution $u(r,\varphi)$ inside the circle $r \leq a$ can be found by the separation of variables and calculate the coefficients $A_{n}$ and $B_{n}$:
+\begin{eqnarray}
+    u(r,\varphi) = \sum_{n=0}^{\infty} r^{n} \Big[ A_{n} \sin{n \varphi} + B_{n} \cos{n \varphi} \Big]
+.\end{eqnarray}
+
+(b) Show that the solution $u(r,\varphi)$ outside the circle $r > a$ can be found by the separation of variables and calculate the coefficients $A_{n}$ and $B_{n}$:
+\begin{eqnarray}
+    u(r,\varphi) = \sum_{n=0}^{\infty} r^{-n} \Big[ A_{n} \sin{n \varphi} + B_{n} \cos{n \varphi} \Big]
+.\end{eqnarray}
+
+}
+
+\sol{
+
+The Laplacian in polar coordinates (or cylindrical coordinates with translation symmetry along the $z$-axis) is
+\begin{eqnarray}
+    \laplacian = \frac{1}{r} \pdv{r} \Big( r \pdv{u}{r} \Big) + \frac{1}{r^2} \pdv[2]{u}{\varphi}
+.\end{eqnarray}
+We can use separation of variables and write $u(r,\varphi) = R(r) T(\varphi)$, which gives
+\begin{eqnarray}
+    \frac{r}{R} \dv{r} \Big( r \dv{R}{r} \Big) + \frac{1}{T} \dv[2]{T}{\varphi} = 0
+.\end{eqnarray}
+Both terms must be constant with respect to $r,\varphi$, and since $T$ must be cyclic (i.e. $u$ must be single-valued), we choose
+\begin{eqnarray}
+    \dv[2]{T}{\phi} = -n^2 T
+,\end{eqnarray}
+which has solutions $\sin{n \varphi}$ and $\cos{n \varphi}$.
+Putting this into the separated laplace's equation, we find a differential equation for the radial part of $u$ as
+\begin{eqnarray}
+    r \dv{r} \Big( r \dv{R}{r} \Big) - n^2 R = 0
+.\end{eqnarray}
+Let us propose a solution of the form $R(r) = \sum_{m=0}^{\infty} a_{m} r^{m+s}$.
+We then find that
+\begin{eqnarray}
+    \sum_{n=0}^{\infty} a_{m} [(m+s)^2 - n^2] r^{m+s} = 0
+.\end{eqnarray}
+We then find that either $a_{m} = 0$ or $m+s = \pm n$ makes each term zero.
+Thus, we only have two terms for $R$ at a fixed $n$ such that
+\begin{eqnarray}
+    R_{n}(r) = a_{n} r^{n} + b_{n} r^{-n}
+.\end{eqnarray}
+A general solution for Laplace's equation is
+\begin{eqnarray}
+    u(r,\varphi) = \sum_{n=0}^{\infty} \Big[ a_{n} r^{n} + b_{n} r^{-n} \Big] \Big[ A_{n} \sin{n \varphi} + B_{n} \cos{n \varphi} \Big]
+.\end{eqnarray}
+
+(a) If we wish to consider the solution of Laplace's equation with boundary conditions at $r = a$ for $r < a$, we must have $b_{n} = 0$ since our solution should be regular at $r = 0$.
+Thus,
+\begin{eqnarray}
+    u(r,\varphi) = \sum_{n=0}^{\infty} r^{n} \Big[ A_{n} \sin{n \varphi} + B_{n} \cos{n \varphi} \Big]
+.\end{eqnarray}
+Next, we find that $\sin^3{\varphi} = [ 3 \sin{\varphi} - \sin{3\varphi} ]/4$, meaning that our solution for $r < a$ must be
+\begin{eqnarray}
+    \eqbox{ u(r,\varphi) = \frac{u_0}{4} \Big[ \frac{3r}{a} \sin{\varphi} - \Big( \frac{r}{a} \Big)^{3} \sin{3 \varphi} \Big] }
+.\end{eqnarray}
+
+(b) Now, if we consider $r > a$, we similarly must have $a_{n} = 0$ so that our solution $u \rightarrow 0$ as $r \rightarrow \infty$, and thus for $r > a$
+\begin{eqnarray}
+    \eqbox{ u(r,\varphi) = \frac{u_0}{4} \Big[ \frac{3a}{r} \sin{\varphi} - \Big( \frac{a}{r} \Big)^3 \sin{3 \varphi} \Big] }
+.\end{eqnarray}
+
+}
+
+
+
+\end{document}

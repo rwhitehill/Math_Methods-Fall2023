@@ -1,0 +1,98 @@
+\def\duedate{\today}
+\def\HWnum{12}
+\input{../preamble.tex}
+
+\begin{document}
+
+\prob{1}{
+
+Using the approach discussed in class, calculate the evolution of $n(x,t)$ along the $x$-axis $-\infty < x < \infty$ described by the diffusion equation
+\begin{eqnarray}
+    \pdv{n}{t} = \pdv[2]{n}{x}
+\end{eqnarray}
+with the boundary conditions $n(\pm \infty,t) = 0$ and the initial condition
+\begin{eqnarray}
+    n(x,0) = n_0 e^{-x^2/a^2}
+.\end{eqnarray}
+
+}
+
+\sol{
+
+The one-dimensional Green function for the diffusion equation (with $D = 1$) on the $x$-axis is
+\begin{eqnarray}
+    G(x-x',t) = \frac{1}{2 \sqrt{\pi t}} e^{-(x - x')^2/4t}
+.\end{eqnarray}
+The temperature distribution at an arbitrary time $t$ is then a spatial convolution of the Green's function with the initial shape of the temperature distribution at time $t = 0$:
+\begin{eqnarray}
+\eqbox{
+\begin{aligned}
+    n(x,t) &= \int_{-\infty}^{\infty} \dd{x'} G(x-x',t) n(x',0) = \frac{n_0}{2 \sqrt{\pi t}} \int_{-\infty}^{\infty} \dd{x'} e^{-(x-x')^2/4t} e^{-x'^2/a^2} \\
+           &= \frac{n_0}{2 \sqrt{\pi t}} \Big( 2a \sqrt{\frac{\pi t}{a^2 + 4t}} e^{-x^2/(a^2 + 4t)} \Big) = \frac{n_0}{\sqrt{1 + 4t/a^2}} e^{-x^2/(a^2 + 4t)}
+.\end{aligned}
+}
+\end{eqnarray}
+
+}
+
+
+\prob{2}{
+
+The temperature of a planar surface at $x = 0$ changes periodically: $T(0,t) = T_0 + T_1 \cos{\omega t}$.
+Using the Fourier transform in $t$, calculate the temperature $T(x,t)$ away from the heated surface at $x > 0$ by solving the thermal diffusion equation
+\begin{eqnarray}
+    \pdv{T}{t} = D \pdv[2]{T}{x}
+\end{eqnarray}
+with the boundary condition $T(0,t) = T_0 + T_1 \cos{\omega t}$ at $x = 0$ and $T(\infty,t) = T_0$ at $x = \infty$.
+
+}
+
+\sol{
+
+First, let's define $u(x,t) = T(x,t) - T_0$.
+It is clear that $u$ satisfies the same diffusion equation as $T$ but with the updated boundary conditions $u(0,t) = T_1 \cos{\omega t}$ and $u(\infty,t) = 0$.
+As suggested, let's take the Fourier transform of the diffusion equation in time:
+\begin{eqnarray}
+    \int_{-\infty}^{\infty} \dd{t} e^{-i \omega' t} \pdv{u}{t} = i \omega \tilde{u}(x,\omega') = D \pdv[2]{\tilde{u}(x,\omega')}{x}
+.\end{eqnarray}
+We find then that
+\begin{eqnarray}
+\begin{aligned}
+    \tilde{u}(x,\omega') &= A e^{\sqrt{-i \omega' / D} \, x} + B e^{-\sqrt{-i \omega' / D} \, x} \\
+                        &= A e^{k'(1-i)x} + B e^{-k'(1-i)x} \\
+                        &= A e^{-i k' x} e^{k' x} + B e^{i k' x} e^{-k' x}
+,\end{aligned}
+\end{eqnarray}
+where we have defined $k' = \sqrt{\omega'/2D}$.
+Notice that the boundary condition $u(\infty,t) = 0$ gives $\tilde{u}(\infty,t) = 0$, meaning that we must have $A = 0$.
+
+Next, observe that the Fourier transform of $u(0,t) = T_1 \cos{\omega t} = \frac{T_1}{2} (e^{i \omega t} + e^{-i \omega t})$ is 
+\begin{eqnarray}
+    \tilde{u}(0,\omega') = \pi T_1[ \delta(\omega' - \omega) + \delta(\omega' + \omega) ] = B
+\end{eqnarray}
+Thus,
+\begin{eqnarray}
+    \tilde{u}(x,\omega') = \pi T_1 [ \delta(\omega' - \omega) + \delta(\omega' + \omega) ] e^{i k' x} e^{-k'x}
+.\end{eqnarray}
+
+With this, we take the inverse Fourier transform of $\tilde{u}$ and find
+\begin{eqnarray}
+\begin{aligned}
+    u(x,t) &= \frac{T_1}{2} \int_{-\infty}^{\infty} \dd{\omega'} e^{i \omega' t} [ \delta(\omega' - \omega) + \delta(\omega' + \omega) ] e^{(-1 + i) \sqrt{\omega'/2D} \, x} \\
+           &= \frac{T_1}{2} \Big[ e^{i \omega t} e^{(-1+i)\sqrt{\omega/2D} \, x} + e^{-i \omega t} e^{-(1 + i)\sqrt{\omega/2D} \, x} \Big] \\
+           &= T_1 \cos\Bigg[ \omega \Bigg( t + \frac{x}{\sqrt{2\omega D}} \Bigg) \Bigg] e^{-\sqrt{\omega / 2D} \, x}
+.\end{aligned}
+\end{eqnarray}
+
+Finally, we add $T_0$ to $u$ and arrive at
+\begin{eqnarray}
+    \eqbox{ T(x,t) = T_0 + T_1 \cos\Bigg[ \omega \Bigg( t + \frac{x}{\sqrt{2\omega D}} \Bigg) \Bigg] \exp( - \sqrt{\frac{\omega}{2D}} \, x ) }
+.\end{eqnarray}
+
+
+}
+
+
+
+
+\end{document}
